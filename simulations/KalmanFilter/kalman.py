@@ -67,6 +67,5 @@ class KalmanFilter():
         plt.title('Raw acceleration data comparison with Kalman filtered output')
         plt.grid(True)
 
-
 if __name__ == "__main__":
     k = KalmanFilter()
