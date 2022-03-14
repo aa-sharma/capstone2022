@@ -4,3 +4,5 @@ A rehabilitation glove with an interactive interface for recovering stroke patie
 > uOttawa Electrical Engineering Capstone 2022.
 
 *Eric Hallé-Sherman. Reethi Paul. Ziad Salameh. Aashna Sharma.*
+
+![alt text](https://github.com/aa-sharma/capstone2022/blob/main/plot.png?raw=true)
