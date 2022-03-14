@@ -43,7 +43,7 @@ class KalmanFilter():
         plt.show()
 
     def kalman(self, i):
-        self.raw_data = random.uniform(0.5, 1.5)        #adjust for appropriate variance; here is +/- 0.5 from mean
+        self.raw_data = np.random.normal(0.5, 1.5)        #adjust for appropriate variance; here is +/- 0.5 from mean
         self.xt_update = self.xt_previous
         self.Pt_update = self.Pt_previous + self.Q
         self.K_t = self.Pt_update / (self.Pt_update + self.R)
