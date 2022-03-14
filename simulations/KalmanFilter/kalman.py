@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 import time
 import random
 
-
 """
 Kalman Filter for Accelertometer noise reduction
 
@@ -29,7 +28,7 @@ class KalmanFilter():
         self.Q = 0.1
         self.R = 50
         self.Pt_previous = 1
-        self.xt_previous = 1        #mean value
+        self.xt_previous = 1        #use mean as initial previous val
 
         self.KalmanOutput = 0
 
@@ -40,7 +39,7 @@ class KalmanFilter():
         self.start_plotting()
     
     def start_plotting(self):
-        self.ani = FuncAnimation(plt.gcf(), self.kalman, interval=700)
+        self.ani = FuncAnimation(plt.gcf(), self.kalman, interval=100)
         plt.show()
 
     def kalman(self, i):
@@ -71,10 +70,3 @@ class KalmanFilter():
 
 if __name__ == "__main__":
     k = KalmanFilter()
-
-
-
-
-
-
-
