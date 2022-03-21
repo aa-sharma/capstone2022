@@ -6,7 +6,7 @@ import time
 import numpy as np
 import matplotlib.animation as animation
 
-class HandPlot():
+class AnimatedHand():
     def __init__(self):
         self.get_sensor_data()
 
@@ -96,7 +96,7 @@ class HandPlot():
             list of positions of elements
         """
 
-        # Inital starting positions
+        # Inital starting segments
         
         self.x_thumb = [self.thumbA_x, self.thumbB_x, self.thumbC_x]
         self.y_thumb = [self.thumbA_y, self.thumbB_y, self.thumbC_y]
@@ -126,6 +126,7 @@ class HandPlot():
         self.middle_index_join_y = [self.middleA_y, self.indexA_y]
         self.middle_index_join_z = [self.middleA_z, self.indexA_z]
         
+        # Initial starting positions
 
         start_thumbA = [self.thumbA_x, self.thumbA_y, self.thumbA_z]
         start_thumbB = [self.thumbB_x, self.thumbB_y, self.thumbB_z]
@@ -158,26 +159,24 @@ class HandPlot():
                             start_pinkyA, start_pinkyB, start_pinkyC, start_wristA, start_wristB, start_wristC,
                             start_wristD, start_wristE])
 
-
-
         print(start_positions)
-        movement = [0, -1, -1]
-        no_movement = [0, 0, 0]
+        # displacement characteristics
+        movement = [0, 0.1, -0.8]           # used for segment C
+        movement_small = [0, 0.1, 0.04]     # used for segment B
+        no_movement = [0, 0, 0]             # used for segment A
         
         # Move three fingers (middle, ring, pinky only B and C)
         start_displacement = np.array([no_movement, no_movement, no_movement, no_movement, no_movement, no_movement, 
-                                no_movement, movement, movement, no_movement, movement, movement,
-                                no_movement, movement, movement, no_movement, no_movement, no_movement,
+                                no_movement, movement_small, movement, no_movement, movement_small, movement,
+                                no_movement, movement_small, movement, no_movement, no_movement, no_movement,
                                 no_movement, no_movement])
-
-        print(start_displacement)
-
         data = [start_positions]
         for iteration in range(iterations):
             prev_positions = data[-1]
             new_positions = prev_positions + start_displacement
             data.append(new_positions)
 
+        print (data)
         return data
 
     def animate_scatters(self, iteration, data, scatters):
@@ -193,15 +192,71 @@ class HandPlot():
         """
         for i in range(data[0].shape[0]):
             scatters[i]._offsets3d = (data[iteration][i,0:1], data[iteration][i,1:2], data[iteration][i,2:])
+            
+            if(i==7):
+                x_middleB = data[iteration][i,0:1]
+                y_middleB = data[iteration][i,1:2]
+                z_middleB = data[iteration][i,2:]
+            elif(i==8):
+                x_middleC = data[iteration][i,0:1]
+                y_middleC = data[iteration][i,1:2]
+                z_middleC = data[iteration][i,2:]   
+
+                x_middle_segment = [self.middleA_x, x_middleB, x_middleC]
+                y_middle_segment = [self.middleA_y, y_middleB, y_middleC]
+                z_middle_segment = [self.middleA_z, z_middleB, z_middleC]
+                plt.plot(x_middle_segment, y_middle_segment, z_middle_segment, color='orange')          #middle 
+
+            elif(i==10):
+                x_ringB = data[iteration][i,0:1]
+                y_ringB = data[iteration][i,1:2]
+                z_ringB = data[iteration][i,2:]
+            elif(i==11):
+                x_ringC = data[iteration][i,0:1]
+                y_ringC = data[iteration][i,1:2]
+                z_ringC = data[iteration][i,2:]   
+
+                x_ring_segment = [self.ringA_x, x_ringB, x_ringC]
+                y_ring_segment = [self.ringA_y, y_ringB, y_ringC]
+                z_ring_segment = [self.ringA_z, z_ringB, z_ringC]
+                plt.plot(x_ring_segment, y_ring_segment, z_ring_segment, color='orange')          #ring          
+            elif(i==13):
+                x_pinkyB = data[iteration][i,0:1]
+                y_pinkyB = data[iteration][i,1:2]
+                z_pinkyB = data[iteration][i,2:]
+            elif(i==14):
+                x_pinkyC = data[iteration][i,0:1]
+                y_pinkyC = data[iteration][i,1:2]
+                z_pinkyC = data[iteration][i,2:]
+
+                x_pinky_segment = [self.pinkyA_x, x_pinkyB, x_pinkyC]
+                y_pinky_segment = [self.pinkyA_y, y_pinkyB, y_pinkyC]
+                z_pinky_segment = [self.pinkyA_z, z_pinkyB, z_pinkyC]
+                plt.plot(x_pinky_segment, y_pinky_segment, z_pinky_segment, color='orange')          #pinky 
+            else:
+                pass
+
         return scatters
     
     def plot_data(self, data):
-        matplotlib.use("TkAgg")
+        matplotlib.use("TkAgg")         # Mac animation dependency issue
         fig = plt.figure()
         ax = p3.Axes3D(fig)
 
         # Initialize scatters
-        scatters = [ ax.scatter(data[0][i,0:1], data[0][i,1:2], data[0][i,2:]) for i in range(data[0].shape[0])]
+        scatters = [ ax.scatter(data[0][i,0:1], data[0][i,1:2], data[0][i,2:], c='skyblue', s=60) for i in range(data[0].shape[0])]
+
+        # stationary segments
+        plt.plot(self.x_thumb,self.y_thumb,self.z_thumb, color='orange')          #thumb 
+        plt.plot(self.x_index, self.y_index, self.z_index, color='orange')          #index
+
+        self.x_palm_segment = [self.wristB_x, self.pinkyA_x, self.ringA_x, self.middleA_x]  #palm
+        self.y_palm_segment = [self.wristB_y, self.pinkyA_y, self.ringA_y, self.middleA_y]
+        self.z_palm_segment = [self.wristB_z, self.pinkyA_z, self.ringA_z, self.middleA_z]
+        plt.plot(self.x_palm_segment, self.y_palm_segment, self.z_palm_segment, color='orange')          #palm
+
+        plt.plot(self.x_wrist, self.y_wrist, self.z_wrist, color='orange')                   #wrist
+        plt.plot(self.middle_index_join_x, self.middle_index_join_y, self.middle_index_join_z, color='orange')
 
         # Number of iterations
         iterations = len(data)
@@ -220,53 +275,13 @@ class HandPlot():
         # Starting angle
         ax.view_init(25, 10)
         
-        ani = animation.FuncAnimation(fig, self.animate_scatters, iterations, fargs=(data, scatters),
+        ani = animation.FuncAnimation(plt.gcf(), self.animate_scatters, iterations, fargs=(data, scatters),
                                        interval=1, blit=False, repeat=True)   
 
         plt.show()     
 
-        """
-        fig3d = plt.figure()
-        ax = fig3d.add_subplot(1,1,1, projection='3d')
-
-        ax.set_xlim(-10, 5)
-        ax.set_ylim(-10, 18)
-        ax.set_zlim(-10, 12)
-        
-        ax.scatter(self.x_thumb,self.y_thumb,self.z_thumb, c='r',s=100, label='True Position')      #points
-        plt.plot(self.x_thumb,self.y_thumb,self.z_thumb, color='r')          #lines between points
-
-        ax.scatter(self.x_index, self.y_index, self.z_index, color='r', s=100)     #points
-        plt.plot(self.x_index, self.y_index, self.z_index, color='r')          #lines between points
-
-        ax.scatter(self.x_middle, self.y_middle, self.z_middle, color='r', s=100)     #points
-        plt.plot(self.x_middle, self.y_middle, self.z_middle, color='r')          #lines between points
-
-        ax.scatter(self.x_ring, self.y_ring, self.z_ring, color='r', s=100)     #points
-        plt.plot(self.x_ring, self.y_ring, self.z_ring, color='r')          #lines between points
-
-        ax.scatter(self.x_pinky, self.y_pinky, self.z_pinky, color='r', s=100)     #points
-        plt.plot(self.x_pinky, self.y_pinky, self.z_pinky, color='r')          #lines between points
-
-        ax.scatter(self.x_wrist, self.y_wrist, self.z_wrist, color='r', s=100)     #points
-        plt.plot(self.x_wrist, self.y_wrist, self.z_wrist, color='r')          #lines between points
-
-        plt.plot(self.middle_index_join_x, self.middle_index_join_y, self.middle_index_join_z, color='r')
-        
-        plt.title('Finger Position Simulation')
-        ax.set_xlabel('X')
-        ax.set_ylabel('Y')
-        ax.set_zlabel('Z')
-        #self.update_plot()
-
-        #ani = plt.animation.FuncAnimation(plt.gcf(), self.update_plot, 19, 
-        #                       interval=500, blit=False)
-
-
-        plt.show()
-        """
 
 
 
 if __name__ == "__main__":
-    hp = HandPlot()
+    ah = AnimatedHand()
