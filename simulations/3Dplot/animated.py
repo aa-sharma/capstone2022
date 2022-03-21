@@ -1,3 +1,4 @@
+import matplotlib
 from matplotlib import pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as p3
 import positionsDB as pdb
@@ -195,6 +196,7 @@ class HandPlot():
         return scatters
     
     def plot_data(self, data):
+        matplotlib.use("TkAgg")
         fig = plt.figure()
         ax = p3.Axes3D(fig)
 
@@ -230,7 +232,7 @@ class HandPlot():
         ax.set_xlim(-10, 5)
         ax.set_ylim(-10, 18)
         ax.set_zlim(-10, 12)
-        """
+        
         ax.scatter(self.x_thumb,self.y_thumb,self.z_thumb, c='r',s=100, label='True Position')      #points
         plt.plot(self.x_thumb,self.y_thumb,self.z_thumb, color='r')          #lines between points
 
@@ -250,7 +252,7 @@ class HandPlot():
         plt.plot(self.x_wrist, self.y_wrist, self.z_wrist, color='r')          #lines between points
 
         plt.plot(self.middle_index_join_x, self.middle_index_join_y, self.middle_index_join_z, color='r')
-        """
+        
         plt.title('Finger Position Simulation')
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
