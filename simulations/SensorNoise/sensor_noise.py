@@ -29,7 +29,7 @@ plt.grid()
 
 plt.xlim(x_min,x_max)
 
-plt.title('Plot a normal distribution of Sensor 1',fontsize=10)
+plt.title('Plot a Normal Distribution of Sensor',fontsize=10)
 
 plt.xlabel('x')
 plt.ylabel('Normal Distribution')
