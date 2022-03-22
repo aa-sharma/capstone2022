@@ -63,8 +63,9 @@ class KalmanFilter():
         self.x_axis.append(time.time()) 
 
         plt.cla()
-        plt.plot(self.x_axis, self.raw_data_array)
-        plt.plot(self.x_axis, self.kalman_filtered_array)
+        plt.plot(self.x_axis, self.raw_data_array, label="Raw Data")
+        plt.plot(self.x_axis, self.kalman_filtered_array, label="Kalman Filtered")
+        plt.legend(loc="upper right")
 
         plt.xlabel('UNIX Time')
         plt.ylabel('Acceleration')
