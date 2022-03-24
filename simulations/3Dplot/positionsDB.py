@@ -1,9 +1,66 @@
 # Dictonaries of hand positions
 # Each contains 21 keys (xyz for 5 fingers, palm and wrist) where the values are lists of coordinates
+
 position1 = {
+    'thumbA' : [-4, 1, 0],
+    'thumbB' : [-6, 3.5, 0],
+    'thumbC' : [-7, 6, 0],
+
+    'indexA' : [-3, 7, 0],
+    'indexB' : [-4, 10, 0],
+    'indexC' : [-5, 13, 0],
+
+    'middleA' : [0, 8, 0],
+    'middleB' : [0, 12, 0],
+    'middleC' : [0, 16, 0],
+
+    'ringA' : [2.5, 7.5, 0],
+    'ringB' : [3, 10, 0],
+    'ringC' : [3.5, 14, 0],
+
+    'pinkyA' : [4, 5, 0],
+    'pinkyB' : [4.9, 8, 0],
+    'pinkyC' : [5.5, 11, 0],
+
+    'wristA' : [0, 0, 0],
+    'wristB' : [4, 0, 0],
+    'wristC' : [-4, 0, 0],
+    'wristD' : [4, -8, 0],
+    'wristE' : [-4, -8, 0]
+}
+
+position2 = {
+    'thumbA' : [-4, 1, 0.7],
+    'thumbB' : [-7, 2, 2],
+    'thumbC' : [-5.5, 1, 4.5],
+
+    'indexA' : [-3, 7, 1],
+    'indexB' : [-4, 9.5, 3],
+    'indexC' : [-4.5, 8, 5],
+
+    'middleA' : [0, 8, 1],
+    'middleB' : [0, 10, 4],
+    'middleC' : [0, 9, 6],
+
+    'ringA' : [2, 7, 1],
+    'ringB' : [3, 9, 3],
+    'ringC' : [3, 8, 5],
+
+    'pinkyA' : [3, 3, 1],
+    'pinkyB' : [5, 5, 3],
+    'pinkyC' : [4, 5, 5],
+
+    'wristA' : [0, 0, 0.5],
+    'wristB' : [3, 0, 0.5],
+    'wristC' : [-4, 0, 0.5],
+    'wristD' : [3, -8, 0],
+    'wristE' : [-4, -8, 0]
+}
+
+position3 = {
     'thumbA' : [5, 0, 0],
     'thumbB' : [5, 8, -1],
-    'thumbC' : [5, 8, -1],
+    'thumbC' : [5, 8, 1],
 
     'indexA' : [5, 8, 3],
     'indexB' : [5, 9, 0],
@@ -26,64 +83,4 @@ position1 = {
     'wristC' : [5, 0, 0],
     'wristD' : [-4, -8, 0],
     'wristE' : [5, -8, 0]
-}
-
-horizontal_ok = {
-    'x_thumb' : [0, 0, 0, 0],
-    'y_thumb' : [6, 9, 5, 0],
-    'z_thumb' : [3, -1, -2, -1],
-
-    'x_index' : [-2, -2, -2],
-    'y_index' : [5, 9, 11],
-    'z_index' : [4, 8, 10],
-    
-    'x_middle' : [-4, -4, -4],
-    'y_middle' : [5, 9, 11],
-    'z_middle' : [4, 8, 10],
-
-    'x_ring' : [-6, -6, -6],
-    'y_ring' : [5, 9, 11],
-    'z_ring' : [4, 8, 10],
-
-    'x_pinky' : [],
-    'y_pinky' : [],
-    'z_pinky' : [],
-
-    'x_palm' : [-6, -6, -4, -2, 0, 0],
-    'y_palm' : [0, 5, 5, 5, 6, 0],
-    'z_palm' : [-1, 4, 4, 4, 3, -1],
-
-    'x_wrist' : [-6, 0, 0, -6, -6],    #order matters for connecting points properly
-    'y_wrist' : [-5, -5, 0, 0, -5],
-    'z_wrist' : [-1, -1, -1, -1, -1]
-}
-
-peace = {
-    'x_thumb' : [],
-    'y_thumb' : [],
-    'z_thumb' : [],
-
-    'x_index' : [],
-    'y_index' : [],
-    'z_index' : [],
-    
-    'x_middle' : [],
-    'y_middle' : [],
-    'z_middle' : [],
-
-    'x_ring' : [],
-    'y_ring' : [],
-    'z_ring' : [],
-
-    'x_pinky' : [],
-    'y_pinky' : [],
-    'z_pinky' : [],
-
-    'x_palm' : [],
-    'y_palm' : [],
-    'z_palm' : [],
-
-    'x_wrist' : [],    #order matters for connecting points properly
-    'y_wrist' : [],
-    'z_wrist' : []
 }
