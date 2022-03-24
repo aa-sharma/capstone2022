@@ -4,9 +4,9 @@ import numpy as np
 
 
 x_min = 0.0
-x_max = 16.0
+x_max = 2.0
 
-mean = 8.0 
+mean = 1.0 
 std1 = 0.11
 std2= 0.3
 std3= 0.15
