@@ -205,7 +205,7 @@ class AnimatedHand():
                 x_middle_segment = [self.middleA_x, x_middleB, x_middleC]
                 y_middle_segment = [self.middleA_y, y_middleB, y_middleC]
                 z_middle_segment = [self.middleA_z, z_middleB, z_middleC]
-                plt.plot(x_middle_segment, y_middle_segment, z_middle_segment, color='orange')          #middle 
+                plt.plot(x_middle_segment, y_middle_segment, z_middle_segment, color='bisque', linestyle='dashed')          #middle 
 
             elif(i==10):
                 x_ringB = data[iteration][i,0:1]
@@ -219,7 +219,7 @@ class AnimatedHand():
                 x_ring_segment = [self.ringA_x, x_ringB, x_ringC]
                 y_ring_segment = [self.ringA_y, y_ringB, y_ringC]
                 z_ring_segment = [self.ringA_z, z_ringB, z_ringC]
-                plt.plot(x_ring_segment, y_ring_segment, z_ring_segment, color='orange')          #ring          
+                plt.plot(x_ring_segment, y_ring_segment, z_ring_segment, color='bisque', linestyle='dashed')          #ring          
             elif(i==13):
                 x_pinkyB = data[iteration][i,0:1]
                 y_pinkyB = data[iteration][i,1:2]
@@ -232,7 +232,7 @@ class AnimatedHand():
                 x_pinky_segment = [self.pinkyA_x, x_pinkyB, x_pinkyC]
                 y_pinky_segment = [self.pinkyA_y, y_pinkyB, y_pinkyC]
                 z_pinky_segment = [self.pinkyA_z, z_pinkyB, z_pinkyC]
-                plt.plot(x_pinky_segment, y_pinky_segment, z_pinky_segment, color='orange')          #pinky 
+                plt.plot(x_pinky_segment, y_pinky_segment, z_pinky_segment, color='bisque', linestyle='dashed')          #pinky 
             else:
                 pass
 
@@ -257,6 +257,10 @@ class AnimatedHand():
 
         plt.plot(self.x_wrist, self.y_wrist, self.z_wrist, color='orange')                   #wrist
         plt.plot(self.middle_index_join_x, self.middle_index_join_y, self.middle_index_join_z, color='orange')
+
+        plt.plot(self.x_middle, self.y_middle, self.z_middle, color='orange')          #lines between points
+        plt.plot(self.x_ring, self.y_ring, self.z_ring, color='orange')          #lines between points
+        plt.plot(self.x_pinky, self.y_pinky, self.z_pinky, color='orange')          #lines between points
 
         # Number of iterations
         iterations = len(data)
