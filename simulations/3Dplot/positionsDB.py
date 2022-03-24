@@ -62,9 +62,9 @@ position3 = {
     'thumbB' : [5, 8, -1],
     'thumbC' : [5, 8, 1],
 
-    'indexA' : [5, 8, 3],
-    'indexB' : [5, 9, 0],
-    'indexC' : [5, 8, -1],
+    'indexA' : [3, 8, 3],
+    'indexB' : [3, 9, 0],
+    'indexC' : [3, 8, -1],
 
     'middleA' : [2, 8, 3],
     'middleB' : [2, 10, 5],
@@ -74,13 +74,13 @@ position3 = {
     'ringB' : [-1, 10, 5],
     'ringC' : [-1, 14, 8],
 
-    'pinkyA' : [-4, 8, 3],
-    'pinkyB' : [-4, 10, 5],
-    'pinkyC' : [-4, 14, 8],
+    'pinkyA' : [-3, 8, 3],
+    'pinkyB' : [-3, 10, 5],
+    'pinkyC' : [-3, 14, 8],
 
     'wristA' : [0, 0, 0],
-    'wristB' : [-4, 0, 0],
-    'wristC' : [5, 0, 0],
-    'wristD' : [-4, -8, 0],
-    'wristE' : [5, -8, 0]
+    'wristB' : [-3, 0, 0],
+    'wristC' : [3, 0, 0],
+    'wristD' : [-3, -8, 0],
+    'wristE' : [3, -8, 0]
 }
