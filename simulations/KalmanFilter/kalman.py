@@ -3,7 +3,7 @@ import numpy as np
 import csv
 import matplotlib.pyplot as plt
 import time
-import random
+import os
 
 """
 Kalman Filter for Accelertometer noise reduction
@@ -71,6 +71,22 @@ class KalmanFilter():
         plt.ylabel('Acceleration')
         plt.title('Raw acceleration data comparison with Kalman filtered output')
         plt.grid(True)
+
+        arr = np.dstack((self.raw_data_array, self.kalman_filtered_array))
+        
+        print(f"Raw:{self.raw_data_array[i]}\nFiltered: {self.kalman_filtered_array[i]}\n")
+
+        timestr = time.strftime("%Y-%m-%d-%H:%M")
+        dirname = os.path.dirname(__file__)
+        output_name = 'gauss' + timestr + '.csv'
+        filename = os.path.join(dirname, 'output/' + output_name)
+
+        with open(filename, "w+", newline='') as file:
+            csvWriter = csv.writer(file)
+            csvWriter.writerow(['Raw noise', 'Kalman filtered output'])
+            for x in arr:
+                csvWriter.writerows(x)
+
 
 if __name__ == "__main__":
     k = KalmanFilter()
