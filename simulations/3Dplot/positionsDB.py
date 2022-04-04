@@ -58,9 +58,9 @@ position2 = {
 }
 
 position3 = {
-    'thumbA' : [5, 0, 0],
-    'thumbB' : [5, 8, -1],
-    'thumbC' : [5, 8, 1],
+    'thumbA' : [3, 0, 0],
+    'thumbB' : [3, 8, -1],
+    'thumbC' : [3, 8, 1],
 
     'indexA' : [3, 8, 3],
     'indexB' : [3, 9, 0],

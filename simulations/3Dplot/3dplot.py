@@ -5,86 +5,103 @@ import time
 
 class HandPlot():
     def __init__(self):
-        self.get_sensor_data()
+        self.get_user_input()
 
-    def get_sensor_data(self):
+    def get_user_input(self):
+        user_position_choice = int(input("Enter position number: "))
+        self.get_values_from_db(user_position_choice)
+    
+    def get_values_from_db(self, position_number):
+        if (position_number == 1):
+            desired_position = pdb.position1
+        elif (position_number == 2):
+            desired_position = pdb.position2
+        elif (position_number == 3):
+            desired_position = pdb.position3
+        else:
+            print("Invalid. Try another number.")
+            self.get_user_input()
+        self.get_sensor_data(desired_position)
+        return
+
+    def get_sensor_data(self, desired_position):
         # Thumb
-        self.thumbA_x = pdb.position1['thumbA'][0]
-        self.thumbA_y = pdb.position1['thumbA'][1]
-        self.thumbA_z = pdb.position1['thumbA'][2]
-        self.thumbB_x = pdb.position1['thumbB'][0]
-        self.thumbB_y = pdb.position1['thumbB'][1]
-        self.thumbB_z = pdb.position1['thumbB'][2]
-        self.thumbC_x = pdb.position1['thumbC'][0]
-        self.thumbC_y = pdb.position1['thumbC'][1]
-        self.thumbC_z = pdb.position1['thumbC'][2]
+        self.thumbA_x = desired_position['thumbA'][0]
+        self.thumbA_y = desired_position['thumbA'][1]
+        self.thumbA_z = desired_position['thumbA'][2]
+        self.thumbB_x = desired_position['thumbB'][0]
+        self.thumbB_y = desired_position['thumbB'][1]
+        self.thumbB_z = desired_position['thumbB'][2]
+        self.thumbC_x = desired_position['thumbC'][0]
+        self.thumbC_y = desired_position['thumbC'][1]
+        self.thumbC_z = desired_position['thumbC'][2]
 
         # Index
-        self.indexA_x = pdb.position1['indexA'][0]
-        self.indexA_y = pdb.position1['indexA'][1]
-        self.indexA_z = pdb.position1['indexA'][2]
-        self.indexB_x = pdb.position1['indexB'][0]
-        self.indexB_y = pdb.position1['indexB'][1]
-        self.indexB_z = pdb.position1['indexB'][2]
-        self.indexC_x = pdb.position1['indexC'][0]
-        self.indexC_y = pdb.position1['indexC'][1]
-        self.indexC_z = pdb.position1['indexC'][2]
+        self.indexA_x = desired_position['indexA'][0]
+        self.indexA_y = desired_position['indexA'][1]
+        self.indexA_z = desired_position['indexA'][2]
+        self.indexB_x = desired_position['indexB'][0]
+        self.indexB_y = desired_position['indexB'][1]
+        self.indexB_z = desired_position['indexB'][2]
+        self.indexC_x = desired_position['indexC'][0]
+        self.indexC_y = desired_position['indexC'][1]
+        self.indexC_z = desired_position['indexC'][2]
 
         # Middle
-        self.middleA_x = pdb.position1['middleA'][0]
-        self.middleA_y = pdb.position1['middleA'][1]
-        self.middleA_z = pdb.position1['middleA'][2]
-        self.middleB_x = pdb.position1['middleB'][0]
-        self.middleB_y = pdb.position1['middleB'][1]
-        self.middleB_z = pdb.position1['middleB'][2]
-        self.middleC_x = pdb.position1['middleC'][0]
-        self.middleC_y = pdb.position1['middleC'][1]
-        self.middleC_z = pdb.position1['middleC'][2]
+        self.middleA_x = desired_position['middleA'][0]
+        self.middleA_y = desired_position['middleA'][1]
+        self.middleA_z = desired_position['middleA'][2]
+        self.middleB_x = desired_position['middleB'][0]
+        self.middleB_y = desired_position['middleB'][1]
+        self.middleB_z = desired_position['middleB'][2]
+        self.middleC_x = desired_position['middleC'][0]
+        self.middleC_y = desired_position['middleC'][1]
+        self.middleC_z = desired_position['middleC'][2]
 
         # Ring
-        self.ringA_x = pdb.position1['ringA'][0]
-        self.ringA_y = pdb.position1['ringA'][1]
-        self.ringA_z = pdb.position1['ringA'][2]
-        self.ringB_x = pdb.position1['ringB'][0]
-        self.ringB_y = pdb.position1['ringB'][1]
-        self.ringB_z = pdb.position1['ringB'][2]
-        self.ringC_x = pdb.position1['ringC'][0]
-        self.ringC_y = pdb.position1['ringC'][1]
-        self.ringC_z = pdb.position1['ringC'][2]
+        self.ringA_x = desired_position['ringA'][0]
+        self.ringA_y = desired_position['ringA'][1]
+        self.ringA_z = desired_position['ringA'][2]
+        self.ringB_x = desired_position['ringB'][0]
+        self.ringB_y = desired_position['ringB'][1]
+        self.ringB_z = desired_position['ringB'][2]
+        self.ringC_x = desired_position['ringC'][0]
+        self.ringC_y = desired_position['ringC'][1]
+        self.ringC_z = desired_position['ringC'][2]
 
         # Pinky
-        self.pinkyA_x = pdb.position1['pinkyA'][0]
-        self.pinkyA_y = pdb.position1['pinkyA'][1]
-        self.pinkyA_z = pdb.position1['pinkyA'][2]
-        self.pinkyB_x = pdb.position1['pinkyB'][0]
-        self.pinkyB_y = pdb.position1['pinkyB'][1]
-        self.pinkyB_z = pdb.position1['pinkyB'][2]
-        self.pinkyC_x = pdb.position1['pinkyC'][0]
-        self.pinkyC_y = pdb.position1['pinkyC'][1]
-        self.pinkyC_z = pdb.position1['pinkyC'][2]
+        self.pinkyA_x = desired_position['pinkyA'][0]
+        self.pinkyA_y = desired_position['pinkyA'][1]
+        self.pinkyA_z = desired_position['pinkyA'][2]
+        self.pinkyB_x = desired_position['pinkyB'][0]
+        self.pinkyB_y = desired_position['pinkyB'][1]
+        self.pinkyB_z = desired_position['pinkyB'][2]
+        self.pinkyC_x = desired_position['pinkyC'][0]
+        self.pinkyC_y = desired_position['pinkyC'][1]
+        self.pinkyC_z = desired_position['pinkyC'][2]
 
         # Wrist
-        self.wristA_x = pdb.position1['wristA'][0]
-        self.wristA_y = pdb.position1['wristA'][1]
-        self.wristA_z = pdb.position1['wristA'][2]
-        self.wristB_x = pdb.position1['wristB'][0]
-        self.wristB_y = pdb.position1['wristB'][1]
-        self.wristB_z = pdb.position1['wristB'][2]
-        self.wristC_x = pdb.position1['wristC'][0]
-        self.wristC_y = pdb.position1['wristC'][1]
-        self.wristC_z = pdb.position1['wristC'][2]
-        self.wristD_x = pdb.position1['wristD'][0]
-        self.wristD_y = pdb.position1['wristD'][1]
-        self.wristD_z = pdb.position1['wristD'][2]
-        self.wristE_x = pdb.position1['wristE'][0]
-        self.wristE_y = pdb.position1['wristE'][1]
-        self.wristE_z = pdb.position1['wristE'][2]
+        self.wristA_x = desired_position['wristA'][0]
+        self.wristA_y = desired_position['wristA'][1]
+        self.wristA_z = desired_position['wristA'][2]
+        self.wristB_x = desired_position['wristB'][0]
+        self.wristB_y = desired_position['wristB'][1]
+        self.wristB_z = desired_position['wristB'][2]
+        self.wristC_x = desired_position['wristC'][0]
+        self.wristC_y = desired_position['wristC'][1]
+        self.wristC_z = desired_position['wristC'][2]
+        self.wristD_x = desired_position['wristD'][0]
+        self.wristD_y = desired_position['wristD'][1]
+        self.wristD_z = desired_position['wristD'][2]
+        self.wristE_x = desired_position['wristE'][0]
+        self.wristE_y = desired_position['wristE'][1]
+        self.wristE_z = desired_position['wristE'][2]
 
         self.format_data_for_plot()
+        return
 
     def format_data_for_plot(self):
         self.x_thumb = [self.thumbA_x, self.thumbB_x, self.thumbC_x]
-        print(self.x_thumb)
         self.y_thumb = [self.thumbA_y, self.thumbB_y, self.thumbC_y]
         self.z_thumb = [self.thumbA_z, self.thumbB_z, self.thumbC_z]
 
@@ -113,6 +130,7 @@ class HandPlot():
         self.middle_index_join_z = [self.middleA_z, self.indexA_z]
 
         self.plot_data()
+        return
 
     def plot_data(self):
         fig3d = plt.figure()
@@ -153,6 +171,7 @@ class HandPlot():
 
 
         plt.show()
+        self.get_user_input()
 
     def update_plot(self):
         pass
