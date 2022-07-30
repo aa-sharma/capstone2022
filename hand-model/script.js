@@ -1,6 +1,47 @@
 const canvas = document.getElementById("canvas1");
 import * as THREE from './three.js-master/build/three.module.js';
-import { OrbitControls } from './three.js-master/examples/jsm/controls/OrbitControls.js'
+
+//GLOBAL VARS
+var line
+let target = {
+    1 : {x:0, y:0, z:0},
+    2 : {x:0, y:0, z:0},
+    3 : {x:0, y:0, z:0},
+    4 : {x:0, y:0, z:0}
+}
+console.log(target)
+
+// ======================================== WEBSOCKETS ===========================================
+const serverAddress = "ws://127.0.0.1:5000";
+const serverConnection = new WebSocket(serverAddress);
+
+serverConnection.onopen = function() {
+    console.log( (new Date()) + "[Client]: JS client connected to server " + serverAddress);
+    serverConnection.send( "This is JS (hand-model) client. Connected to server " + serverAddress);
+}
+serverConnection.onclose = function() {
+    console.log( (new Date()) + "[Client]: JS client (hand-model) disconnecting from server " + serverAddress);
+    serverConnection.send( "This is JS (hand-model) client. Disconnecting from server " + serverAddress);
+}
+
+serverConnection.onmessage = function(event) {
+    if(event.data instanceof Blob) {
+        var reader = new FileReader;
+
+        reader.onload = () => {
+            console.log( "[Client]: Received message from server (parsed): " + reader.result);
+            let obj = JSON.parse(reader.result)
+            target = obj
+            console.log(target)
+        };
+        reader.readAsText(event.data);
+    } else {
+        console.log("[Client]: Received message from server (not-parsed): " + event.data);
+        console.log(event.data)
+    }
+}
+
+// ======================================== SETUP SCENE ===========================================
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -13,7 +54,7 @@ const camera = new THREE.PerspectiveCamera(
     40, 
     window.innerWidth / window.innerHeight, 
     1, 
-    500 
+    500
 );
 
 camera.position.set( 1, 15, 75 );
@@ -22,9 +63,6 @@ camera.lookAt( 0, 0, 0 );
 document.addEventListener( 'mousewheel', (event) => {
     camera.position.z +=event.deltaY/200;
 });
-
-const orbit = new OrbitControls(camera, renderer.domElement);
-//orbit.update();
 
 const axesHelper = new THREE.AxesHelper(100);
 scene.add(axesHelper);
@@ -73,6 +111,8 @@ function onWindowResize() {
     renderer.render(scene, camera)
 }
 
+// ======================================== HAND-MODEL ===========================================
+
 var pointGeometry = new THREE.SphereGeometry(0.5, 25, 25);
 var pointMaterial = new THREE.MeshPhysicalMaterial({color: 0x0d374f});
 
@@ -81,39 +121,109 @@ var meshPinkyPointA = new THREE.Mesh(pointGeometry, pointMaterial);
 meshPinkyPointA.position.set(0, 0, 0);
 
 var meshPinkyPointB = new THREE.Mesh(pointGeometry, pointMaterial);
-meshPinkyPointB.position.set(5, 5, 10);
+meshPinkyPointB.position.set(0, 0, 0);
 
 scene.add(meshPinkyPointA, meshPinkyPointB)
 
-var speed = 0.5;
-var targetPositionX = 10
-var render = function() {
-    requestAnimationFrame(render);
-    // meshPinkyPointB
+console.log(meshPinkyPointA.position)
+console.log(meshPinkyPointB.position)
 
-    if (meshPinkyPointB.position.x < targetPositionX) {
-        meshPinkyPointB.position.x += speed; // You decide on the increment, higher value will mean the objects moves faster
-        console.log(meshPinkyPointB.position)
-    }
-    if (meshPinkyPointB.position.y < targetPositionX) {
-        meshPinkyPointB.position.y += speed; 
-        console.log(meshPinkyPointB.position)
-    }
-    if (meshPinkyPointB.position.z < 15) {
-        meshPinkyPointB.position.z += speed;
-        console.log(meshPinkyPointB.position)
-    }
-    if (meshPinkyPointA.position.x > -1*targetPositionX) {
+var pointsPinky = [];
+pointsPinky.push(meshPinkyPointA.position, meshPinkyPointB.position); //[ (x,y,z), (x,y,z), (x,y,z), (x,y,z) ]
+
+var lineGeom = new THREE.BufferGeometry().setFromPoints( pointsPinky );
+var lineMat = new THREE.LineBasicMaterial( {
+    color: 0x6AA1CB, 
+    linewidth: 2 
+} );
+var line = new THREE.Line(lineGeom, lineMat)
+line.geometry.attributes.position.needsUpdate = true;
+
+scene.add(line);
+line.geometry.attributes.position.needsUpdate = true;
+
+var speed = 0.5;
+
+// Utilities
+const obj_value = (obj, path) => 
+path
+    .replace(/\[|\]\.?/g, '.')
+    .split('.')
+    .filter(s => s)
+    .reduce((acc, val) => acc && acc[val], obj);
+
+function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    
+    // TODO: Improve this later by using a switch statement for this condition and looping through the points
+    if (meshPinkyPointA.position.x < obj_value(target, "1.x")) {
+        meshPinkyPointA.position.x += speed;
+    } else if (meshPinkyPointA.position.x > obj_value(target, "1.x")){
         meshPinkyPointA.position.x -= speed;
     }
+
+    if (meshPinkyPointA.position.y < obj_value(target, "1.y")) {
+        meshPinkyPointA.position.y += speed;
+    } else if (meshPinkyPointA.position.y > obj_value(target, "1.y")) {
+        meshPinkyPointA.position.y -= speed;
+    }
+
+    if (meshPinkyPointA.position.z < obj_value(target, "1.z")) {
+        meshPinkyPointA.position.z += speed;
+    } else if (meshPinkyPointA.position.z > obj_value(target, "1.z")) {
+        meshPinkyPointA.position.z -= speed;
+    }
+    console.log(meshPinkyPointA.position)
+    
+
+
+    if (meshPinkyPointB.position.x < obj_value(target, "2.x")) {
+        meshPinkyPointB.position.x += speed;
+    } else if (meshPinkyPointB.position.x > obj_value(target, "2.x")){
+        meshPinkyPointB.position.x -= speed;
+    }
+
+    if (meshPinkyPointB.position.y < obj_value(target, "2.y")) {
+        meshPinkyPointB.position.y += speed;
+    } else if (meshPinkyPointB.position.y > obj_value(target, "2.y")) {
+        meshPinkyPointB.position.y -= speed;
+    }
+
+    if (meshPinkyPointB.position.z < obj_value(target, "2.z")) {
+        meshPinkyPointB.position.z += speed;
+    } else if (meshPinkyPointB.position.z > obj_value(target, "2.z")) {
+        meshPinkyPointB.position.z -= speed;
+    }
+    console.log(meshPinkyPointB.position)
+
+    // sleep(100)
+
+    line.geometry.attributes.position.needsUpdate = true;
+
+    line.geometry.computeBoundingBox();
+    line.geometry.computeBoundingSphere();
+
+    render()
+    //console.log(line.geometry.attributes.position)
+
+}
+
+function render() {
     renderer.render(scene, camera);
+    line.geometry.attributes.position.needsUpdate = true;
 }
 
 render();
+animate();
 
 
 
-
+//====================== TO BE DELETED ===================================
 
 // var scene, camera, renderer, pointsPinky, line;
 
@@ -187,20 +297,20 @@ render();
 
 //     // DATA POINTS - PINKY
 //     // Instantiate points (22 of 3 dimensions)
-//     pointsPinky = [];
-//     const pointPinkyA = new THREE.Vector3(4, 5, 5);
-//     var pointPinkyB = new THREE.Vector3(0, 4, 0);
-//     var pointPinkyC = new THREE.Vector3(0, 2, 0);
-//     var pointPinkyD = new THREE.Vector3(0, 0, 0);
-//     pointsPinky.push(pointPinkyA, pointPinkyB, pointPinkyC, pointPinkyD); //[ (x,y,z), (x,y,z), (x,y,z), (x,y,z) ]
-//     var lineGeometryPinky = new THREE.BufferGeometry().setFromPoints( pointsPinky );
+    // var pointsPinky = [];
+    // const pointPinkyA = new THREE.Vector3(4, 5, 5);
+    // var pointPinkyB = new THREE.Vector3(0, 4, 0);
+    // var pointPinkyC = new THREE.Vector3(0, 2, 0);
+    // var pointPinkyD = new THREE.Vector3(0, 0, 0);
+    // pointsPinky.push(pointPinkyA, pointPinkyB, pointPinkyC, pointPinkyD); //[ (x,y,z), (x,y,z), (x,y,z), (x,y,z) ]
+    // var lineGeometryPinky = new THREE.BufferGeometry().setFromPoints( pointsPinky );
 
-//     //Draw SEGMENT
-//     var linePinky = new THREE.Line(
-//         lineGeometryPinky,
-//         material
-//     );
-//     scene.add(linePinky)
+    // //Draw SEGMENT
+    // var linePinky = new THREE.Line(
+    //     lineGeometryPinky,
+    //     material
+    // );
+    // scene.add(linePinky)
 
 
 
