@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Interactive</title>
+  <title>Capstone 2022 Interactive</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="img/a.png" rel="icon">
+  <link href="/img/const.png" rel="icon">
   <link href="img/a.png" rel="apple-touch-icon">
 
   <!-- Bootstrap CSS File -->
@@ -48,7 +48,6 @@
       }
   }
 </script>
-<script src="/hand-model/gauge.js"></script>
 </head>
 <body>
 <!--/ Nav Star /-->
@@ -83,30 +82,47 @@
 </div>
 </nav>
 
-<div class="row">
-  <div class="column">
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+
+      <br>
+      <br>
+      <img src="/img/handTest.png" alt="handTest" style="width:216px;height:288.5px;">
+      <h5>Target Position</h2>
+
+    </div>
+    <div class="col-sm">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <h1>Level 1</h1>
+      <label id="minutes">00</label>:<label id="seconds">00</label>
+      <br>
+      <br>
+      <div class="mkCharts" data-percent="80" data-color="#654321"></div>
+      <h5>Acceleration</h5>
+    </div>
+    <div class="col-sm">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <h1>WORDS OF ENCOURAGEMENT HERE</h1>
+    </div>
+
     <canvas id="canvas1">
       <script type="module" src="/hand-model/script.js"></script>
-    </canvas>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="mkCharts" data-percent="42" data-color="#654321"></div>
-  </div>
-  <div class="column">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>Level 1</h1>
-    <div class="mkCharts" data-percent="42" data-color="#654321"></div>
-
-
+    </canvas>  
   </div>
 </div>
+<script src="/hand-model/utilities.js"></script>
+
 
 
 

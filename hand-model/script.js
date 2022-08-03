@@ -277,8 +277,8 @@ function animate() {
 
     line.geometry.attributes.position.needsUpdate = true;
 
-    line.geometry.computeBoundingBox();
-    line.geometry.computeBoundingSphere();
+    //line.geometry.computeBoundingBox();
+    //line.geometry.computeBoundingSphere();
 
     render()
     //console.log(line.geometry.attributes.position)
