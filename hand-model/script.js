@@ -2,7 +2,9 @@ const canvas = document.getElementById("canvas1");
 import * as THREE from './three.js-master/build/three.module.js';
 
 //GLOBAL VARS
-var line
+var line, pointsPinky
+var lineGeom
+
 let target = {
     1 : {x:0, y:0, z:0},
     2 : {x:0, y:0, z:0},
@@ -51,13 +53,13 @@ renderer.setPixelRatio(window.devicePixelRatio)
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera( 
-    40, 
+    30, 
     window.innerWidth / window.innerHeight, 
     1, 
     500
 );
 
-camera.position.set( 1, 15, 75 );
+camera.position.set( 1, 35, 75 );
 camera.lookAt( 0, 0, 0 );
 
 document.addEventListener( 'mousewheel', (event) => {
@@ -117,19 +119,89 @@ var pointGeometry = new THREE.SphereGeometry(0.5, 25, 25);
 var pointMaterial = new THREE.MeshPhysicalMaterial({color: 0x0d374f});
 
 //meshPinkyPoint.position.x = 0;
+// Pinky
 var meshPinkyPointA = new THREE.Mesh(pointGeometry, pointMaterial);
 meshPinkyPointA.position.set(0, 0, 0);
 
 var meshPinkyPointB = new THREE.Mesh(pointGeometry, pointMaterial);
 meshPinkyPointB.position.set(0, 0, 0);
 
-scene.add(meshPinkyPointA, meshPinkyPointB)
+var meshPinkyPointC = new THREE.Mesh(pointGeometry, pointMaterial);
+meshPinkyPointC.position.set(0, 0, 0);
+
+var meshPinkyPointD = new THREE.Mesh(pointGeometry, pointMaterial);
+meshPinkyPointD.position.set(0, 0, 0);
+scene.add(meshPinkyPointA, meshPinkyPointB, meshPinkyPointC, meshPinkyPointD)
+
+// Ring
+var meshRingPointA = new THREE.Mesh(pointGeometry, pointMaterial);
+meshRingPointA.position.set(0, 0, 0);
+
+var meshRingPointB = new THREE.Mesh(pointGeometry, pointMaterial);
+meshRingPointB.position.set(0, 0, 0);
+
+var meshRingPointC = new THREE.Mesh(pointGeometry, pointMaterial);
+meshRingPointC.position.set(0, 0, 0);
+
+var meshRingPointD = new THREE.Mesh(pointGeometry, pointMaterial);
+meshRingPointD.position.set(0, 0, 0);
+scene.add(meshRingPointA, meshRingPointB, meshRingPointC, meshRingPointD)
+
+// Middle
+var meshMiddlePointA = new THREE.Mesh(pointGeometry, pointMaterial);
+meshMiddlePointA.position.set(0, 0, 0);
+
+var meshMiddlePointB = new THREE.Mesh(pointGeometry, pointMaterial);
+meshMiddlePointB.position.set(0, 0, 0);
+
+var meshMiddlePointC = new THREE.Mesh(pointGeometry, pointMaterial);
+meshMiddlePointC.position.set(0, 0, 0);
+
+var meshMiddlePointD = new THREE.Mesh(pointGeometry, pointMaterial);
+meshMiddlePointD.position.set(0, 0, 0);
+scene.add(meshMiddlePointA, meshMiddlePointB, meshMiddlePointC, meshMiddlePointD)
+
+// Index
+var meshIndexPointA = new THREE.Mesh(pointGeometry, pointMaterial);
+meshIndexPointA.position.set(0, 0, 0);
+
+var meshIndexPointB = new THREE.Mesh(pointGeometry, pointMaterial);
+meshIndexPointB.position.set(0, 0, 0);
+
+var meshIndexPointC = new THREE.Mesh(pointGeometry, pointMaterial);
+meshIndexPointC.position.set(0, 0, 0);
+
+var meshIndexPointD = new THREE.Mesh(pointGeometry, pointMaterial);
+meshIndexPointD.position.set(0, 0, 0);
+scene.add(meshIndexPointA, meshIndexPointB, meshIndexPointC, meshIndexPointD)
+
+// Thumb
+var meshThumbPointA = new THREE.Mesh(pointGeometry, pointMaterial);
+meshThumbPointA.position.set(0, 0, 0);
+
+var meshThumbPointB = new THREE.Mesh(pointGeometry, pointMaterial);
+meshThumbPointB.position.set(0, 0, 0);
+
+var meshThumbPointC = new THREE.Mesh(pointGeometry, pointMaterial);
+meshThumbPointC.position.set(0, 0, 0);
+
+var meshThumbPointD = new THREE.Mesh(pointGeometry, pointMaterial);
+meshThumbPointD.position.set(0, 0, 0);
+scene.add(meshThumbPointA, meshThumbPointB, meshThumbPointC, meshThumbPointD)
+
+// Wrist
+var meshWristPointO = new THREE.Mesh(pointGeometry, pointMaterial);
+meshWristPointO.position.set(0, 0, 0);
+
+var meshWristPointW = new THREE.Mesh(pointGeometry, pointMaterial);
+meshWristPointW.position.set(0, 0, 0);
+scene.add(meshWristPointO, meshWristPointW)
 
 console.log(meshPinkyPointA.position)
 console.log(meshPinkyPointB.position)
 
 var pointsPinky = [];
-pointsPinky.push(meshPinkyPointA.position, meshPinkyPointB.position); //[ (x,y,z), (x,y,z), (x,y,z), (x,y,z) ]
+pointsPinky.push(meshPinkyPointA.position, meshPinkyPointB.position, meshPinkyPointC, meshPinkyPointD); //[ (x,y,z), (x,y,z), (x,y,z), (x,y,z) ]
 
 var lineGeom = new THREE.BufferGeometry().setFromPoints( pointsPinky );
 var lineMat = new THREE.LineBasicMaterial( {
