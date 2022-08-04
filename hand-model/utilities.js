@@ -1,3 +1,4 @@
+//==================Gauge==================
 function createCircleChart(percent, color, size, stroke) {
     let svg = `<svg class="mkc_circle-chart" viewbox="0 0 36 36" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
         <path class="mkc_circle-bg" stroke="#eeeeee" stroke-width="${stroke * 0.5}" fill="none" d="M18 2.0845
@@ -23,6 +24,7 @@ for(let i=0;i<charts.length;i++) {
     charts[i].innerHTML = createCircleChart(percent, color, size, stroke);
 }
 
+//==================Timer==================
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var totalSeconds = 0;

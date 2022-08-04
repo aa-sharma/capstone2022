@@ -116,7 +116,7 @@ function onWindowResize() {
 // ======================================== HAND-MODEL ===========================================
 
 var pointGeometry = new THREE.SphereGeometry(0.5, 25, 25);
-var pointMaterial = new THREE.MeshPhysicalMaterial({color: 0x0d374f});
+var pointMaterial = new THREE.MeshPhysicalMaterial({color: 0xD41C00});
 
 //meshPinkyPoint.position.x = 0;
 // Pinky
