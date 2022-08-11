@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "socket.io": "^4.5.1",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13",
+    "weak-map": "^1.0.8",
     "ws": "^8.8.0"
   }
 }
