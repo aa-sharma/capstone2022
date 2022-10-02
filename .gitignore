@@ -17,12 +17,9 @@
 
 # Env
 .env*
+!.env.example
 
-# Hardhat
-gas-report.txt
-/artifacts/
-/cache/
-/deployments/
-coverage
-coverage.json
-/typechain-types/
+# Python
+**/venv/
+__pycache__
+.pytest_cache
