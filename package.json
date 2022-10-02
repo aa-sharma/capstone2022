@@ -1,7 +1,0 @@
-{
-  "type" : "module",
-  "dependencies": {
-    "firebase": "^9.10.0",
-    "progressbar.js": "^1.1.0"
-  }
-}
