@@ -7,10 +7,9 @@ services:
       dockerfile: Dockerfile
     entrypoint: ./entrypoint.sh
     volumes:
-      - ./services/server/src:/usr/src/app/src
-      - ./logs:/var/log/server_logs
+      - ./services/tests/logs:/var/log/server_logs
     env_file:
-      - .env.dev
+      - .env.test
     depends_on:
       - mongo-db
     ports:
@@ -28,8 +27,21 @@ services:
       - "${DB_PORT}"
     volumes:
       - ./services/database/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./services/database/mongo-volume:/data/db
+      - ./services/tests/mongo-volume:/data/db
       - ./services/database/mongod.conf:/etc/mongod.conf
-      - ./logs:/var/log/mongodb
+      - ./services/tests/logs:/var/log/mongodb
     env_file:
-      - .env.dev
+      - .env.test
+
+  test:
+    build:
+      context: ./services/tests
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo-db
+      - server
+    entrypoint: ./entrypoint.sh
+    volumes:
+      - ./services/tests/logs:/usr/src/app/logs
+    env_file:
+      - .env.test

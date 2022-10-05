@@ -13,6 +13,4 @@ COPY . .
 RUN mkdir -p /var/log/server_logs
 RUN chmod 777 /var/log/server_logs
 
-EXPOSE 5000
-
-CMD ["nodemon", "server.js"]
+RUN chmod ugo+x ./entrypoint.sh

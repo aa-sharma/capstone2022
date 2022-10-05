@@ -70,7 +70,7 @@ router.get("/", auth, async (req, res) => {
     const user = await User.findById(req.user.id)
       .select("-password")
       .select("-__v");
-    return res.json(user);
+    logger.info("YEEEET");
   } catch (err) {
     logger.error(err.message);
     return res.status(500).send("Server Error");

@@ -4,16 +4,15 @@ load_dotenv()
 
 
 class Config:
-    API_URL = os.getenv('API_URL')
+    JWT_SECRET = os.getenv("JWT_SECRET")
 
 
 class DevConfig(Config):
     ENV = 'development'
 
-    API_URL = 'http://127.0.0.1:5000'
-
-    DB_URL = 'mongodb://127.0.0.1:27017'
-    JWT_SECRET = 'this-is-a-secret'
+    API_URL = f'http://{os.getenv("SERVER_HOST")}:{os.getenv("SERVER_PORT")}'
+    DB_URL = f'mongodb://{os.getenv("MONGO_INITDB_ROOT_USERNAME")}:{os.getenv("MONGO_INITDB_ROOT_PASSWORD")}@' \
+        f'{os.getenv("DB_HOST")}:{os.getenv("DB_PORT")}/{os.getenv("MONGO_INITDB_DATABASE")}'
 
 
 class ProdConfig(Config):

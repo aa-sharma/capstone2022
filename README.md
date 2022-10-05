@@ -4,51 +4,48 @@ A rehabilitation glove with an interactive interface for recovering stroke patie
 
 ![alt text](./plot.png)
 
-## Locally Run
-
-### Edit .env.example file
+## Edit .env.example file
 
 In order to run the app on your local setup you must rename `.env.example` to `.env.dev`
 
+In order to run the tests on your local setup you must also have a `.env.test` file with your test environment variables. It is recommended
+to change the ports in .env.test to differ from the ports used in `.env.dev`. The reason for this is it allows you to run the application
+and tests at the same time. In `.env.test` you should make `SERVER_PORT=5001` and `DB_PORT=27018` then leave it as is for `.env.dev`
+
 Next you can change some of the parameters in the environment file as needed, such as usernames and password as these should be set by you.
 
-### Install Docker and Docker Compose
+## Install Docker and Docker Compose on your Machine
 
 Docker: https://docs.docker.com/engine/install/
 Docker Compose: https://docs.docker.com/compose/install/
 
+## Locally Run
+
 ### Run Docker Compose
 
-Use Docker compose to bootup the server and database
+## Run Application
 
-`docker compose -f docker-compose.dev.yml up --build`
+There is a file in the root directory called `run-app.sh`. You can start the application, including the server and database simply by typing `./run-app.sh`.
+You may or may not need to make it an executable file by running `chmod +x run-app.sh`, though this will only need to be done once.
 
 if everything goes well you should see
 
 `info: MongoDB Connected...` and `info: Server started on port 5000`
 
-Let me know if this works or not, I can help out if needed
+Let me know if this works or not, I can help out if needed, i have not tested this on anything except for a mac, but it should work on other machines
+all the same.
 
 ## Run Tests
 
-Tests were created using pytest. Currently the suite requires that mongodb is set up and running, and the NodeJS/Express server is running
-and ready to receive API calls
+There is a file in the root directory called `run-tests.sh`. You can run the tests, which boots up a seperate instance of the database and
+server by running `./run-tests.sh`. You may or may not need to make it an executable file by running `chmod +x run-tests.sh`, though this will
+only need to be done once.
 
-### Setup local virutal environment
+### Logs
 
-`python3 -m venv venv` - macos/maybe windows?
+You can view logs at ./logs
 
-### Activate virtual environment
-
-`source ./venv/bin/active` - macos/maybe windows?
-
-### Install Dependencies
-
-`pip3 install -r requirements.txt`
-
-### Run Tests
-
-`pytest`
+Additionally when running tests, logs will be stored at ./services/tests/logs
 
 > uOttawa Electrical Engineering Capstone 2022.
 

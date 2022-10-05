@@ -10,7 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def test_post_users(config, cache):
+def test_post_users(env_config, cache):
     """tests creating a user via api"""
 
     name = ''.join(random.sample(string.ascii_letters, 8))
@@ -26,11 +26,11 @@ def test_post_users(config, cache):
         "password": password
         }
 
-    r = requests.post(f'{config.API_URL}/api/users', json=payload)
+    r = requests.post(f'{env_config.API_URL}/api/users', json=payload)
     if r.status_code < 200 or r.status_code >= 300:
         pytest.fail(f"request was unsuccessful. status code: {r.status_code}. json: {r.json()}")
 
-def test_post_token(config, cache):
+def test_post_token(env_config, cache):
     """tests fetching a token for a user via api"""
 
     email = cache.get('users/email', None)
@@ -38,7 +38,7 @@ def test_post_token(config, cache):
     
     payload = {"email": email, "password": password}
 
-    r = requests.post(f'{config.API_URL}/api/auth', json=payload)
+    r = requests.post(f'{env_config.API_URL}/api/auth', json=payload)
     if r.status_code < 200 or r.status_code >= 300:
         pytest.fail(f"request was unsuccessful. status code: {r.status_code}. json: {r.json()}")
 
@@ -46,7 +46,7 @@ def test_post_token(config, cache):
     token = json['token']
     cache.set('users/token', token)
 
-def test_get_user(config, cache):
+def test_get_user(env_config, cache):
     """tests private function to get a user using the users auth token"""
 
     token = cache.get('users/token', None)
@@ -54,7 +54,7 @@ def test_get_user(config, cache):
 
     headers = {'x-auth-token': token}
 
-    r = requests.get(f'{config.API_URL}/api/auth', headers=headers)
+    r = requests.get(f'{env_config.API_URL}/api/auth', headers=headers)
     if r.status_code < 200 or r.status_code >= 300:
         pytest.fail(f"request was unsuccessful. status code: {r.status_code}. json: {r.json()}")
 
