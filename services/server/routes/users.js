@@ -6,6 +6,7 @@ const config = require("config");
 const { check, validationResult } = require("express-validator");
 
 const User = require("../models/User");
+const logger = require("../logger");
 
 // @route   POST api/users
 // @desc    Register a user
@@ -55,7 +56,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        process.env.JWT_SECRET,
         {
           expiresIn: 360000,
         },
@@ -65,7 +66,7 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
+      logger.error(err.message);
       res.status(500).send("Server Error");
     }
   }

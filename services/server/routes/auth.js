@@ -4,9 +4,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../middleware/auth");
+const logger = require("../logger");
 const { check, validationResult } = require("express-validator");
-
 const User = require("../models/User");
+
 // @route   POST api/auth
 // @desc    Auth user & get token
 // @access  Public
@@ -45,7 +46,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtSecret"),
+        process.env.JWT_SECRET,
         {
           expiresIn: 360000,
         },
@@ -55,7 +56,7 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
+      logger.error(err.message);
       res.status(500).send("Server Error");
     }
   }
@@ -71,10 +72,9 @@ router.get("/", auth, async (req, res) => {
       .select("-__v");
     return res.json(user);
   } catch (err) {
-    console.error(err.message);
+    logger.error(err.message);
     return res.status(500).send("Server Error");
   }
-  res.send("Login User");
 });
 
 module.exports = router;

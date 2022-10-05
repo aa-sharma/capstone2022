@@ -90,6 +90,20 @@ const HandPosition = mongoose.Schema({
       required: true,
     },
   },
+  indexD: {
+    x: {
+      type: Number,
+      required: true,
+    },
+    y: {
+      type: Number,
+      required: true,
+    },
+    z: {
+      type: Number,
+      required: true,
+    },
+  },
 
   middleA: {
     x: {

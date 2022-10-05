@@ -14,6 +14,10 @@
 
 # Misc
 /.DS_Store
+logs
+
+# Database
+mongo-volume
 
 # Env
 .env*

@@ -6,31 +6,28 @@ A rehabilitation glove with an interactive interface for recovering stroke patie
 
 ## Locally Run
 
-If on windows/linux go to https://www.mongodb.com/docs/mongodb-shell/install/ for details on how to install mongodb on your system. Otherwise
-Docker might be set up in the future to support easily running the entire application with one command on any machine, we will have to see how much this is in demand.
+### Edit .env.example file
 
-### Install MongoDB
+In order to run the app on your local setup you must rename `.env.example` to `.env.dev`
 
-`brew tap mongodb/brew` - macos
+Next you can change some of the parameters in the environment file as needed, such as usernames and password as these should be set by you.
 
-`brew install mongodb-community@6.0` - macos
+### Install Docker and Docker Compose
 
-### Install dependencies
+Docker: https://docs.docker.com/engine/install/
+Docker Compose: https://docs.docker.com/compose/install/
 
-`cd services/server`
+### Run Docker Compose
 
-`npm i`
+Use Docker compose to bootup the server and database
 
-### Start MongoDB
+`docker compose -f docker-compose.dev.yml up --build`
 
-`brew services start mongodb-community@6.0` - macos
+if everything goes well you should see
 
-### Start NodeJS
+`info: MongoDB Connected...` and `info: Server started on port 5000`
 
-`npm start`
-
-if all steps were successful, this should start a nodejs server thats connected to a local mongodb deployment. You should see
-"MongoDB Connected...", "Server started on port 5000"
+Let me know if this works or not, I can help out if needed
 
 ## Run Tests
 

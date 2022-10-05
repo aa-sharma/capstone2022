@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 const config = require("config");
-const db = config.get("mongoURI");
+const logger = require("../logger");
 
 const connectDB = async () => {
   try {
-    mongoose.connect(db, {
-      useNewUrlParser: true,
-    });
+    mongoose.connect(
+      `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.MONGO_INITDB_DATABASE}`,
+      {
+        useNewUrlParser: true,
+      }
+    );
 
-    console.log("MongoDB Connected...");
+    logger.info("MongoDB Connected...");
   } catch (err) {
-    console.error(err.message);
+    logger.error(err.message);
     process.exit(1);
   }
 };
