@@ -8,7 +8,7 @@ A rehabilitation glove with an interactive interface for recovering stroke patie
 
 In order to run the app on your local setup you must rename `.env.example.dev` to `.env.dev`
 
-In order to run the tests on your local setup you must also rename `.env.example.test` file with your test environment variables.
+In order to run the tests on your local setup you must also rename `.env.example.test` to `.env.test` file with your test environment variables.
 
 Next you can change some of the parameters in the environment files as needed, such as usernames and password as these should be set by you, but I would leave
 `HOST` and `PORT` parameters alone.
