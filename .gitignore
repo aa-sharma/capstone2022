@@ -21,7 +21,7 @@ mongo-volume
 
 # Env
 .env*
-!.env.example
+!.env.example*
 
 # Python
 **/venv/

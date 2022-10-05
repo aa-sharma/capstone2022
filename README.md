@@ -6,13 +6,12 @@ A rehabilitation glove with an interactive interface for recovering stroke patie
 
 ## Edit .env.example file
 
-In order to run the app on your local setup you must rename `.env.example` to `.env.dev`
+In order to run the app on your local setup you must rename `.env.example.dev` to `.env.dev`
 
-In order to run the tests on your local setup you must also have a `.env.test` file with your test environment variables. It is recommended
-to change the ports in .env.test to differ from the ports used in `.env.dev`. The reason for this is it allows you to run the application
-and tests at the same time. In `.env.test` you should make `SERVER_PORT=5001` and `DB_PORT=27018` then leave it as is for `.env.dev`
+In order to run the tests on your local setup you must also rename `.env.example.test` file with your test environment variables.
 
-Next you can change some of the parameters in the environment file as needed, such as usernames and password as these should be set by you.
+Next you can change some of the parameters in the environment files as needed, such as usernames and password as these should be set by you, but I would leave
+`HOST` and `PORT` parameters alone.
 
 ## Install Docker and Docker Compose on your Machine
 

@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  server:
+  test-server:
     build:
       context: ./services/server
       dockerfile: Dockerfile
@@ -11,11 +11,11 @@ services:
     env_file:
       - .env.test
     depends_on:
-      - mongo-db
+      - test-mongo-db
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
 
-  mongo-db:
+  test-mongo-db:
     image: mongo
     ports:
       - "${DB_PORT}:${DB_PORT}"
@@ -33,13 +33,13 @@ services:
     env_file:
       - .env.test
 
-  test:
+  test-suite:
     build:
       context: ./services/tests
       dockerfile: Dockerfile
     depends_on:
-      - mongo-db
-      - server
+      - test-mongo-db
+      - test-server
     entrypoint: ./entrypoint.sh
     volumes:
       - ./services/tests/logs:/usr/src/app/logs
