@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const logger = require("../logger");
+const logger = require("../utils/logger");
 
 module.exports = function (req, res, next) {
   //  Get token from header

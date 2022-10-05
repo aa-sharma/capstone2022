@@ -3,7 +3,7 @@ const connectDB = require("./config/db");
 const http = require("http");
 const path = require("path");
 const io = require("./websockets/ws-server");
-const logger = require("./logger");
+const logger = require("./utils/logger");
 
 const app = express();
 const server = http.createServer(app);
