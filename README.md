@@ -19,10 +19,6 @@ Next you can change some of the parameters in the environment file as needed, su
 Docker: https://docs.docker.com/engine/install/
 Docker Compose: https://docs.docker.com/compose/install/
 
-## Locally Run
-
-### Run Docker Compose
-
 ## Run Application
 
 There is a file in the root directory called `run-app.sh`. You can start the application, including the server and database simply by typing `./run-app.sh`.
@@ -41,11 +37,13 @@ There is a file in the root directory called `run-tests.sh`. You can run the tes
 server by running `./run-tests.sh`. You may or may not need to make it an executable file by running `chmod +x run-tests.sh`, though this will
 only need to be done once.
 
-### Logs
+## Logs
 
 You can view logs at ./logs
 
 Additionally when running tests, logs will be stored at ./services/tests/logs
+
+## Disclaimer
 
 > uOttawa Electrical Engineering Capstone 2022.
 
