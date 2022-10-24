@@ -14,6 +14,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  productCode: {
+    type: String,
+    required: false,
+  },
   date: {
     type: Date,
     default: Date.now,
