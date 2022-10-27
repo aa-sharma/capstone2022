@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 5
+sleep 10
 
 pytest_date=`date +"%Y-%m-%d"`
 pytest_time=`date +"%T"`
