@@ -16,6 +16,18 @@ services:
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
 
+  nginx:
+    build:
+      context: ./services/website
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./logs/nginx_logs:/var/log/nginx
+      - ./services/website:/app
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
   mongo-db:
     image: mongo
     ports:

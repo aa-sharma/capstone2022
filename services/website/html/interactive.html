@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Capstone 2022 Interactive</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicons -->
+    <link href="../img/const.png" rel="icon" />
+    <link href="../img/a.png" rel="apple-touch-icon" />
+
+    <!-- Bootstrap CSS File -->
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Libraries CSS Files -->
+    <link
+      href="../lib/font-awesome/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link href="../lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="../lib/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link
+      href="../lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+
+    <!-- Main Stylesheet File -->
+    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../hand-model/style.css" rel="stylesheet" />
+
+    <style>
+      .navbar-b {
+        transition: all 0.5s ease-in-out;
+        background-color: #000;
+        padding-top: 1.563rem;
+        padding-bottom: 1.563rem;
+      }
+      #batteryContainer {
+        margin: 20px;
+        width: 400px;
+        height: 8px;
+      }
+    </style>
+
+    <!-- =======================================================
+    Theme Name: DevFolio
+    Theme URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.138.0/build/three.module.js",
+          "OrbitControls": "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!--/ Nav Star /-->
+    <nav
+      class="navbar navbar-b navbar-trans navbar-expand-md fixed-top"
+      id="mainNav"
+    >
+      <div class="container">
+        <a class="navbar-brand js-scroll" href="#page-top">Capstone 2022</a>
+        <button
+          class="navbar-toggler collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarDefault"
+          aria-controls="navbarDefault"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div
+          class="navbar-collapse collapse justify-content-end"
+          id="navbarDefault"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="./">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="./interactive.html"
+                >Interactive</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="./">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="./about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="./help.html">Help</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll" href="./signup.html">My Account</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" style="height: 100vh">
+      <div class="row">
+        <div class="col-sm">
+          <br />
+          <br />
+          <img
+            src="../img/handTest.png"
+            alt="handTest"
+            style="width: 216px; height: 288.5px"
+          />
+          <p>Target Position</p>
+        </div>
+        <div class="col-sm">
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <h1>Level 1</h1>
+          <label id="minutes">00</label>:<label id="seconds">00</label>
+          <br />
+          <br />
+          <div
+            class="mkCharts"
+            data-percent="45"
+            data-color="#2DAEDF"
+            data-size="100"
+            data-stroke="2"
+          ></div>
+          <p>Acceleration</p>
+        </div>
+        <div class="col-sm">
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <!-- <div id="batteryContainer"></div> -->
+          <br />
+          <p class="font-weight-light">Battery <em>87%</em></p>
+          <i class="bi bi-battery-full"></i>
+          <h1 class="font-weight-light">WORDS OF ENCOURAGEMENT HERE</h1>
+          <p class="font-weight-light">
+            Exercise 1 of 5 | <a href=""><em>Skip >></em></a>
+          </p>
+        </div>
+
+        <canvas id="canvas1">
+          <script type="module" src="/hand-model/script.js"></script>
+        </canvas>
+      </div>
+    </div>
+
+    <footer class="containter-fluid mt-auto">
+      <div class="div-1">
+        <div class="row">
+          <div class="col-sm-4">
+            <br />
+            <br />
+            <p class="font-weight-light">
+              Electrical Engineering Capstone 2022
+            </p>
+            <small class="text-muted">ELG4912 - ELG4913</small>
+            <br />
+            <small class="text-muted">January 2022 - December 2022</small>
+            <br />
+          </div>
+
+          <div class="col-sm-4 mt-2">
+            <br />
+            <small class="text-muted">Eric Hallé-Sherman</small>
+            <br />
+            <small class="text-muted">Reethi Paul</small>
+            <br />
+            <small class="text-muted">Ziad Salameh</small>
+            <br />
+            <small class="text-muted">Aashna Sharma</small>
+            <br />
+            <small class="text-muted">Lucas Rahn</small>
+          </div>
+
+          <div class="col-sm-4">
+            <br />
+            <br />
+            <img
+              src="img/uottawa.png"
+              class="icon"
+              alt="uOttawa logo"
+              style="width: 110px; height: 85px"
+            />
+            <br />
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <div id="preloader"></div>
+
+    <!-- JavaScript Libraries -->
+    <script src="../lib/jquery/jquery.min.js"></script>
+    <script src="../lib/jquery/jquery-migrate.min.js"></script>
+    <script src="../lib/popper/popper.min.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/counterup/jquery.waypoints.min.js"></script>
+    <script src="../lib/counterup/jquery.counterup.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
+    <script src="../lib/typed/typed.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="../contactform/contactform.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="../js/main.js"></script>
+    <script src="../hand-model/utilities.js"></script>
+  </body>
+</html>
