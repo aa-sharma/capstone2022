@@ -5,8 +5,10 @@ from utils.config import config
 import logging
 
 logger = logging.getLogger('logger')
+setup_logger()
 
 if __name__ == "__main__":
-    setup_logger()
+    logger.info("Starting Data Processor")
+
     while True:
         read_serial()

@@ -11,14 +11,14 @@ ser = serial.Serial(config.COM_PORT, config.BAUD_RATE)
 
 def read_serial():
     data = ser.readLine()
-    
+
     logger.debug(data)
     if config.WRITE_ARUDINO_DATA:
-        savefile(data)
+        __savefile(data)
 
     return ser.readLine()
 
-def savefile(data):
+def __savefile(data):
     # a functin for simply saving files
     with open(f'{ROOT_DIR}/../data/arduino_data.csv',"w+", newline='') as my_csv:
         csvWriter = csv.writer(my_csv, delimiter=',')
