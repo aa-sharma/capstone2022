@@ -13,7 +13,7 @@ const signJWT = async (user) => {
       payload,
       process.env.JWT_SECRET,
       {
-        expiresIn: 360000,
+        expiresIn: 86400,
       },
       (err, token) => {
         if (err) reject(err);

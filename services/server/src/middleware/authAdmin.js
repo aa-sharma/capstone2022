@@ -16,9 +16,16 @@ module.exports = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decoded.user.id)
+    const user = await User.findById(decoded.user.id)
       .select("-password")
       .select("-__v");
+
+    if (!user.admin) {
+      return res
+        .status(401)
+        .json(singleErrorMsg("User is not admin user, authorization denied"));
+    }
+    req.user = decoded.user;
     next();
   } catch (err) {
     return res.status(401).json(singleErrorMsg("Token is not valid"));
