@@ -1,30 +1,31 @@
 const mongoose = require("mongoose");
+const { ExerciseLevelSchema } = require("./ExerciseLevel");
 
-const UserLevelProgress = mongoose.Schema({
-  _id: {
-    type: Number,
-    required: true,
-  },
+const UserLevelProgressSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: [true, "`user` is required"],
   },
-  level: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Level",
+  exerciseLevel: {
+    type: ExerciseLevelSchema,
+    default: () => ({}),
   },
-  exercisesCompleted: [
-    {
-      exercise: {
-        type: String, // "handPosition1"
-        required: true,
-      },
-      time: {
-        type: Number, // completed in 5 seconds
-        required: true,
-      },
-    },
-  ],
+  dexterityScore: {
+    // relative to exerciseLevel dexterityDifficulty
+    type: Number,
+    required: [true, "`dexterityScore` is required"],
+  },
+  agilityScore: {
+    // relative to exerciseLevel agilityDifficulty
+    type: Number,
+    required: [true, "`agilityScore` is required"],
+  },
 });
 
-module.exports = mongoose.model("UserLevelProgress", UserLevelProgress);
+const UserLevelProgress = mongoose.model(
+  "UserLevelProgress",
+  UserLevelProgressSchema
+);
+
+module.exports = { UserLevelProgress, UserLevelProgressSchema };

@@ -1,0 +1,26 @@
+[
+  {
+    "flexResistor1": 1,
+    "flexResistor2": 1,
+    "flexResistor3": 1,
+    "flexResistor4": 1,
+    "flexResistor5": 1,
+    "gyroscope": 1
+  },
+  {
+    "flexResistor1": 2,
+    "flexResistor2": 2,
+    "flexResistor3": 2,
+    "flexResistor4": 2,
+    "flexResistor5": 2,
+    "gyroscope": 2
+  },
+  {
+    "flexResistor1": 3,
+    "flexResistor2": 3,
+    "flexResistor3": 3,
+    "flexResistor4": 3,
+    "flexResistor5": 3,
+    "gyroscope": 3
+  }
+]
