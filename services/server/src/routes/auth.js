@@ -1,14 +1,12 @@
 const express = require("../config/express-p");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
 const auth = require("../middleware/auth");
 const logger = require("../utils/logger");
 const { check, validationResult } = require("express-validator");
 const { User } = require("../models/User");
-const signJWT = require("../utils/sign-jwt");
-const { singleErrorMsg } = require("../utils/handleErrors");
+const { singleErrorMsg, handleExpressValidatorError } = require("../utils/handleErrors");
+const { signJWT } = require("../utils/helpers");
 
 // @route   POST api/auth
 // @desc    Auth user & get token
@@ -23,7 +21,7 @@ router.postP(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json(handleExpressValidatorError(errors));
     }
 
     const { email, password } = req.body;
@@ -62,14 +60,16 @@ router.postP(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json(handleExpressValidatorError(errors));
     }
 
     const { productCode } = req.body;
     try {
       const user = await User.findOne({ productCode });
       if (!user) {
-        return res.status(400).json(singleErrorMsg("invalid product code"));
+        return res
+          .status(400)
+          .json(singleErrorMsg("user product code does not exist"));
       }
 
       const token = await signJWT(user);

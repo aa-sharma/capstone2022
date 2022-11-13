@@ -1,50 +1,50 @@
 [
   {
-    "levelNumber": 1,
+    "level": 1,
     "dexterityDifficulty": 1,
     "agilityDifficulty": 1,
-    "exerciseIndex": 0
+    "positionIndex": 0
   },
   {
-    "levelNumber": 1,
+    "level": 1,
     "dexterityDifficulty": 2,
     "agilityDifficulty": 2,
-    "exerciseIndex": 1
+    "positionIndex": 1
   },
   {
-    "levelNumber": 2,
+    "level": 2,
     "dexterityDifficulty": 1,
     "agilityDifficulty": 1,
-    "exerciseIndex": 2
+    "positionIndex": 2
   },
   {
-    "levelNumber": 2,
+    "level": 2,
     "dexterityDifficulty": 2,
     "agilityDifficulty": 2,
-    "exerciseIndex": 0
+    "positionIndex": 0
   },
   {
-    "levelNumber": 3,
+    "level": 3,
     "dexterityDifficulty": 1,
     "agilityDifficulty": 1,
-    "exerciseIndex": 1
+    "positionIndex": 1
   },
   {
-    "levelNumber": 3,
+    "level": 3,
     "dexterityDifficulty": 2,
     "agilityDifficulty": 2,
-    "exerciseIndex": 2
+    "positionIndex": 2
   },
   {
-    "levelNumber": 4,
+    "level": 4,
     "dexterityDifficulty": 3,
     "agilityDifficulty": 3,
-    "exerciseIndex": 0
+    "positionIndex": 0
   },
   {
-    "levelNumber": 4,
+    "level": 4,
     "dexterityDifficulty": 4,
     "agilityDifficulty": 4,
-    "exerciseIndex": 1
+    "positionIndex": 1
   }
 ]

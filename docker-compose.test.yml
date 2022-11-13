@@ -8,6 +8,7 @@ services:
     entrypoint: ./entrypoint.sh
     volumes:
       - ./services/tests/logs:/var/log/server_logs
+      - ./initilize-server-data:/usr/src/app/initilize-server-data
     env_file:
       - .env.test
     depends_on:
@@ -43,5 +44,6 @@ services:
     entrypoint: ./entrypoint.sh
     volumes:
       - ./services/tests/logs:/usr/src/app/logs
+      - ./initilize-server-data:/usr/src/app/initilize-server-data
     env_file:
       - .env.test

@@ -1,5 +1,5 @@
 const express = require("./src/config/express-p");
-const { connectDB, initData } = require("./src/config/db");
+const { connectDB, initExercises } = require("./src/config/db");
 const http = require("http");
 const path = require("path");
 const io = require("./src/websockets/ws-server");
@@ -23,21 +23,16 @@ const runServer = async () => {
   app.useP("/api/users", require("./src/routes/users"));
   app.useP("/api/auth", require("./src/routes/auth"));
   app.useP("/api/exercise", require("./src/routes/exercise"));
-  app.useP("/api/level", require("./src/routes/level"));
-  app.useP("/api/exercise-level", require("./src/routes/exerciseLevel"));
+  app.useP("/api/initilize", require("./src/routes/initilize-data"));
   app.useP(
     "/api/user-level-progress",
     require("./src/routes/user-level-progress")
   );
 
   await createAdminUser();
-  await initData();
 
-  if (process.env.NODE_ENV === "production") {
-    // app.use(express.static("client/build"));
-    // app.get("*", (req, res) =>
-    //   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-    // );
+  if (process.env.NODE_ENV === "development") {
+    // Do something
   }
 
   const PORT = process.env.SERVER_PORT || 5000;

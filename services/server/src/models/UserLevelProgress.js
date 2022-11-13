@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
-const { ExerciseLevelSchema } = require("./ExerciseLevel");
+const { ExerciseSchema } = require("./Exercise");
+
+const modifiedExerciseSchema = mongoose.Schema(ExerciseSchema, {
+  toJSON: {
+    transform: function (doc, ret) {
+      delete ret._id;
+    },
+  },
+});
 
 const UserLevelProgressSchema = mongoose.Schema({
   user: {
@@ -7,8 +15,8 @@ const UserLevelProgressSchema = mongoose.Schema({
     ref: "User",
     required: [true, "`user` is required"],
   },
-  exerciseLevel: {
-    type: ExerciseLevelSchema,
+  exercise: {
+    type: modifiedExerciseSchema,
     default: () => ({}),
   },
   dexterityScore: {
@@ -21,7 +29,20 @@ const UserLevelProgressSchema = mongoose.Schema({
     type: Number,
     required: [true, "`agilityScore` is required"],
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
+
+UserLevelProgressSchema.path("exercise").validate(function (exercise) {
+  if (!exercise.position) {
+    return false;
+  } else if (exercise.position.length != 2) {
+    return false;
+  }
+  return true;
+}, "`exercise.position` must be of length 2, where the first index is the starting position and second index is the ending position");
 
 const UserLevelProgress = mongoose.model(
   "UserLevelProgress",

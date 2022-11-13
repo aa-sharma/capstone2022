@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { UserLevelProgress } = require("./UserLevelProgress");
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -35,6 +36,18 @@ const UserSchema = mongoose.Schema({
     default: Date.now,
   },
 });
+
+// `this` is not accessible unless the function is NON-ES6 syntax for some weird reason...
+// delete userLevelProgress if user is deleted.
+async function preDelete() {
+  const doc = await User.findOne(this.getFilter());
+  if (doc) {
+    await UserLevelProgress.deleteMany({ user: doc._id });
+  }
+}
+
+UserSchema.pre("deleteOne", preDelete);
+UserSchema.pre("deleteMany", preDelete);
 
 const User = mongoose.model("User", UserSchema);
 

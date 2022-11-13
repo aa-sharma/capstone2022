@@ -1,13 +1,16 @@
 const express = require("../config/express-p");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const config = require("config");
 const { check, validationResult } = require("express-validator");
 const { User } = require("../models/User");
 const logger = require("../utils/logger");
 const auth = require("../middleware/auth");
-const signJWT = require("../utils/sign-jwt");
 const authAdmin = require("../middleware/authAdmin");
+const { signJWT, paginationResponse } = require("../utils/helpers");
+const {
+  singleErrorMsg,
+  handleExpressValidatorError,
+} = require("../utils/handleErrors");
 
 // @route   POST api/users
 // @desc    Register a user
@@ -25,7 +28,7 @@ router.postP(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json(handleExpressValidatorError(errors));
     }
     const { name, email, password } = req.body;
 
@@ -33,9 +36,7 @@ router.postP(
       let user = await User.findOne({ email });
 
       if (user) {
-        return res.status(400).json({
-          errors: [{ msg: "Email already exists" }],
-        });
+        return res.status(400).json(singleErrorMsg("Email already exists"));
       }
       user = new User({
         name,
@@ -76,7 +77,7 @@ router.postP(
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json(handleExpressValidatorError(errors));
       }
 
       const { productCode } = req.body;
@@ -98,9 +99,14 @@ router.postP(
 // @access  onlyAdmin
 router.getP("/", authAdmin, async (req, res) => {
   try {
-    const users = await User.find().select("-password").select("-__v");
+    const users = await User.find()
+      .select("-password")
+      .select("-__v")
+      .sort({ admin: "desc", date: "desc" });
 
-    return res.json(users);
+    return res.json(
+      paginationResponse(users, req.query.page, req.query.pageSize)
+    );
   } catch (err) {
     logger.error(err.message);
     return res.status(500).send("Server Error");

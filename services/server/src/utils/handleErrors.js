@@ -15,4 +15,10 @@ const handleMongooseErrors = (err) => {
 
 const singleErrorMsg = (msg) => ({ errors: [{ msg }] });
 
-module.exports = { handleMongooseErrors, singleErrorMsg };
+const handleExpressValidatorError = (err) => ({ errors: err.array() });
+
+module.exports = {
+  handleMongooseErrors,
+  singleErrorMsg,
+  handleExpressValidatorError,
+};

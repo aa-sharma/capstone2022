@@ -1,0 +1,132 @@
+{
+  "successful_user_data": {
+    "name": "Lucas Rahn",
+    "email": "lucasrahn09@gmail.com",
+    "password": "lucasrahn",
+    "productCode": "7815696ecbf1c96e6894"
+  },
+  "success": [
+    {
+      "name": "Lucas Rahn",
+      "email": "lucasrahn@gmail.com",
+      "password": "lucaslucashey!",
+      "productCode": "thisisavalidproduct"
+    },
+    {
+      "name": "Eric Halle-Sherman",
+      "email": "erichallesherman@hotmail.com",
+      "password": "whatisapassword?",
+      "productCode": "alsoaValidProductC"
+    },
+    {
+      "name": "Reethi Paul",
+      "email": "reethipaul@outlook.ca",
+      "password": "thisIsMYPASSWORD",
+      "productCode": "7815696ecbf1c96e6894"
+    },
+    {
+      "name": "Ziad Salameh",
+      "email": "ziadsalameh@yahoo.ca",
+      "password": "butBUTWHY?!?!",
+      "productCode": "minval"
+    },
+    {
+      "name": "Aashna Sharma",
+      "email": "aashnasharma@gmail.ca",
+      "password": "wellhellothereimAashna:)",
+      "productCode": "yooooooooooooo"
+    }
+  ],
+
+  "error": {
+    "register": [
+      {
+        "data": {
+          "name": null,
+          "email": "lucasrahn@gmail.com",
+          "password": "lucashey"
+        },
+        "status_code": 400,
+        "msg": "Please include a name"
+      },
+      {
+        "data": {
+          "name": "Lucas Rahn",
+          "email": "lucasrahn@gmailcom",
+          "password": "lucashey"
+        },
+        "status_code": 400,
+        "msg": "Please include a valid email"
+      },
+      {
+        "data": {
+          "name": "Lucas Rahn",
+          "email": "lucasrahn06@gmail.com",
+          "password": "lucas"
+        },
+        "status_code": 400,
+        "msg": "Password must be greater than or equal to 6 characters"
+      },
+      {
+        "data": {
+          "name": "Lucas Rahn",
+          "email": "lucasrahn09@gmail.com",
+          "password": "lucasrahn"
+        },
+        "status_code": 400,
+        "msg": "Email already exists"
+      }
+    ],
+    "register_product_code": [
+      {
+        "data": {
+          "productCode": "7815696ecbf1c96e68941"
+        },
+        "status_code": 400,
+        "msg": "Please include a valid product code between 6 and 20 characters"
+      },
+      {
+        "data": {
+          "productCode": "78156"
+        },
+        "status_code": 400,
+        "msg": "Please include a valid product code between 6 and 20 characters"
+      }
+    ],
+    "auth": [
+      {
+        "data": {
+          "email": "lucasrahn09@gmail.com",
+          "password": null
+        },
+        "status_code": 400,
+        "msg": "Password is required"
+      },
+      {
+        "data": {
+          "email": "lucasrahn09@gmail.com",
+          "password": "lucasrah"
+        },
+        "status_code": 400,
+        "msg": "Invalid Credentials"
+      },
+      {
+        "data": {
+          "email": "lucasrahn0@gmail.com",
+          "password": "lucasrahn"
+        },
+        "status_code": 400,
+        "msg": "Invalid Credentials"
+      }
+    ],
+    "auth_device": [
+      {
+        "data": {
+          "productCode": "7815696ecbf1c96e689"
+        },
+        "status_code": 400,
+        "msg": "user product code does not exist"
+      }
+    ]
+  }
+}

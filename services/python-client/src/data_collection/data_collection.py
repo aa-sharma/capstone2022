@@ -11,12 +11,12 @@ ser = serial.Serial(config.COM_PORT, config.BAUD_RATE)
 
 def read_serial():
     data = ser.readLine()
-
     logger.debug(data)
     if config.WRITE_ARUDINO_DATA:
         __savefile(data)
 
-    return ser.readLine()
+    return data
+
 
 def __savefile(data):
     # a functin for simply saving files
