@@ -9,7 +9,6 @@ services:
     volumes:
       - ./services/server:/usr/src/app
       - ./logs:/var/log/server_logs
-      - ./initilize-server-data:/usr/src/app/initilize-server-data
     env_file:
       - .env.dev
     depends_on:
