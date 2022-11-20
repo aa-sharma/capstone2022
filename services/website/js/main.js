@@ -28,25 +28,24 @@
     }
   });
   $(".back-to-top").click(function () {
-    $("html, body").animate({ scrollTop: 0 }, 1500, "easeInOutExpo");
+    $("html, body").animate({ scrollTop: 0 }, 0, "easeInExpo");
     return false;
   });
 
-  /*--/ Star ScrollTop /--*/
-  $(".scrolltop-mf").on("click", function () {
-    $("html, body").animate(
-      {
-        scrollTop: 0,
-      },
-      1000
-    );
+  $(".js-scroll").click(function () {
+    $("html, body").animate({ scrollTop: 0 }, 0, "easeInExpo");
+    return false;
   });
 
-  /*--/ Star Counter /--*/
-  $(".counter").counterUp({
-    delay: 15,
-    time: 2000,
-  });
+  // /*--/ Star ScrollTop /--*/
+  // $(".scrolltop-mf").on("click", function () {
+  //   $("html, body").animate(
+  //     {
+  //       scrollTop: 0,
+  //     },
+  //     1000
+  //   );
+  // });
 
   /*--/ Star Scrolling nav /--*/
   $('a.js-scroll[href*="#"]:not([href="#"])').on("click", function () {
@@ -76,10 +75,10 @@
   });
 
   // Activate scrollspy to add active class to navbar items on scroll
-  $("body").scrollspy({
-    target: "#mainNav",
-    offset: navHeight,
-  });
+  // $("body").scrollspy({
+  //   target: "#mainNav",
+  //   offset: navHeight,
+  // });
   /*--/ End Scrolling nav /--*/
 
   /*--/ Navbar Menu Reduce /--*/
