@@ -315,7 +315,6 @@ render();
 animate();
 
 <<<<<<< Updated upstream:archived/website/js/script.js
-<<<<<<< Updated upstream:archived/website/js/script.js
 //====================== TO BE DELETED ===================================
 
 // var scene, camera, renderer, pointsPinky, line;
@@ -573,7 +572,5 @@ animate();
 // }
 
 // init();
-=======
->>>>>>> Stashed changes:services/website/js/hand-model/script.js
 =======
 >>>>>>> Stashed changes:services/website/js/hand-model/script.js

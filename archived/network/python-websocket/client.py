@@ -11,10 +11,7 @@ def parseData(inputData):
     angles = angles[0].split("/")
     #angles = str(inputData).split("/")
     return angles
-<<<<<<< Updated upstream:archived/network/python-websocket/client.py
 
-=======
->>>>>>> Stashed changes:network/python-websocket/client.py
 
 def updateValues():
     """
@@ -100,7 +97,6 @@ def updateValues():
 
 async def listen():
 <<<<<<< Updated upstream:archived/network/python-websocket/client.py
-<<<<<<< Updated upstream:archived/network/python-websocket/client.py
     url = "ws://127.0.0.1:5002"
 
     async with websockets.connect(url) as ws:
@@ -108,8 +104,6 @@ async def listen():
         # await ws.send(json.dumps({"position": "pinkyA", "x": "7", "y": "0", "z": "3"}))
         await ws.send(json.dumps(updateValues()))
 =======
-=======
->>>>>>> Stashed changes:network/python-websocket/client.py
     url = "ws://127.0.0.1:5050"
 
     async with websockets.connect(url) as ws:
