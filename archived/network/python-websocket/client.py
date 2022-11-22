@@ -3,14 +3,6 @@ import asyncio
 import json
 import time
 from datetime import datetime
-import serial
-
-def parseData(inputData):
-    angles = str(inputData).split("'")
-    angles = angles[1].split("\\")
-    angles = angles[0].split("/")
-    #angles = str(inputData).split("/")
-    return angles
 
 
 def updateValues():
@@ -96,30 +88,12 @@ def updateValues():
 
 
 async def listen():
-<<<<<<< Updated upstream:archived/network/python-websocket/client.py
     url = "ws://127.0.0.1:5002"
 
     async with websockets.connect(url) as ws:
         await ws.send("This is python client. Connected to server " + url)
         # await ws.send(json.dumps({"position": "pinkyA", "x": "7", "y": "0", "z": "3"}))
         await ws.send(json.dumps(updateValues()))
-=======
-    url = "ws://127.0.0.1:5050"
-
-    async with websockets.connect(url) as ws:
-        await ws.send("This is python client. Connected to server " + url)
-        while True:
-            ser = serial.Serial('/dev/tty.usbmodem1301', 9600, timeout = 1)
-            input = ser.readline()
-            print("recieved string: " + str(input))
-            ser.close()
-
-            anglesList = parseData(input)
-            print("Parsed angles")
-            print("thetaindex = " + anglesList[0])
-            #await ws.send(json.dumps({"position": "pinkyA", "x": "7", "y": "0", "z": "3"}))
-            await ws.send(json.dumps(updateValues()))
->>>>>>> Stashed changes:network/python-websocket/client.py
 
         print(str(datetime.now()) + ": [PYTHON-CLIENT INFO] Sleeping for 10 seconds")
         time.sleep(10)

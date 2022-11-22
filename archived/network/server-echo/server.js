@@ -2,11 +2,7 @@ const WebSocket = require('ws');
 const { v4: uuidv4 } = require("uuid");
 const WeakMap = require("weak-map");
 
-<<<<<<< Updated upstream:archived/network/server-echo/server.js
 const PORT = 5002;
-=======
-const PORT = 5050;
->>>>>>> Stashed changes:network/server-echo/server.js
 const socketMap = new WeakMap();
 
 //start server
