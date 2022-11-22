@@ -5,15 +5,63 @@ import json
 import time
 from datetime import datetime
 import serial
+import re
 
 def parseData(inputData):
-    angles = str(inputData).split("'")
-    angles = angles[1].split("\\")
-    angles = angles[0].split("/")
-    #angles = str(inputData).split("/")
-    return angles
+    """
+    Function to extract just the adc data from received string from serial port.
+    """
+    print(str(inputData))
+    adc = re.search("(\d+)", str(inputData))
+    if adc:
+        return adc.group(1)
+    else:
+        print(["[ERROR]: Could not parse input data."])
 
-def updateValues():
+def readSerialPort():
+    """
+    Reading from Arduino serial port.
+    5 Values are appended to anglesList (index 0-4)
+        anglesList[0] -> Pinky adc
+        anglesList[1] -> Ring adc
+        anglesList[2] -> Middle adc
+        anglesList[3] -> Index adc
+        anglesList[4] -> Thumb adc
+    [TODO]: This list is then passed to convertAdcToAngle()
+    """
+    adcDict = {
+        0 : {"ADC": "7", "Angle" : "0"},
+        1 : {"ADC": "7", "Angle" : "0"},
+        2 : {"ADC": "7", "Angle" : "0"},
+        3 : {"ADC": "7", "Angle" : "0"},
+        4 : {"ADC": "7", "Angle" : "0"},
+    }  
+    for x in range(5):
+        ser = serial.Serial('/dev/tty.usbmodem1301', 9600, timeout = 1)
+        input = ser.readline()
+        # print(input)
+
+        ser.close()
+
+        adcDict[x]["ADC"] = parseData(input)
+
+    return(convertAdcToAngle(adcDict))
+    # updateCartesianValues(anglesList)
+
+def convertAdcToAngle(adcDict):
+    """
+    Mapping function to convert ADC to angles
+    """
+    ###################
+    #### DO SOME STUFF
+    ###################
+    for x in range(5):
+        # Change this logic. Just for demo purpose:
+        adcDict[x]["Angle"] = adcDict[x]["ADC"]
+
+    return(updateCartesianValues(adcDict))
+
+def updateCartesianValues(adcDict):
     """
     Updates a nested dictionary of 22 entries each for a data point. 
     Map to keep track of idx and associated data point ex. pinkyA
@@ -44,75 +92,66 @@ def updateValues():
     |    22    |           W          |
     |    23    |     acceleration     |
     +----------+----------------------+
+    TODO
+    Function to convert angles for each finger to data points (4 per finger).
+    Mapping Algorithm (blurb):
+        1. Define 0 and 180 for all fingers
+        2. Define function to translate [x,y,z] based on angles.
+    Passes mapped values to updateCartesianValues().
     """
 
     # Initial coordinates
     allPoints = {
-        1 : {"x": "7", "y": "0", "z": "3"},
-        2 : {"x": "3", "y": "2", "z": "9"},
-        3 : {"x": "8", "y": "8", "z": "8"},
+        0 : {"x": "7", "y": "0", "z": "3"},
+        1 : {"x": "3", "y": "2", "z": "9"},
+        2 : {"x": "8", "y": "8", "z": "8"},
+        3 : {"x": "1", "y": "6", "z": "1"},
         4 : {"x": "1", "y": "6", "z": "1"},
         5 : {"x": "1", "y": "6", "z": "1"},
-        6 : {"x": "1", "y": "6", "z": "1"},
-        7 : {"x": "7", "y": "0", "z": "3"},
-        8 : {"x": "3", "y": "2", "z": "9"},
-        9 : {"x": "8", "y": "8", "z": "8"},
+        6 : {"x": "7", "y": "0", "z": "3"},
+        7 : {"x": "3", "y": "2", "z": "9"},
+        8 : {"x": "8", "y": "8", "z": "8"},
+        9 : {"x": "1", "y": "6", "z": "1"},
         10 : {"x": "1", "y": "6", "z": "1"},
         11 : {"x": "1", "y": "6", "z": "1"},
-        12 : {"x": "1", "y": "6", "z": "1"},
-        13 : {"x": "8", "y": "8", "z": "8"},
+        12 : {"x": "8", "y": "8", "z": "8"},
+        13 : {"x": "1", "y": "6", "z": "1"},
         14 : {"x": "1", "y": "6", "z": "1"},
         15 : {"x": "1", "y": "6", "z": "1"},
-        16 : {"x": "1", "y": "6", "z": "1"},
-        17 : {"x": "7", "y": "0", "z": "3"},
-        18 : {"x": "3", "y": "2", "z": "9"},
-        19 : {"x": "8", "y": "8", "z": "8"},
+        16 : {"x": "7", "y": "0", "z": "3"},
+        17 : {"x": "3", "y": "2", "z": "9"},
+        18 : {"x": "8", "y": "8", "z": "8"},
+        19 : {"x": "1", "y": "6", "z": "1"},
         20 : {"x": "1", "y": "6", "z": "1"},
         21 : {"x": "1", "y": "6", "z": "1"},
-        22 : {"x": "1", "y": "6", "z": "1"},
-        23 : {"x": "1", "y": "6", "z": "1"}
+        22 : {"x": "1", "y": "6", "z": "1"}
     }
 
-    for i in range (2):
-        dataPoint = int(input("Data point: "))
-        x = int(input("targetX: "))
-        y = int(input("targetY: "))
-        z = int(input("targetZ: "))
+    for i in range (5):
+        x = adcDict[i]["ADC"]
+        y = adcDict[i]["ADC"]
+        z = adcDict[i]["ADC"]
 
-        allPoints[dataPoint]["x"] = x
-        allPoints[dataPoint]["y"] = y
-        allPoints[dataPoint]["z"] = z
-
-    accelX = int(input("accelaration x: "))
-    accelY = int(input("accelaration y: "))
-    accelZ = int(input("accelaration z: "))
-
-    allPoints[23]["x"] = accelX
-    allPoints[23]["y"] = accelY
-    allPoints[23]["z"] = accelZ
+        allPoints[i]["x"] = x
+        allPoints[i]["y"] = y
+        allPoints[i]["z"] = z
 
     print(allPoints)
     return(allPoints)
+
+
 
 async def listen():
     url = "ws://127.0.0.1:5050"
 
     async with websockets.connect(url) as ws:
-        await ws.send("This is python client. Connected to server " + url)
+        await ws.send("ID: Python Client. Connected to server " + url)
         while True:
-            ser = serial.Serial('/dev/tty.usbmodem1301', 9600, timeout = 1)
-            input = ser.readline()
-            print("recieved string: " + str(input))
-            ser.close()
+            data = readSerialPort()
+            await ws.send(json.dumps(data))
 
-            anglesList = parseData(input)
-            print("Parsed angles")
-            print("thetaindex = " + anglesList[0])
-            #await ws.send(json.dumps({"position": "pinkyA", "x": "7", "y": "0", "z": "3"}))
-            await ws.send(json.dumps(updateValues()))
-
-            print(str(datetime.now()) + ": [PYTHON-CLIENT INFO] Sleeping for 10 seconds")
-            time.sleep(10)
+            print(str(datetime.now()) + ": [PYTHON-CLIENT INFO] Sleeping for 3 seconds\n")
+            time.sleep(3)
             reponse = await ws.recv()
             print(reponse)
             # print(str(reponse))
