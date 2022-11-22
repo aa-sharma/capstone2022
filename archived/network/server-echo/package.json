@@ -14,7 +14,11 @@
     "uuidv4": "^6.2.13",
     "weak-map": "^1.0.8",
 <<<<<<< Updated upstream:archived/network/server-echo/package.json
+<<<<<<< Updated upstream:archived/network/server-echo/package.json
     "ws": "^8.11.0"
+=======
+    "ws": "^8.10.0"
+>>>>>>> Stashed changes:network/server-echo/package.json
 =======
     "ws": "^8.10.0"
 >>>>>>> Stashed changes:network/server-echo/package.json
