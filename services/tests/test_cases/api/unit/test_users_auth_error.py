@@ -48,7 +48,6 @@ def test_auth_fail(env_config, register_initial_user):
     """tests fetching a token for a user via api"""
 
     auths_data = read_json('./test_data/users_auth_data.json')['error']['auth']
-    assert 1 == 0
     for auth_data in auths_data:
         payload = {
             "email": auth_data['data']['email'],
