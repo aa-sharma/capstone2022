@@ -1,47 +1,47 @@
 import Render from "./render/render.js";
 
-// const serverAddress = "ws://127.0.0.1:5002";
-// const serverConnection = new WebSocket(serverAddress);
+const serverAddress = "ws://127.0.0.1:5002";
+const serverConnection = new WebSocket(serverAddress);
 
-// serverConnection.onopen = function () {
-//   console.log(
-//     new Date() + "[Client]: JS client connected to server " + serverAddress
-//   );
-//   serverConnection.send(
-//     "This is JS (hand-model) client. Connected to server " + serverAddress
-//   );
-// };
-// serverConnection.onclose = function () {
-//   console.log(
-//     new Date() +
-//       "[Client]: JS client (hand-model) disconnecting from server " +
-//       serverAddress
-//   );
-//   serverConnection.send(
-//     "This is JS (hand-model) client. Disconnecting from server " + serverAddress
-//   );
-// };
+serverConnection.onopen = function () {
+  console.log(
+    new Date() + "[Client]: JS client connected to server " + serverAddress
+  );
+  serverConnection.send(
+    "This is JS (hand-model) client. Connected to server " + serverAddress
+  );
+};
+serverConnection.onclose = function () {
+  console.log(
+    new Date() +
+      "[Client]: JS client (hand-model) disconnecting from server " +
+      serverAddress
+  );
+  serverConnection.send(
+    "This is JS (hand-model) client. Disconnecting from server " + serverAddress
+  );
+};
 
-// serverConnection.onmessage = function (event) {
-//   if (event.data instanceof Blob) {
-//     var reader = new FileReader();
+serverConnection.onmessage = function (event) {
+  if (event.data instanceof Blob) {
+    var reader = new FileReader();
 
-//     reader.onload = () => {
-//       console.log(
-//         "[Client]: Received message from server (parsed): " + reader.result
-//       );
-//       let obj = JSON.parse(reader.result);
-//       target = obj;
-//       console.log(target);
-//     };
-//     reader.readAsText(event.data);
-//   } else {
-//     console.log(
-//       "[Client]: Received message from server (not-parsed): " + event.data
-//     );
-//     console.log(event.data);
-//   }
-// };
+    reader.onload = () => {
+      console.log(
+        "[Client]: Received message from server (parsed): " + reader.result
+      );
+      let obj = JSON.parse(reader.result);
+      target = obj;
+      console.log(target);
+    };
+    reader.readAsText(event.data);
+  } else {
+    console.log(
+      "[Client]: Received message from server (not-parsed): " + event.data
+    );
+    console.log(event.data);
+  }
+};
 
 const render = new Render();
 render.animate();
