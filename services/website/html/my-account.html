@@ -128,7 +128,7 @@
         >
           <div class="container">
             <div class="row gx-lg-5 align-items-center">
-              <div class="col-lg-6 mb-5 mb-lg-0">
+              <div class="col-lg-6 mb-5 mb-lg-0 text-center">
                 <h4
                   class="mt-3 mb-2 display-3 fw-bold ls-tight"
                   style="color: rgb(255, 255, 255)"
@@ -138,20 +138,22 @@
                     class="font-weight-light"
                     style="color: rgb(244, 189, 127)"
                   >
-                    REHABILITATION GLOVE
+                    Update User Settings
                   </h4>
                 </h4>
-                <p style="color: rgb(236, 236, 236)" class="font-weight-light">
-                  A rehabilitation glove with an interactive interface for
-                  recovering stroke patients and others with limited hand
-                  mobility. Electrical Engineering Capstone Project 2022.
-                </p>
               </div>
 
               <div class="col-lg-6 mb-5 mb-lg-0">
                 <div class="card">
                   <div class="card-body py-5 px-md-5">
-                    <form id="signupForm" method="post" novalidate>
+                    <form
+                      id="updateForm"
+                      method="put"
+                      autocomplete="off"
+                      novalidate
+                    >
+                      <!-- 2 column grid layout with text inputs for the first and last names -->
+
                       <!-- Name input -->
                       <div class="form-outline mb-4">
                         <label class="font-weight-light float-start" for="name"
@@ -170,19 +172,22 @@
                         ></div>
                       </div>
 
-                      <!-- Email input -->
+                      <!-- Product Code input -->
                       <div class="form-outline mb-4">
-                        <label class="font-weight-light float-start" for="email"
-                          >Email</label
+                        <label
+                          class="font-weight-light float-start"
+                          for="productCode"
+                          >Product Code</label
                         >
                         <input
-                          type="email"
-                          id="email"
-                          name="email"
+                          type="text"
+                          id="productCode"
+                          name="productCode"
                           class="form-control"
+                          autocomplete="off"
                         />
                         <div
-                          id="emailHelpBlock"
+                          id="productCodeHelpBlock"
                           class="float-start text-danger text-sm"
                         ></div>
                       </div>
@@ -192,13 +197,18 @@
                         <label
                           class="font-weight-light float-start"
                           for="password"
-                          >Password</label
+                          autocomplete="off"
+                          >Password
+                          <span class="text-sm"
+                            >(Leave blank to keep the same password )</span
+                          ></label
                         >
                         <input
                           type="password"
                           id="password"
                           name="password"
                           class="form-control"
+                          autocomplete="new-password"
                         />
                         <div
                           id="passwordHelpBlock"
@@ -210,19 +220,12 @@
                       <!-- <button type="submit" class="btn btn-primary btn-block mb-4" onclick="signup()"> -->
                       <button
                         type="submit"
-                        class="btn btn-primary btn-block mb-4"
+                        class="btn btn-success btn-block"
                         id="signUp"
                       >
-                        Sign up
+                        Update
                       </button>
                     </form>
-                    <!-- Register buttons -->
-                    <div class="text-center">
-                      <p class="font-weight-light">
-                        Already have an account?
-                        <a href="./login.html" data-abc="true">Login</a>
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -339,6 +342,6 @@
 
     <!-- Template Main Javascript File -->
     <script src="../js/main.js" type="module"></script>
-    <script src="../js/pages/signup.js" type="module"></script>
+    <script src="../js/pages/myAccount.js" type="module"></script>
   </body>
 </html>

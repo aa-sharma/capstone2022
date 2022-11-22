@@ -77,20 +77,28 @@
         "msg": "Email already exists"
       }
     ],
-    "register_product_code": [
+    "update_user": [
       {
         "data": {
           "productCode": "7815696ecbf1c96e68941"
         },
         "status_code": 400,
-        "msg": "Please include a valid product code between 6 and 20 characters"
+        "msg": "`productCode` must be between 6 and 20 characters"
       },
       {
         "data": {
           "productCode": "78156"
         },
         "status_code": 400,
-        "msg": "Please include a valid product code between 6 and 20 characters"
+        "msg": "`productCode` must be between 6 and 20 characters"
+      },
+      {
+        "data": {
+          "password": "luca",
+          "productCode": "7815696ecbf1c96e6894"
+        },
+        "status_code": 400,
+        "msg": "`password` must be greater than 5 characters"
       }
     ],
     "auth": [

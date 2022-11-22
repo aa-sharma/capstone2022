@@ -1,19 +1,34 @@
 import pytest
 import logging
+import requests
 import os
 import sys
+import time
 from pprint import pformat, pprint
 from pymongo import MongoClient
 from ..config import DevConfig, ProdConfig
 
 logger = logging.getLogger(__name__)
 
+
+@pytest.fixture(scope='session', autouse=True)
+def wait_server_ready(env_config):
+    while True:
+        try:
+            r = requests.get(f'{env_config.API_URL}/')
+            if r.json()['msg'] == "Welcome to the Apollo API...":
+                break
+        except Exception as e:
+            logger.info("Server not ready yet, sleeping 2 seconds...")
+        time.sleep(2)
+
+
 @pytest.fixture(scope='session', autouse=True)
 def drop_database(env_config):
     client = MongoClient(env_config.DB_URL)
     db = client[env_config.DATABASE_NAME]
 
-    db.users.delete_many({ 'admin': False })
+    db.users.delete_many({'admin': False})
     db.exercises.delete_many({})
     db.userlevelprogresses.delete_many({})
 
@@ -27,4 +42,3 @@ def env_config():
     else:
         logger.error('environment variable "NODE_ENV" must be either: "development" OR "production"')
         sys.exit(4)
-    

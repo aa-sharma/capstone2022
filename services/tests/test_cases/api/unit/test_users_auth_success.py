@@ -69,7 +69,7 @@ def test_register_product_code(env_config, cache):
         payload = {"productCode": user_data['productCode']}
         headers = {'x-auth-token': user_data['token']}
 
-        r = requests.post(f'{env_config.API_URL}/api/users/register-product-code', json=payload, headers=headers)
+        r = requests.put(f'{env_config.API_URL}/api/users', json=payload, headers=headers)
         if r.status_code < 200 or r.status_code >= 300:
             pytest.fail(f"request was unsuccessful. status code: {r.status_code}. json: {r.json()}")
 

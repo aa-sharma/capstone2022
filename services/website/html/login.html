@@ -22,8 +22,8 @@
     <!-- Libraries CSS Files -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
       crossorigin="anonymous"
     />
     <link
@@ -63,8 +63,6 @@
   </head>
 
   <body id="page-top" style="background-color: rgb(240, 171, 201)">
-    <script src="auth.js" type="module"></script>
-
     <!--/ Nav Star /-->
     <nav
       class="navbar navbar-b navbar-trans navbar-expand-md fixed-top"
@@ -93,34 +91,36 @@
             <li class="nav-item">
               <a class="nav-link" href="./">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item logged-in">
               <a class="nav-link" href="./interactive.html">Interactive</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item logged-in">
               <a class="nav-link" href="./">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./about.html">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./help.html">Help</a>
+            <li class="nav-item not-logged-in">
+              <a class="nav-link" href="./signup.html">Sign Up</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./signup.html">My Account</a>
+            <li class="nav-item logged-in">
+              <a class="nav-link" href="./my-account.html">My Account</a>
+            </li>
+            <li class="nav-item logged-in">
+              <a id="sign-out" class="nav-link" href="">Sign Out</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <!--/ Nav End /-->
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <div class="container" style="height: 100vh">
+
+    <div class="container position-relative" style="height: 100vh">
       <!-- Section: Design Block -->
-      <section class="">
+      <section
+        class="py-5 position-absolute"
+        style="transform: translateY(-50%); top: 50%"
+      >
         <!-- Jumbotron -->
         <div
           class="px-4 py-5 px-md-5 text-center text-lg-start"
@@ -151,55 +151,60 @@
                 <br />
                 <div class="card">
                   <div class="card-body py-5 px-md-5">
-                    <form>
+                    <form id="loginForm" method="post" novalidate>
                       <!-- 2 column grid layout with text inputs for the first and last names -->
                       <!-- Email input -->
                       <div class="form-outline mb-4">
-                        <input
-                          type="email"
-                          id="email_field"
-                          class="form-control"
-                        />
-                        <label class="font-weight-light" for="email_field"
+                        <label class="font-weight-light float-start" for="email"
                           >Email</label
                         >
+                        <input
+                          type="email"
+                          id="email"
+                          class="form-control"
+                          name="email"
+                        />
+                        <div
+                          id="emailHelpBlock"
+                          class="float-start text-danger text-sm"
+                        ></div>
                       </div>
 
                       <!-- Password input -->
                       <div class="form-outline mb-4">
-                        <input
-                          type="password"
-                          id="password_field"
-                          class="form-control"
-                        />
-                        <label class="font-weight-light" for="password_field"
+                        <label
+                          class="font-weight-light float-start"
+                          for="password"
                           >Password</label
                         >
+                        <input
+                          type="password"
+                          id="password"
+                          name="password"
+                          class="form-control"
+                        />
+                        <div
+                          id="passwordHelpBlock"
+                          class="float-start text-danger text-sm"
+                        ></div>
                       </div>
 
-                      <!-- Submit button -->
-                      <!-- <button type="submit" class="btn btn-primary btn-block mb-4" onclick="login()">
-                    Login
-                  </button> -->
-
-                      <form>
-                        <button
-                          type="button"
-                          id="login"
-                          class="btn btn-primary btn-block mb-4"
-                        >
-                          Login
-                        </button>
-                      </form>
-
-                      <!-- Register buttons -->
-                      <div class="text-center">
-                        <p class="font-weight-light">
-                          Dont' have an account?
-                          <a href="./signup.html" data-abc="true">Sign Up</a>
-                        </p>
-                      </div>
+                      <button
+                        type="submit"
+                        id="login"
+                        class="btn btn-primary btn-block mb-4"
+                      >
+                        Login
+                      </button>
                     </form>
+
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                      <p class="font-weight-light">
+                        Dont' have an account?
+                        <a href="./signup.html" data-abc="true">Sign Up</a>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -312,8 +317,10 @@
       integrity="sha512-3J8teBiHrSyaaRBajZyIEtpDsXdPq1gsznKWIVb5CnorQuFhjWGhWe54z8YNnHHr7MZuExb9m5kvf964HiT1Sw=="
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
 
     <!-- Template Main Javascript File -->
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" type="module"></script>
+    <script src="../js/pages/login.js" type="module"></script>
   </body>
 </html>

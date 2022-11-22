@@ -77,7 +77,7 @@ class Render {
   }
 
   __setGrid() {
-    const grid = new THREE.GridHelper(10000, 10000, 0x0fd000, 0x000000);
+    const grid = new THREE.GridHelper(100, 100, 0x0fd000, 0x000000);
     grid.material.opacity = 0.1;
     grid.material.transparent = true;
     this.scene.add(grid);

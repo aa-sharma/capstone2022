@@ -1284,3 +1284,9 @@ footer .credits a {
     bottom: 15px;
   }
 }
+
+/* Lucas Added */
+
+.text-sm {
+  font-size: 12px;
+}

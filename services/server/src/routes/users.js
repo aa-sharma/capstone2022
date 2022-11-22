@@ -6,10 +6,15 @@ const { User } = require("../models/User");
 const logger = require("../utils/logger");
 const auth = require("../middleware/auth");
 const authAdmin = require("../middleware/authAdmin");
-const { signJWT, paginationResponse } = require("../utils/helpers");
+const {
+  signJWT,
+  paginationResponse,
+  isValidObjectId,
+} = require("../utils/helpers");
 const {
   singleErrorMsg,
   handleExpressValidatorError,
+  handleMongooseErrors,
 } = require("../utils/handleErrors");
 
 // @route   POST api/users
@@ -26,7 +31,6 @@ router.postP(
   ],
   async (req, res) => {
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       return res.status(400).json(handleExpressValidatorError(errors));
     }
@@ -58,41 +62,45 @@ router.postP(
   }
 );
 
-// @route   POST api/users/register-product-code
-// @desc    Register Product Code
+// @route   PUT api/users/
+// @desc    Update your user details including product code
 // @access  Private
-router.postP(
-  "/register-product-code",
-  auth,
-  [
-    check(
-      "productCode",
-      "Please include a valid product code between 6 and 20 characters"
-    )
-      .exists()
-      .isLength({ min: 6, max: 20 }),
-  ],
-  async (req, res) => {
-    try {
-      const errors = validationResult(req);
-
-      if (!errors.isEmpty()) {
-        return res.status(400).json(handleExpressValidatorError(errors));
-      }
-
-      const { productCode } = req.body;
-      const user = req.user;
-      user.productCode = productCode;
-
-      await user.save();
-
-      return res.json(user);
-    } catch (err) {
-      logger.error(err.message);
-      return res.status(500).send("Server Error");
+router.putP("/", auth, async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json(handleExpressValidatorError(errors));
     }
+
+    const { productCode, name, password } = req.body;
+    let user = await User.findOne({ _id: req.user.id });
+    user.productCode = productCode || user.productCode;
+    user.name = name || user.name;
+    user.password = password || user.password;
+
+    try {
+      await user.save();
+    } catch (err) {
+      return res.status(400).json(handleMongooseErrors(err));
+    }
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    await user.save();
+
+    user = await User.findOne({ _id: user.id })
+      .select("-password")
+      .select("-__v");
+
+    return res.json(user);
+  } catch (err) {
+    logger.error(err.message);
+    return res.status(500).send("Server Error");
   }
-);
+});
 
 // @route   GET api/users
 // @desc    Get all users
@@ -107,6 +115,49 @@ router.getP("/", authAdmin, async (req, res) => {
     return res.json(
       paginationResponse(users, req.query.page, req.query.pageSize)
     );
+  } catch (err) {
+    logger.error(err.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
+// @route   DELETE api/users/:id
+// @desc    delete all users
+// @access  onlyAdmin
+router.deleteP("/:id", authAdmin, async (req, res) => {
+  try {
+    if (!isValidObjectId(req.params.id)) {
+      return res.status(400).json(singleErrorMsg("not a valid mongodb id"));
+    }
+
+    let user = await User.deleteOne({
+      _id: req.params.id,
+      admin: !true,
+    });
+
+    if (!user.deletedCount) {
+      return res.status(400).json(singleErrorMsg("User does not exist"));
+    }
+
+    return res.json(user);
+  } catch (err) {
+    logger.error(err.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
+// @route   DELETE api/users
+// @desc    delete all users
+// @access  onlyAdmin
+router.deleteP("/", authAdmin, async (req, res) => {
+  try {
+    const users = await User.deleteMany({ admin: !true });
+
+    if (!users.deletedCount) {
+      return res.status(400).json(singleErrorMsg("No users to delete"));
+    }
+
+    return res.json(users);
   } catch (err) {
     logger.error(err.message);
     return res.status(500).send("Server Error");

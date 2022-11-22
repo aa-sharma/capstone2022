@@ -16,7 +16,7 @@ const UserSchema = mongoose.Schema({
     required: [true, "`password` is required"],
     validate: {
       validator: (v) => v.length >= 6,
-      message: () => "`password` must be greater than 6 characters",
+      message: () => "`password` must be greater than 5 characters",
     },
   },
   productCode: {

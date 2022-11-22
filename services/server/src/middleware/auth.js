@@ -20,6 +20,9 @@ module.exports = async (req, res, next) => {
     req.user = await User.findById(decoded.user.id)
       .select("-password")
       .select("-__v");
+    if (!req.user) {
+      return res.status(401).json(singleErrorMsg("Token is not valid"));
+    }
     next();
   } catch (err) {
     return res.status(401).json(singleErrorMsg("Token is not valid"));

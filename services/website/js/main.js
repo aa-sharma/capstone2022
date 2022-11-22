@@ -1,3 +1,5 @@
+import API from "./modules/api.js";
+
 (function ($) {
   "use strict";
   var nav = $("nav");
@@ -125,3 +127,55 @@
     },
   });
 })(jQuery);
+
+const token = localStorage["token"];
+const loggedInElements = document.getElementsByClassName("logged-in");
+const notLoggedInElements = document.getElementsByClassName("not-logged-in");
+
+const unauthorizedPaths = [
+  "/my-account.html",
+  "/interactive.html",
+  "/dashboard.html",
+];
+
+const fetchUser = async () => {
+  if (!token) {
+    if (unauthorizedPaths.includes(window.location.pathname)) {
+      // logged out user is in authorized location, reassign to home page
+      window.location.assign("/");
+    }
+
+    // user is logged out
+    return false;
+  }
+
+  const api = new API({ url: "/api/auth", token });
+  const { res, json } = await api.call();
+
+  if (res.status != 200) {
+    // token is not valid, remove it and reassign to home page
+    localStorage.removeItem("token");
+    window.location.assign("/");
+  }
+
+  // user is valid
+  return true;
+};
+
+if (await fetchUser()) {
+  // user is logged in
+  for (let notLoggedInElement of notLoggedInElements) {
+    notLoggedInElement.classList.add("d-none");
+  }
+
+  const signoutEl = document.getElementById("sign-out");
+  signoutEl.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    // window.location.assign("/");
+  });
+} else {
+  // user is not logged in
+  for (let loggedInElement of loggedInElements) {
+    loggedInElement.classList.add("d-none");
+  }
+}

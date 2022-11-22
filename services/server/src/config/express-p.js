@@ -32,7 +32,7 @@ function handleP(verb) {
 
 // modify prototypes for app and router
 // to add useP, allP, getP, postP, optionsP, deleteP variants
-["use", "all", "get", "post", "options", "delete"].forEach((verb) => {
+["use", "all", "get", "post", "options", "delete", "put"].forEach((verb) => {
   let handler = handleP(verb);
   express.Router[verb + "P"] = handler;
   express.application[verb + "P"] = handler;

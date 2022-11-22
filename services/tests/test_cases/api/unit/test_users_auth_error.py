@@ -30,20 +30,18 @@ def test_register_user_fail(env_config, register_initial_user):
         logger.info(f"Successfully confirmed error with error msg: {user_data['msg']}")
 
 
-def test_register_product_code_fail(env_config, register_initial_user):
+def test_update_user_fail(env_config, register_initial_user):
     """tests registering a user for failure conditions"""
 
-    product_codes_data = read_json('./test_data/users_auth_data.json')['error']['register_product_code']
+    update_users_data = read_json('./test_data/users_auth_data.json')['error']['update_user']
 
-    for product_code_data in product_codes_data:
+    for update_user_data in update_users_data:
         headers = {'x-auth-token': register_initial_user['token']}
-
-        r = requests.post(f'{env_config.API_URL}/api/users/register-product-code',
-                          json=product_code_data, headers=headers)
-
-        assert r.status_code == product_code_data['status_code']
-        assert r.json()['errors'][0]['msg'] == product_code_data['msg']
-        logger.info(f"Successfully confirmed error with error msg: {product_code_data['msg']}")
+        r = requests.put(f'{env_config.API_URL}/api/users',
+                         json=update_user_data['data'], headers=headers)
+        assert r.status_code == update_user_data['status_code']
+        assert r.json()['errors'][0]['msg'] == update_user_data['msg']
+        logger.info(f"Successfully confirmed error with error msg: {update_user_data['msg']}")
 
 
 def test_auth_fail(env_config, register_initial_user):

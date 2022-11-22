@@ -22,8 +22,8 @@
     <!-- Libraries CSS Files -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
       crossorigin="anonymous"
     />
     <link
@@ -91,20 +91,23 @@
             <li class="nav-item">
               <a class="nav-link" href="./">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item logged-in">
               <a class="nav-link" href="./interactive.html">Interactive</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item logged-in">
               <a class="nav-link" href="./">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./about.html">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./help.html">Help</a>
+            <li class="nav-item not-logged-in">
+              <a class="nav-link" href="./signup.html">Sign Up</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./signup.html">My Account</a>
+            <li class="nav-item logged-in">
+              <a class="nav-link" href="./my-account.html">My Account</a>
+            </li>
+            <li class="nav-item logged-in">
+              <a id="sign-out" class="nav-link" href="">Sign Out</a>
             </li>
           </ul>
         </div>
@@ -127,12 +130,30 @@
             <!-- typey text
           <p class="intro-subtitle"><span class="text-slider-items">BASc. Electrical Engineering Candidate,Embedded Developer,Software Tester,Graphic Designer</span><strong class="text-slider"></strong></p>
         -->
-            <button type="button" class="btn btn-dark mr-3">
-              <a style="color: rgb(236, 236, 236)" href="./login.html">Login</a>
-            </button>
-            <button type="button" class="btn btn-warning mr-3">
-              <a style="color: rgb(0, 0, 0)" href="./signup.html">Sign Up</a>
-            </button>
+            <div class="not-logged-in">
+              <button type="button" class="btn btn-dark mr-3">
+                <a
+                  class="text-decoration-none"
+                  style="color: rgb(236, 236, 236)"
+                  href="./login.html"
+                  >Login</a
+                >
+              </button>
+              <button type="button" class="btn btn-warning mr-3">
+                <a
+                  class="text-decoration-none"
+                  style="color: rgb(0, 0, 0)"
+                  href="./signup.html"
+                  >Sign Up</a
+                >
+              </button>
+            </div>
+
+            <div
+              class="card bg-light text-dark mx-auto logged-in d-inline-block"
+            >
+              <div id="user-details" class="card-body py-2 px-md-5"></div>
+            </div>
 
             <!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
           </div>
@@ -254,10 +275,8 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Contact Form JavaScript File -->
-    <script src="../contactform/contactform.js"></script>
-
     <!-- Template Main Javascript File -->
-    <script src="../js/main.js"></script>
+    <script src="../js/main.js" type="module"></script>
+    <script src="../js/pages/home.js" type="module"></script>
   </body>
 </html>

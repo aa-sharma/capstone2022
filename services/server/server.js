@@ -5,6 +5,7 @@ const path = require("path");
 const io = require("./src/websockets/ws-server");
 const logger = require("./src/utils/logger");
 const createAdminUser = require("./src/config/createAdminUser");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
@@ -15,6 +16,8 @@ const runServer = async () => {
 
   // Init middleware
   app.useP(express.json({ extended: false }));
+
+  app.useP(cors());
 
   app.getP("/", (req, res) =>
     res.json({ msg: "Welcome to the Apollo API..." })

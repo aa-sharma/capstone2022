@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sleep 15
-
 pytest_date=`date +"%Y-%m-%d"`
 pytest_time=`date +"%T"`
 mkdir -p ./logs/pytest_logs/$pytest_date
