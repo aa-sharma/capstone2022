@@ -171,7 +171,6 @@ if (await fetchUser()) {
   const signoutEl = document.getElementById("sign-out");
   signoutEl.addEventListener("click", () => {
     localStorage.removeItem("token");
-    // window.location.assign("/");
   });
 } else {
   // user is not logged in
