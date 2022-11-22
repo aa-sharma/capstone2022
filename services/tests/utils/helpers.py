@@ -8,4 +8,3 @@ def read_json(file_path):
     with open(join(ROOT_DIR, file_path), "r") as f:
         data = json.load(f)
         return data
-

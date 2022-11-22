@@ -19,7 +19,7 @@ def wait_server_ready(env_config):
             if r.json()['msg'] == "Welcome to the Apollo API...":
                 break
         except Exception as e:
-            logger.info("Server not ready yet, sleeping 2 seconds...")
+            logger.warning("Server not ready yet, sleeping 2 seconds...")
         time.sleep(2)
 
 
