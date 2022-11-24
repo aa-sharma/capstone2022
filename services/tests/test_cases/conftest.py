@@ -7,6 +7,7 @@ import time
 from pprint import pformat, pprint
 from pymongo import MongoClient
 from ..config import DevConfig, ProdConfig
+from ..utils.helpers import create_folder_file_now
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +32,14 @@ def drop_database(env_config):
     db.users.delete_many({'admin': False})
     db.exercises.delete_many({})
     db.userlevelprogresses.delete_many({})
+
+
+def pytest_configure(config):
+    """***config.option.htmlpath needs to be fixed and relooked at***"""
+
+    if not config.option.htmlpath:
+        file = create_folder_file_now(directory='reports', file_name='reports', file_type='html')
+        config.option.htmlpath = file
 
 
 @pytest.fixture(scope='session')

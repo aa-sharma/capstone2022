@@ -16,6 +16,7 @@
 /.DS_Store
 .DS_Store
 logs
+reports
 
 # Database
 mongo-volume

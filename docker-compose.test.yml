@@ -42,6 +42,7 @@ services:
       - test-server
     entrypoint: ./entrypoint.sh
     volumes:
+      - ./services/tests/reports:/usr/src/app/reports
       - ./services/tests/logs:/usr/src/app/logs
     env_file:
       - .env.test

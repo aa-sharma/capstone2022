@@ -58,7 +58,7 @@ if __name__ == "__main__":
 # start timer for agility score
 # LOOP {
     # read angles from arduino
-    # parse values into object:
+    # parse values into object: { pinkyAngle, ringAngle, middleAngle, indexAngle, roll, pitch, yaw }
     # {
     # pinkyAngle,
     # ringAngle
