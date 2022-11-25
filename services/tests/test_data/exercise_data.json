@@ -2,70 +2,79 @@
   "success": [
     {
       "level": 1,
-      "dexterityDifficulty": 4,
-      "agilityDifficulty": 4,
+      "description": "something",
       "position": [
         {
-          "flexResistor1": 0,
-          "flexResistor2": 0,
-          "flexResistor3": 0,
-          "flexResistor4": 0,
-          "flexResistor5": 0,
-          "gyroscope": 0
+          "pinkyAngle": 0,
+          "ringAngle": 0,
+          "middleAngle": 0,
+          "indexAngle": 0,
+          "thumbAngle": 0,
+          "roll": 0,
+          "pitch": 0,
+          "yaw": 0
         },
         {
-          "flexResistor1": 3,
-          "flexResistor2": 3,
-          "flexResistor3": 3,
-          "flexResistor4": 3,
-          "flexResistor5": 3,
-          "gyroscope": 3
+          "pinkyAngle": 2,
+          "ringAngle": 2,
+          "middleAngle": 2,
+          "indexAngle": 2,
+          "thumbAngle": 2,
+          "roll": 2,
+          "pitch": 2,
+          "yaw": 2
         }
       ]
     },
     {
       "level": 2,
-      "dexterityDifficulty": 4,
-      "agilityDifficulty": 9,
+      "description": "rock on",
       "position": [
         {
-          "flexResistor1": 1,
-          "flexResistor2": 1,
-          "flexResistor3": 1,
-          "flexResistor4": 1,
-          "flexResistor5": 1,
-          "gyroscope": 2
+          "pinkyAngle": 0,
+          "ringAngle": 0,
+          "middleAngle": 0,
+          "indexAngle": 0,
+          "thumbAngle": 0,
+          "roll": 0,
+          "pitch": 0,
+          "yaw": 0
         },
         {
-          "flexResistor1": 10,
-          "flexResistor2": 10,
-          "flexResistor3": 30,
-          "flexResistor4": 30,
-          "flexResistor5": 30,
-          "gyroscope": 30
+          "pinkyAngle": 2,
+          "ringAngle": 2,
+          "middleAngle": 2,
+          "indexAngle": 2,
+          "thumbAngle": 2,
+          "roll": 2,
+          "pitch": 2,
+          "yaw": 2
         }
       ]
     },
     {
       "level": 3,
-      "dexterityDifficulty": 10,
-      "agilityDifficulty": 1,
+      "description": "point at me",
       "position": [
         {
-          "flexResistor1": 0,
-          "flexResistor2": 0,
-          "flexResistor3": 0,
-          "flexResistor4": 0,
-          "flexResistor5": 0,
-          "gyroscope": 0
+          "pinkyAngle": 0,
+          "ringAngle": 0,
+          "middleAngle": 0,
+          "indexAngle": 0,
+          "thumbAngle": 0,
+          "roll": 0,
+          "pitch": 0,
+          "yaw": 0
         },
         {
-          "flexResistor1": 3,
-          "flexResistor2": 3,
-          "flexResistor3": 3,
-          "flexResistor4": 3,
-          "flexResistor5": 3,
-          "gyroscope": 3
+          "pinkyAngle": 2,
+          "ringAngle": 2,
+          "middleAngle": 2,
+          "indexAngle": 2,
+          "thumbAngle": 2,
+          "roll": 2,
+          "pitch": 2,
+          "yaw": 2
         }
       ]
     }
@@ -75,16 +84,17 @@
       {
         "data": {
           "level": 3,
-          "dexterityDifficulty": 10,
-          "agilityDifficulty": 1,
+          "description": "something something",
           "position": [
             {
-              "flexResistor1": 0,
-              "flexResistor2": 0,
-              "flexResistor3": 0,
-              "flexResistor4": 0,
-              "flexResistor5": 0,
-              "gyroscope": 0
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             }
           ]
         },
@@ -94,32 +104,37 @@
       {
         "data": {
           "level": 3,
-          "dexterityDifficulty": 10,
-          "agilityDifficulty": 1,
+          "description": "something something",
           "position": [
             {
-              "flexResistor1": 0,
-              "flexResistor2": 0,
-              "flexResistor3": 0,
-              "flexResistor4": 0,
-              "flexResistor5": 0,
-              "gyroscope": 0
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             },
             {
-              "flexResistor1": 1,
-              "flexResistor2": 1,
-              "flexResistor3": 1,
-              "flexResistor4": 1,
-              "flexResistor5": 1,
-              "gyroscope": 1
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             },
             {
-              "flexResistor1": 2,
-              "flexResistor2": 2,
-              "flexResistor3": 2,
-              "flexResistor4": 2,
-              "flexResistor5": 2,
-              "gyroscope": 2
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             }
           ]
         },
@@ -129,56 +144,62 @@
       {
         "data": {
           "level": 3,
-          "dexterityDifficulty": 11,
-          "agilityDifficulty": 1,
+          "description": null,
           "position": [
             {
-              "flexResistor1": 0,
-              "flexResistor2": 0,
-              "flexResistor3": 0,
-              "flexResistor4": 0,
-              "flexResistor5": 0,
-              "gyroscope": 0
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             },
             {
-              "flexResistor1": 1,
-              "flexResistor2": 1,
-              "flexResistor3": 1,
-              "flexResistor4": 1,
-              "flexResistor5": 1,
-              "gyroscope": 1
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             }
           ]
         },
         "status_code": 400,
-        "msg": "maximum dexterity difficulty is 10"
+        "msg": "`description` is required"
       },
       {
         "data": {
-          "level": 3,
-          "dexterityDifficulty": 9,
-          "agilityDifficulty": 0,
+          "level": null,
+          "description": "some description",
           "position": [
             {
-              "flexResistor1": 0,
-              "flexResistor2": 0,
-              "flexResistor3": 0,
-              "flexResistor4": 0,
-              "flexResistor5": 0,
-              "gyroscope": 0
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             },
             {
-              "flexResistor1": 1,
-              "flexResistor2": 1,
-              "flexResistor3": 1,
-              "flexResistor4": 1,
-              "flexResistor5": 1,
-              "gyroscope": 1
+              "pinkyAngle": 2,
+              "ringAngle": 2,
+              "middleAngle": 2,
+              "indexAngle": 2,
+              "thumbAngle": 2,
+              "roll": 2,
+              "pitch": 2,
+              "yaw": 2
             }
           ]
         },
         "status_code": 400,
-        "msg": "minimum agility difficulty is 1"
+        "msg": "`level` is required"
       }
     ],
     "get": [

@@ -1,50 +1,42 @@
 [
   {
     "level": 1,
-    "dexterityDifficulty": 1,
-    "agilityDifficulty": 1,
-    "positionIndex": 0
+    "positionIndex": 0,
+    "description": "Closed Fist"
   },
   {
     "level": 1,
-    "dexterityDifficulty": 2,
-    "agilityDifficulty": 2,
-    "positionIndex": 1
+    "positionIndex": 1,
+    "description": "open palm"
   },
   {
     "level": 2,
-    "dexterityDifficulty": 1,
-    "agilityDifficulty": 1,
-    "positionIndex": 2
+    "positionIndex": 2,
+    "description": "give me the middle finger"
   },
   {
     "level": 2,
-    "dexterityDifficulty": 2,
-    "agilityDifficulty": 2,
-    "positionIndex": 0
+    "positionIndex": 0,
+    "description": "point at me"
   },
   {
     "level": 3,
-    "dexterityDifficulty": 1,
-    "agilityDifficulty": 1,
-    "positionIndex": 1
+    "positionIndex": 1,
+    "description": "do the cha cha slide"
   },
   {
     "level": 3,
-    "dexterityDifficulty": 2,
-    "agilityDifficulty": 2,
-    "positionIndex": 2
+    "positionIndex": 2,
+    "description": "peace me"
   },
   {
     "level": 4,
-    "dexterityDifficulty": 3,
-    "agilityDifficulty": 3,
-    "positionIndex": 0
+    "positionIndex": 0,
+    "description": "like your drinking wine"
   },
   {
     "level": 4,
-    "dexterityDifficulty": 4,
-    "agilityDifficulty": 4,
-    "positionIndex": 1
+    "positionIndex": 1,
+    "description": "rock on"
   }
 ]

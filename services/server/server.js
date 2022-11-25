@@ -1,5 +1,5 @@
 const express = require("./src/config/express-p");
-const { connectDB, initExercises } = require("./src/config/db");
+const { connectDB } = require("./src/config/db");
 const http = require("http");
 const path = require("path");
 const io = require("./src/websockets/ws-server");

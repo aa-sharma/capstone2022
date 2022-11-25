@@ -18,12 +18,14 @@ router.postP("/", authAdmin, async (req, res) => {
     );
 
     const startingPosition = {
-      flexResistor1: 0,
-      flexResistor2: 0,
-      flexResistor3: 0,
-      flexResistor4: 0,
-      flexResistor5: 0,
-      gyroscope: 0,
+      pinkyAngle: 0,
+      ringAngle: 0,
+      middleAngle: 0,
+      indexAngle: 0,
+      thumbAngle: 0,
+      roll: 0,
+      pitch: 0,
+      yaw: 0,
     };
 
     await Exercise.deleteMany();
@@ -42,9 +44,8 @@ router.postP("/", authAdmin, async (req, res) => {
 
       let exercise = new Exercise({
         level: exercises[idx].level,
+        description: exercises[idx].description,
         position: [startingPosition, finalPosition],
-        dexterityDifficulty: exercises[idx].dexterityDifficulty,
-        agilityDifficulty: exercises[idx].agilityDifficulty,
       });
       await exercise.save();
     }

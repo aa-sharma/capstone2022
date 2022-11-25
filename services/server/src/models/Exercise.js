@@ -8,23 +8,13 @@ const ExerciseSchema = mongoose.Schema({
       default: () => ({}),
     },
   ],
+  description: {
+    type: String,
+    required: [true, "`description` is required"],
+  },
   level: {
     type: Number,
     required: [true, "`level` is required"],
-  },
-  dexterityDifficulty: {
-    // value 1-10
-    type: Number,
-    required: [true, "`dexterityDifficulty` is required"],
-    min: [1, "minimum dexterity difficulty is 1"],
-    max: [10, "maximum dexterity difficulty is 10"],
-  },
-  agilityDifficulty: {
-    // value 1-10
-    type: Number,
-    required: [true, "`agilityDifficulty` is required"],
-    min: [1, "minimum agility difficulty is 1"],
-    max: [10, "maximum agility difficulty is 10"],
   },
 });
 

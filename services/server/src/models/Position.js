@@ -3,29 +3,37 @@ const logger = require("../utils/logger");
 
 const PositionSchema = mongoose.Schema(
   {
-    flexResistor1: {
+    pinkyAngle: {
       type: Number,
-      required: [true, "`position.flexResistor1` is required"],
+      required: [true, "`position.pinkyAngle` is required"],
     },
-    flexResistor2: {
+    ringAngle: {
       type: Number,
-      required: [true, "`position.flexResistor2` is required"],
+      required: [true, "`position.ringAngle` is required"],
     },
-    flexResistor3: {
+    middleAngle: {
       type: Number,
-      required: [true, "`position.flexResistor3` is required"],
+      required: [true, "`position.middleAngle` is required"],
     },
-    flexResistor4: {
+    indexAngle: {
       type: Number,
-      required: [true, "`position.flexResistor4` is required"],
+      required: [true, "`position.indexAngle` is required"],
     },
-    flexResistor5: {
+    thumbAngle: {
       type: Number,
-      required: [true, "`position.flexResistor5` is required"],
+      required: [true, "`position.thumbAngle` is required"],
     },
-    gyroscope: {
+    roll: {
       type: Number,
-      required: [true, "`position.gyroscope` is required"],
+      required: [true, "`position.roll` is required"],
+    },
+    pitch: {
+      type: Number,
+      required: [true, "`position.pitch` is required"],
+    },
+    yaw: {
+      type: Number,
+      required: [true, "`position.yaw` is required"],
     },
   },
   {

@@ -16,7 +16,17 @@ def test_create_exercise_fail(env_config, autheticate_admin_user):
     headers = {'x-auth-token': autheticate_admin_user['token']}
 
     for exercise_data in exercises_data:
-        r = requests.post(f'{env_config.API_URL}/api/exercise', json=exercise_data['data'], headers=headers)
+        payload = {
+            "level": exercise_data['data']['level'],
+            "description": exercise_data['data']['description'],
+            "position": exercise_data['data']['position']
+        }
+        if not exercise_data['data']['level']:
+            payload.pop("level")
+        if not exercise_data['data']['description']:
+            payload.pop("description")
+
+        r = requests.post(f'{env_config.API_URL}/api/exercise', json=payload, headers=headers)
 
         assert r.status_code == exercise_data['status_code']
         assert r.json()['errors'][0]['msg'] == exercise_data['msg']
