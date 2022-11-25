@@ -28,6 +28,7 @@ def read_serial():
 
     Returns: Dictionary with 8 entries all of which are angles.
     """
+    # remove dict if only using array
     angleDict = {
         0 : {"Angle" : "0"},
         1 : {"Angle" : "0"},
@@ -37,18 +38,21 @@ def read_serial():
         5 : {"Angle" : "0"},
         6 : {"Angle" : "0"},
         7 : {"Angle" : "0"}
-    }  
-    for x in range(5):
+    } 
+    angleList = []
+
+    for x in range(8):
         ser = serial.Serial('/dev/tty.usbmodem1301', 9600, timeout = 1)
         input = ser.readline()
         ser.close()
         angleDict[x]["Angle"] = parseData(input)
+        angleList.append(parseData(input))
 
         logger.debug(angleDict[x]["Angle"])
         if config.WRITE_ARUDINO_DATA:
             __savefile(angleDict[x]["Angle"])
 
-    return angleDict
+    return angleList
 
 def parseData(inputData):
     """
