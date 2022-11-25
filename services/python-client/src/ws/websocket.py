@@ -19,6 +19,9 @@ def start_exercise(data):
     logger.info(f'User requested to start exercise:\n{json.dumps(data, indent=4)}')
     sio.run_level = True
 
+    while sio.start_level:
+        pass
+
     while sio.run_level:
         logger.info("running")
         time.sleep(1)

@@ -8,7 +8,6 @@ const createAdminUser = require("./src/config/createAdminUser");
 const cors = require("cors");
 
 const app = express();
-const server = http.createServer(app);
 
 const runServer = async () => {
   // Connect DB
@@ -40,6 +39,7 @@ const runServer = async () => {
 
   const PORT = process.env.SERVER_PORT || 5000;
 
+  const server = http.createServer(app);
   io.listen(server);
   server.listen(PORT, () => logger.info(`Server started on port ${PORT}`));
 };

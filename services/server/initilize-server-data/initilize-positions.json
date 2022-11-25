@@ -1,26 +1,32 @@
 [
   {
-    "flexResistor1": 1,
-    "flexResistor2": 1,
-    "flexResistor3": 1,
-    "flexResistor4": 1,
-    "flexResistor5": 1,
-    "gyroscope": 1
+    "pinkyAngle": 1,
+    "ringAngle": 1,
+    "middleAngle": 1,
+    "indexAngle": 1,
+    "thumbAngle": 1,
+    "roll": 1,
+    "pitch": 1,
+    "yaw": 1
   },
   {
-    "flexResistor1": 2,
-    "flexResistor2": 2,
-    "flexResistor3": 2,
-    "flexResistor4": 2,
-    "flexResistor5": 2,
-    "gyroscope": 2
+    "pinkyAngle": 2,
+    "ringAngle": 2,
+    "middleAngle": 2,
+    "indexAngle": 2,
+    "thumbAngle": 2,
+    "roll": 2,
+    "pitch": 2,
+    "yaw": 2
   },
   {
-    "flexResistor1": 3,
-    "flexResistor2": 3,
-    "flexResistor3": 3,
-    "flexResistor4": 3,
-    "flexResistor5": 3,
-    "gyroscope": 3
+    "pinkyAngle": 3,
+    "ringAngle": 3,
+    "middleAngle": 3,
+    "indexAngle": 3,
+    "thumbAngle": 3,
+    "roll": 3,
+    "pitch": 3,
+    "yaw": 3
   }
 ]

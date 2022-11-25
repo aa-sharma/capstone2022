@@ -43,14 +43,6 @@ wsServer.on("connection", function (socket, req) {
       client.send(msg);
     });
   });
-
-  socket.on("userStartsExercise", function (msg) {
-    socket.emit("userStartsExercise", msg, onlyToCorrectPythonClient);
-  });
-  socket.on("positionUpdate", function (msg) {
-    socket.emit("positionUpdate", msg, correctWebClient);
-  });
-  socket.on("message", function (msg) {});
 });
 
 // PASS MESSAGE TO SPECIFIC CLIENTS

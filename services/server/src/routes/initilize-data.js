@@ -30,12 +30,14 @@ router.postP("/", authAdmin, async (req, res) => {
 
     for (idx in exercises) {
       const finalPosition = {
-        flexResistor1: positions[exercises[idx].positionIndex].flexResistor1,
-        flexResistor2: positions[exercises[idx].positionIndex].flexResistor2,
-        flexResistor3: positions[exercises[idx].positionIndex].flexResistor3,
-        flexResistor4: positions[exercises[idx].positionIndex].flexResistor4,
-        flexResistor5: positions[exercises[idx].positionIndex].flexResistor5,
-        gyroscope: positions[exercises[idx].positionIndex].gyroscope,
+        pinkyAngle: positions[exercises[idx].positionIndex].pinkyAngle,
+        ringAngle: positions[exercises[idx].positionIndex].ringAngle,
+        middleAngle: positions[exercises[idx].positionIndex].middleAngle,
+        indexAngle: positions[exercises[idx].positionIndex].indexAngle,
+        thumbAngle: positions[exercises[idx].positionIndex].thumbAngle,
+        roll: positions[exercises[idx].positionIndex].roll,
+        pitch: positions[exercises[idx].positionIndex].pitch,
+        yaw: positions[exercises[idx].positionIndex].yaw,
       };
 
       let exercise = new Exercise({

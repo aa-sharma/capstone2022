@@ -134,7 +134,7 @@ const notLoggedInElements = document.getElementsByClassName("not-logged-in");
 
 const unauthorizedPaths = [
   "/my-account.html",
-  "/interactive.html",
+  "/exercises.html",
   "/dashboard.html",
 ];
 

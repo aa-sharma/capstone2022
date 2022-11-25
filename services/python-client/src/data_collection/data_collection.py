@@ -9,6 +9,7 @@ logger = logging.getLogger('logger')
 
 ser = serial.Serial(config.COM_PORT, config.BAUD_RATE)
 
+
 def read_serial():
     data = ser.readLine()
     logger.debug(data)
@@ -20,6 +21,6 @@ def read_serial():
 
 def __savefile(data):
     # a functin for simply saving files
-    with open(f'{ROOT_DIR}/../data/arduino_data.csv',"w+", newline='') as my_csv:
+    with open(f'{ROOT_DIR}/../data/arduino_data.csv', "w+", newline='') as my_csv:
         csvWriter = csv.writer(my_csv, delimiter=',')
         csvWriter.writerows(data)

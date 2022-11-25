@@ -113,10 +113,10 @@
               <a class="nav-link" href="./">Home</a>
             </li>
             <li class="nav-item logged-in">
-              <a class="nav-link" href="./interactive.html">Interactive</a>
+              <a class="nav-link" href="./exercises.html">Exercises</a>
             </li>
             <li class="nav-item logged-in">
-              <a class="nav-link" href="./">Dashboard</a>
+              <a class="nav-link" href="./dashboard.html">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./about.html">About</a>
@@ -134,58 +134,20 @@
         </div>
       </div>
     </nav>
+    <!--/ Nav End /-->
 
-    <div class="container" style="height: 100vh">
-      <div class="row">
-        <div class="col-sm">
-          <br />
-          <br />
-          <img
-            src="../img/handTest.png"
-            alt="handTest"
-            style="width: 216px; height: 288.5px"
-          />
-          <p>Target Position</p>
-        </div>
-        <div class="col-sm">
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <h1>Level 1</h1>
-          <label id="minutes">00</label>:<label id="seconds">00</label>
-          <br />
-          <br />
-          <div
-            class="mkCharts"
-            data-percent="45"
-            data-color="#2DAEDF"
-            data-size="100"
-            data-stroke="2"
-          ></div>
-          <p>Acceleration</p>
-        </div>
-        <div class="col-sm">
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <!-- <div id="batteryContainer"></div> -->
-          <br />
-          <p class="font-weight-light">Battery <em>87%</em></p>
-          <i class="bi bi-battery-full"></i>
-          <h1 class="font-weight-light">WORDS OF ENCOURAGEMENT HERE</h1>
-          <p class="font-weight-light">
-            Exercise 1 of 5 | <a href=""><em>Skip >></em></a>
-          </p>
-        </div>
+    <div id="exercises" class="container" style="height: 100vh">
+      <button id="start-level" class="btn btn-primary btn-block my-4">
+        Start Level
+      </button>
+      <button id="stop-level" class="btn btn-danger btn-block my-4">
+        Stop Level
+      </button>
 
-        <canvas id="canvas1">
-          <script type="module" src="../js/modules/handModel.js"></script>
-        </canvas>
-      </div>
+      <canvas id="canvas1">
+        <script type="module" src="../js/modules/handModel.js"></script>
+      </canvas>
+      <!-- </div> -->
     </div>
 
     <footer class="containter-fluid mt-auto">
@@ -292,6 +254,12 @@
     ></script>
 
     <!-- Template Main Javascript File -->
+    <script
+      src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+      integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
+      crossorigin="anonymous"
+    ></script>
     <script src="../js/main.js" type="module"></script>
+    <script src="../js/pages/exercises.js" type="module"></script>
   </body>
 </html>
