@@ -3,6 +3,8 @@ import logging
 import time
 import json
 from utils.config import config
+from data_collection import data_collection
+from data_processor import dataProcessor
 
 sio = socketio.Client()
 logger = logging.getLogger('logger')
