@@ -28,8 +28,7 @@ def start_exercise(data):
         raw_data = data_collection.read_serial() # outputs angles dict (NEEDS TO BE ARRAY)
         raw_xyz = dataProcessor.GenerateXYZ(raw_data)
         processed_xyz = data_collection.repackageCartesian(raw_xyz)
-        xyz_allPoints = data_collection.updateCartesianValues(processed_xyz)
-        sio.emit('python_client_data', xyz_allPoints)
+        sio.emit('python_client_data', processed_xyz)
 
     while sio.run_level:
         logger.info("running")

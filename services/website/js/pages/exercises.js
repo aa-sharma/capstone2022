@@ -32,6 +32,10 @@ socket.on("python_client_connected", (data) => {
   console.log(data);
 });
 
+socket.on("python_client_data", (data) => {
+  console.log(data);
+});
+
 startLevelButton.addEventListener("click", (ev) => {
   console.log("start level");
   socket.emit("user_start_exercise", { exercise: json.items[0] });
