@@ -29,7 +29,6 @@ io.on("connection", (socket) => {
 
   socket.on("python_client_data", (message) => {
     io.to(room).emit("python_client_data", message);
-    console.log(message)
   });
 
   socket.on("disconnect", (reason) => {

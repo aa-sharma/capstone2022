@@ -3,8 +3,10 @@ import sys
 from utils.helper_functions import ROOT_DIR
 from logging.handlers import RotatingFileHandler
 import logging
+from utils.config import config
 
 logger = logging.getLogger('logger')
+
 
 class __CLIFormat(logging.Formatter):
 
@@ -29,6 +31,7 @@ class __CLIFormat(logging.Formatter):
         formatter = logging.Formatter(log_fmt)
         return formatter.format(record)
 
+
 def setup_logger():
     os.system(f'mkdir -p {ROOT_DIR}/../logs')
 
@@ -36,7 +39,8 @@ def setup_logger():
     stream_handler.setFormatter(__CLIFormat())
 
     file_format = logging.Formatter("[%(asctime)s] [%(levelname)s] : %(message)s (%(filename)s:%(lineno)d)")
-    rotating_file_handler = RotatingFileHandler(f'{ROOT_DIR}/../logs/data_processor.log', maxBytes=200000, backupCount=10)
+    rotating_file_handler = RotatingFileHandler(
+        f'{ROOT_DIR}/../logs/data_processor.log', maxBytes=200000, backupCount=10)
     rotating_file_handler.setFormatter(file_format)
 
     if (logger.hasHandlers()):
@@ -44,4 +48,4 @@ def setup_logger():
 
     logger.addHandler(stream_handler)
     logger.addHandler(rotating_file_handler)
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(config.LOG_LEVEL)

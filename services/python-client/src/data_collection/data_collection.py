@@ -28,7 +28,7 @@ def read_serial():
 
     for x in range(8):
         try:
-            ser = serial.Serial(config.COM_PORT, 9600, timeout = 1)
+            ser = serial.Serial(config.COM_PORT, 9600, timeout=1)
             input = ser.readline()
             ser.close()
             anglesList = (parseData(input))
@@ -43,7 +43,8 @@ def read_serial():
         if config.WRITE_ARUDINO_DATA:
             __savefile(anglesList[x])
 
-    return(anglesList)
+    return (anglesList)
+
 
 def parseData(inputString):
     """
@@ -53,15 +54,17 @@ def parseData(inputString):
     Returns: anglesList appended with 8 elements corresponding to the extracted angle values
                         Ex. ['168', '171', '175', '155', '175', '0', '0', '0']
     """
-    adc = re.search("'(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)", str(inputString))
+    adc = re.search(
+        "'(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)", str(inputString))
     anglesList = []
     if adc:
         for i in range(1, 9):
             anglesList.append(int(adc.group(i)))
     else:
-        print(["[ERROR]: Could not parse input data."])
+        logger.error(["Could not parse input data."])
 
-    return(anglesList)
+    return (anglesList)
+
 
 def repackageCartesian(XYZ):
     """
@@ -114,43 +117,42 @@ def repackageCartesian(XYZ):
     """
     # Inital
     XYZDict = {
-        0 : {"x": "7", "y": "0", "z": "3"},
-        1 : {"x": "3", "y": "2", "z": "9"},
-        2 : {"x": "8", "y": "8", "z": "8"},
-        3 : {"x": "1", "y": "6", "z": "1"},
-        4 : {"x": "1", "y": "6", "z": "1"},
-        5 : {"x": "1", "y": "6", "z": "1"},
-        6 : {"x": "7", "y": "0", "z": "3"},
-        7 : {"x": "3", "y": "2", "z": "9"},
-        8 : {"x": "8", "y": "8", "z": "8"},
-        9 : {"x": "1", "y": "6", "z": "1"},
-        10 : {"x": "1", "y": "6", "z": "1"},
-        11 : {"x": "1", "y": "6", "z": "1"},
-        12 : {"x": "8", "y": "8", "z": "8"},
-        13 : {"x": "1", "y": "6", "z": "1"},
-        14 : {"x": "1", "y": "6", "z": "1"},
-        15 : {"x": "1", "y": "6", "z": "1"},
-        16 : {"x": "7", "y": "0", "z": "3"},
-        17 : {"x": "3", "y": "2", "z": "9"},
-        18 : {"x": "8", "y": "8", "z": "8"},
-        19 : {"x": "1", "y": "6", "z": "1"},
-        20 : {"x": "1", "y": "6", "z": "1"},
-        21 : {"x": "1", "y": "6", "z": "1"},
-        22 : {"x": "1", "y": "6", "z": "1"},
-        23 : {"x": "1", "y": "6", "z": "1"}
+        0: {"x": "7", "y": "0", "z": "3"},
+        1: {"x": "3", "y": "2", "z": "9"},
+        2: {"x": "8", "y": "8", "z": "8"},
+        3: {"x": "1", "y": "6", "z": "1"},
+        4: {"x": "1", "y": "6", "z": "1"},
+        5: {"x": "1", "y": "6", "z": "1"},
+        6: {"x": "7", "y": "0", "z": "3"},
+        7: {"x": "3", "y": "2", "z": "9"},
+        8: {"x": "8", "y": "8", "z": "8"},
+        9: {"x": "1", "y": "6", "z": "1"},
+        10: {"x": "1", "y": "6", "z": "1"},
+        11: {"x": "1", "y": "6", "z": "1"},
+        12: {"x": "8", "y": "8", "z": "8"},
+        13: {"x": "1", "y": "6", "z": "1"},
+        14: {"x": "1", "y": "6", "z": "1"},
+        15: {"x": "1", "y": "6", "z": "1"},
+        16: {"x": "7", "y": "0", "z": "3"},
+        17: {"x": "3", "y": "2", "z": "9"},
+        18: {"x": "8", "y": "8", "z": "8"},
+        19: {"x": "1", "y": "6", "z": "1"},
+        20: {"x": "1", "y": "6", "z": "1"},
+        21: {"x": "1", "y": "6", "z": "1"},
+        22: {"x": "1", "y": "6", "z": "1"},
+        23: {"x": "1", "y": "6", "z": "1"}
     }
 
     ############ Unpack Array ############
 
     X = XYZ[0]
-    Y = XYZ [1]
+    Y = XYZ[1]
     Z = XYZ[2]
 
     # [TODO] Palm (RPY) [PARKED] HW IMPLEMENTATION IN PROGRESS
     X[0] = [0, 0, 0, 0]    # temporarily
     Y[0] = [0, 0, 0, 0]    # temporarily
     Z[0] = [0, 0, 0, 0]    # temporarily
-
 
     # j
     # 0 --> Palm
@@ -159,11 +161,11 @@ def repackageCartesian(XYZ):
     # 3 --> Ring
     # 4 --> Pinky
     # 5 --> Thumb
-        # i
-        # 0 --> Point A
-        # 1 --> Point B
-        # 2 --> Point C
-        # 3 --> Point D
+    # i
+    # 0 --> Point A
+    # 1 --> Point B
+    # 2 --> Point C
+    # 3 --> Point D
 
     k = 0
     for j in range(6):
@@ -175,7 +177,7 @@ def repackageCartesian(XYZ):
             k = k+1
 
     logger.debug(XYZDict)
-    return(XYZDict)
+    return (XYZDict)
 
 
 def __savefile(data):

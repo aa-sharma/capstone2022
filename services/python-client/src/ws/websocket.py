@@ -14,21 +14,22 @@ logger = logging.getLogger('logger')
 def stop_exercise(data):
     logger.info(data)
     sio.run_level = False
+    sio.start_level = False
 
 
 @sio.on("user_start_exercise")
 def start_exercise(data):
     logger.info(f'User requested to start exercise:\n{json.dumps(data, indent=4)}')
     sio.start_level = True
-    
     sio.run_level = True
 
     while sio.start_level:
         # read values from Arduino
-        raw_data = data_collection.read_serial() # outputs angles dict (NEEDS TO BE ARRAY)
+        raw_data = data_collection.read_serial()  # outputs angles dict (NEEDS TO BE ARRAY)
         raw_xyz = dataProcessor.GenerateXYZ(raw_data)
         processed_xyz = data_collection.repackageCartesian(raw_xyz)
         sio.emit('python_client_data', processed_xyz)
+        time.sleep(1)
 
     while sio.run_level:
         logger.info("running")

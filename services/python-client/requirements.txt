@@ -4,6 +4,7 @@ charset-normalizer==2.1.1
 future==0.18.2
 idna==3.4
 iso8601==1.1.0
+numpy==1.23.5
 pyserial==3.5
 python-dotenv==0.21.0
 python-engineio==4.3.4

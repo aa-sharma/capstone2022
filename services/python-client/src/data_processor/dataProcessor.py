@@ -43,7 +43,7 @@ def GenerateXYZ(angles):
     Xpalm = 0
     Ypalm = 0
     Zpalm = 0
-    
+
     Xthumb = [0, 0, 0, 0]
     Ythumb = [0, 0, 0, 0]
     Zthumb = [0, 0, 0, 0]
@@ -60,7 +60,7 @@ def GenerateXYZ(angles):
     Yindex = [0, 0, 0, 0]
     Zindex = [0, 0, 0, 0]
 
-    #Thumb position
+    # Thumb position
     l = [3.5, 2]
     Q_thumb = Qtrpy(6, -1.5, 0, roll, pitch, yaw)
     Xthumb[0] = Q_thumb[0, 3]
@@ -76,7 +76,7 @@ def GenerateXYZ(angles):
         Ythumb[i+2] = Q_thumb[1, 3]
         Zthumb[i+2] = Q_thumb[2, 3]
 
-    #Pinky position
+    # Pinky position
     l = [3.5, 2, 2]
     Q_pinky = Qtrpy(0, 7, 0, 90, 0, -90)
     Xpinky[0] = Q_pinky[0, 3]
@@ -87,8 +87,8 @@ def GenerateXYZ(angles):
         Xpinky[i+1] = Q_pinky[0, 3]
         Ypinky[i+1] = Q_pinky[1, 3]
         Zpinky[i+1] = Q_pinky[2, 3]
-    
-    #Ring position
+
+    # Ring position
     l = [4, 3.5, 2]
     Q_ring = Qtrpy(2, 7.5, 0, 90, 0, -90)
     Xring[0] = Q_ring[0, 3]
@@ -99,8 +99,8 @@ def GenerateXYZ(angles):
         Xring[i+1] = Q_ring[0, 3]
         Yring[i+1] = Q_ring[1, 3]
         Zring[i+1] = Q_ring[2, 3]
-    
-    #Middle position
+
+    # Middle position
     l = [5, 3, 2]
     Q_middle = Qtrpy(4, 7.5, 0, 90, 0, -90)
     Xmiddle[0] = Q_middle[0, 3]
@@ -111,8 +111,8 @@ def GenerateXYZ(angles):
         Xmiddle[i+1] = Q_middle[0, 3]
         Ymiddle[i+1] = Q_middle[1, 3]
         Zmiddle[i+1] = Q_middle[2, 3]
-    
-    #Index position
+
+    # Index position
     l = [4, 3, 2]
     Q_index = Qtrpy(6, 7.5, 0, 90, 0, -90)
     Xindex[0] = Q_index[0, 3]
@@ -123,25 +123,29 @@ def GenerateXYZ(angles):
         Xindex[i+1] = Q_index[0, 3]
         Yindex[i+1] = Q_index[1, 3]
         Zindex[i+1] = Q_index[2, 3]
-    
+
     X = [Xpalm, Xindex, Xmiddle, Xring, Xpinky, Xthumb]
     Y = [Ypalm, Yindex, Ymiddle, Yring, Ypinky, Ythumb]
     Z = [Zpalm, Zindex, Zmiddle, Zring, Zpinky, Zthumb]
 
     return [X, Y, Z]
 
+
 def Qtrpy(xT, yT, zT, roll, pitch, yaw):
     roll = math.radians(roll)
     pitch = math.radians(pitch)
     yaw = math.radians(yaw)
-    A_t = [[1, 0, 0, xT],[0, 1, 0, yT],[0, 0, 1, zT],[0, 0, 0, 1]]
-    A_roll = [[math.cos(roll), -math.sin(roll), 0, 0],[math.sin(roll), math.cos(roll), 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
-    A_pitch = [[math.cos(pitch), 0, math.sin(pitch), 0], [0, 1, 0, 0], [-math.sin(pitch), 0, math.cos(pitch), 0], [0, 0, 0, 1]]
+    A_t = [[1, 0, 0, xT], [0, 1, 0, yT], [0, 0, 1, zT], [0, 0, 0, 1]]
+    A_roll = [[math.cos(roll), -math.sin(roll), 0, 0], [math.sin(roll),
+                                                        math.cos(roll), 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    A_pitch = [[math.cos(pitch), 0, math.sin(pitch), 0], [0, 1, 0, 0],
+               [-math.sin(pitch), 0, math.cos(pitch), 0], [0, 0, 0, 1]]
     A_yaw = [[1, 0, 0, 0], [0, math.cos(yaw), -math.sin(yaw), 0], [0, math.sin(yaw), math.cos(yaw), 0], [0, 0, 0, 1]]
     Q = numpy.dot(A_t, A_roll)
     Q = numpy.dot(Q, A_pitch)
     Q = numpy.dot(Q, A_yaw)
     return Q
+
 
 def DenHart(l, theta):
     theta = math.radians(theta)
@@ -153,7 +157,7 @@ def DenHart(l, theta):
 #ser = serial.Serial('/dev/cu.usbmodem14201', 9600, timeout = 1)
 #input = ser.readline()
 #print("recieved string: " + str(input))
-#ser.close()
+# ser.close()
 
 #anglesList = parseData(input)
 #print("Parsed angles")
@@ -166,8 +170,7 @@ def DenHart(l, theta):
 #print("pitch = " + anglesList[6])
 #print("yaw = " + anglesList[7])
 
-start = time.process_time()
-XYZ = GenerateXYZ([33, 34, 35, 36, 37, 40, 18, 9])
-print(XYZ)
-print(time.process_time() - start)
-
+# start = time.process_time()
+# XYZ = GenerateXYZ([33, 34, 35, 36, 37, 40, 18, 9])
+# print(XYZ)
+# print(time.process_time() - start)
