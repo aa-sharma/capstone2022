@@ -1,11 +1,11 @@
-import serial
+import serial as serial
 import csv
 from datetime import datetime
 from utils.helper_functions import ROOT_DIR
 import logging
 from utils.config import config
 import re
-from data_processor import dataProcessor
+import data_processor.dataProcessor
 
 logger = logging.getLogger('logger')
 
@@ -14,106 +14,102 @@ ser = serial.Serial(config.COM_PORT, config.BAUD_RATE)
 def read_serial():
     """
     Reading from Arduino serial port.
-    5 Values are appended to angleDict (index 0-4)
-        [0] -> Pinky angle
-        [1] -> Ring angle
-        [2] -> Middle angle
-        [3] -> Index angle
-        [4] -> Thumb angle
-        [5]* -> Roll
-        [6]* -> Pitch
-        [7]* -> Yaw
-    *[TODO] Validate gyroscope x,y,z (fifth key value pair)
-    This list is then passed to xxxx()
-
-    Returns: Dictionary with 8 entries all of which are angles.
+    Sample Data Example: b'168/171/175/155/175/0/0/0\r\n'
+                Order: index, middle, ring, pinky, thumb, roll, pitch, yaw
+    Returns: List with 8 entries of angles.
+                [0] -> Index angle
+                [1] -> Middle angle
+                [2] -> Ring angle
+                [3] -> Pinky angle
+                [4] -> Thumb angle
+                [5]* -> Roll
+                [6]* -> Pitch
+                [7]* -> Yaw
     """
-    # remove dict if only using array
-    angleDict = {
-        0 : {"Angle" : "0"},
-        1 : {"Angle" : "0"},
-        2 : {"Angle" : "0"},
-        3 : {"Angle" : "0"},
-        4 : {"Angle" : "0"},
-        5 : {"Angle" : "0"},
-        6 : {"Angle" : "0"},
-        7 : {"Angle" : "0"}
-    } 
-    angleList = []
 
     for x in range(8):
+        # Tested using test_string only. To be tested with HW integration.
         ser = serial.Serial('/dev/tty.usbmodem1301', 9600, timeout = 1)
         input = ser.readline()
         ser.close()
-        angleDict[x]["Angle"] = parseData(input)
-        angleList.append(parseData(input))
+        anglesList = (parseData(input))
 
-        logger.debug(angleDict[x]["Angle"])
+        # Write to file not tested.
+        logger.debug(anglesList[x])
         if config.WRITE_ARUDINO_DATA:
-            __savefile(angleDict[x]["Angle"])
+            __savefile(anglesList[x])
 
-    return angleList
+    return(anglesList)
 
-def parseData(inputData):
+def parseData(inputString):
     """
-    Function to extract just the angle data from received string from serial port.
+    Function to extract just the angles data from received string from serial port.
+    Args: inputString of format: "b'168/171/175/155/175/0/0/0\r\n'" 
+          corresponding to angles in order: index, middle, ring, pinky, thumb, roll, pitch, yaw
+    Returns: anglesList appended with 8 elements corresponding to the extracted angle values
+                        Ex. ['168', '171', '175', '155', '175', '0', '0', '0']
     """
-    print(str(inputData))
-    adc = re.search("(\d+)", str(inputData))
+    adc = re.search("'(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)", str(inputString))
+    anglesList = []
     if adc:
-        return adc.group(1)
+        for i in range(1, 9):
+            anglesList.append(int(adc.group(i)))
     else:
         print(["[ERROR]: Could not parse input data."])
 
+    return(anglesList)
+
 def repackageCartesian(XYZ):
     """
-    [TODO] This function is to get the data into a format that is comprehensible to the web client. x,y,z for each point needs to be concatenated.
-    Called after the angle to xyz conversion.
-    """
-    pass
+    Args: Array of 3 subarrays with 6 sub-subarrays each corresponding to fingers/palm. 
+    Each of these 6 sub-subarrays has 4 elements for 4 points (A,B,C,D):
+    [
+        X = [Xpalm, Xindex, Xmiddle, Xring, Xpinky, Xthumb]
+        Y = [Ypalm, Yindex, Ymiddle, Yring, Ypinky, Ythumb]
+        Z = [Zpalm, Zindex, Zmiddle, Zring, Zpinky, Zthumb]
+    ]
+            Xindex = [XindexA, XindexB, XindexC, XindexD]
+    Ex:
+    xindexA = X[1][0]
+    yindexA = Y[1][0]
+    zindexA = Z[1][0]
+    xindexB = X[1][1]
+    yindexB = Y[1][1]
+    zindexB = Z[1][1]
 
-def updateCartesianValues(angleDict):
+    Returns: Dictionary with points as the keys and x,y,z as the values. 
+    Map to indicate which key corresponds to what point.
+    +----------+----------------------+
+    |  Key     |      Point Map       |
+    +----------+----------------------+
+    |    0     |        palm A       |
+    |    1     |        palm B       |
+    |    2     |        palm C       |
+    |    3     |        palm D       |
+    |    4     |        index A      |
+    |    5     |        index B      |
+    |    6     |        index C      |
+    |    7     |        index D      |
+    |    8     |        middle A     |
+    |    9     |        middle B     |
+    |    10    |        middle C     |
+    |    11    |        middle D     |
+    |    12    |        ring A       |
+    |    13    |        ring B       |
+    |    14    |        ring C       |
+    |    15    |        ring D       |
+    |    16    |        pinky A      |
+    |    17    |        pinky B      |
+    |    18    |        pinky C      |
+    |    19    |        pinky D      |
+    |    20    |        thumb A      |
+    |    21    |        thumb B      |
+    |    22    |        thumb C      |
+    |    23    |        thumb D      |
+    +----------+----------------------+
     """
-    Updates a nested dictionary of 22 entries each for a data point. 
-    Map to keep track of idx and associated data point ex. pinkyA
-    +----------+----------------------+
-    | Index    |      Point Map       |
-    +----------+----------------------+
-    |    1     |        pinky A       |
-    |    2     |        pinky B       |
-    |    3     |        pinky C       |
-    |    4     |        pinky D       |
-    |    5     |        ring A        |
-    |    6     |        ring B        |
-    |    7     |        ring C        |
-    |    8     |        ring D        |
-    |    9     |        middle A      |
-    |    10    |        middle B      |
-    |    11    |        middle C      |
-    |    12    |        middle D      |
-    |    13    |        index A       |
-    |    14    |        index B       |
-    |    15    |        index C       |
-    |    16    |        index D       |
-    |    17    |        thumb A       |
-    |    18    |        thumb B       |
-    |    19    |        thumb C       |
-    |    20    |        thumb D       |
-    |    21    |           o          |
-    |    22    |           W          |
-    |    23    |     acceleration     |
-    +----------+----------------------+
-    TODO
-    This function should only be called after passing the data to convert from angle to cartesian.
-    Function to convert angles for each finger to data points (4 per finger).
-    Mapping Algorithm (blurb):
-        1. Define 0 and 180 for all fingers
-        2. Define function to translate [x,y,z] based on angles.
-    Passes mapped values to updateCartesianValues().
-    """
-
-    # Initial coordinates
-    allPoints = {
+    # Inital
+    XYZDict = {
         0 : {"x": "7", "y": "0", "z": "3"},
         1 : {"x": "3", "y": "2", "z": "9"},
         2 : {"x": "8", "y": "8", "z": "8"},
@@ -136,20 +132,46 @@ def updateCartesianValues(angleDict):
         19 : {"x": "1", "y": "6", "z": "1"},
         20 : {"x": "1", "y": "6", "z": "1"},
         21 : {"x": "1", "y": "6", "z": "1"},
-        22 : {"x": "1", "y": "6", "z": "1"}
+        22 : {"x": "1", "y": "6", "z": "1"},
+        23 : {"x": "1", "y": "6", "z": "1"}
     }
 
-    for i in range (5):
-        x = angleDict[i]["ADC"]
-        y = angleDict[i]["ADC"]
-        z = angleDict[i]["ADC"]
+    ############ Unpack Array ############
 
-        allPoints[i]["x"] = x
-        allPoints[i]["y"] = y
-        allPoints[i]["z"] = z
+    X = XYZ[0]
+    Y = XYZ [1]
+    Z = XYZ[2]
 
-    print(allPoints)
-    return(allPoints)
+    # [TODO] Palm (RPY) [PARKED] HW IMPLEMENTATION IN PROGRESS
+    X[0] = [0, 0, 0, 0]    # temporarily
+    Y[0] = [0, 0, 0, 0]    # temporarily
+    Z[0] = [0, 0, 0, 0]    # temporarily
+
+
+    # j
+    # 0 --> Palm
+    # 1 --> Index
+    # 2 --> Middle
+    # 3 --> Ring
+    # 4 --> Pinky
+    # 5 --> Thumb
+        # i
+        # 0 --> Point A
+        # 1 --> Point B
+        # 2 --> Point C
+        # 3 --> Point D
+
+    k = 0
+    for j in range(6):
+        for i in range(4):
+            XYZDict[k]["x"] = X[j][i]
+            XYZDict[k]["y"] = Y[j][i]
+            XYZDict[k]["z"] = Z[j][i]
+
+            k = k+1
+
+    return(XYZDict)
+
 
 def __savefile(data):
     # a functin for simply saving files
