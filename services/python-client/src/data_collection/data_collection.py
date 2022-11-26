@@ -9,7 +9,6 @@ import data_processor.dataProcessor
 
 logger = logging.getLogger('logger')
 
-ser = serial.Serial(config.COM_PORT, config.BAUD_RATE)
 
 def read_serial():
     """
@@ -28,11 +27,16 @@ def read_serial():
     """
 
     for x in range(8):
-        # Tested using test_string only. To be tested with HW integration.
-        ser = serial.Serial('/dev/tty.usbmodem1301', 9600, timeout = 1)
-        input = ser.readline()
-        ser.close()
-        anglesList = (parseData(input))
+        try:
+            ser = serial.Serial(config.COM_PORT, 9600, timeout = 1)
+            input = ser.readline()
+            ser.close()
+            anglesList = (parseData(input))
+        except:
+            # Tested using test_string only. To be tested with HW integration.
+            test_string = "b'168/171/175/155/175/0/0/0\r\n'"
+            input = test_string
+            anglesList = (parseData(input))
 
         # Write to file not tested.
         logger.debug(anglesList[x])
@@ -170,6 +174,7 @@ def repackageCartesian(XYZ):
 
             k = k+1
 
+    logger.debug(XYZDict)
     return(XYZDict)
 
 
