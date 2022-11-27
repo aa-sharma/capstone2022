@@ -136,37 +136,31 @@
     </nav>
     <!--/ Nav End /-->
 
-<br>
-<br>
-<div class="row">
-    <div class="col-lg-8 mx-auto">
-      <div class="mb-4">
-        <header class="py-5 text-left ms-1">
-            <br>
-            <br>
-            <br>
-          <h1 class="display-4">LEVEL 1</h1>
-          <p class="font-weight-light mb-0">Exercise 1</p>
-        </header>
+    <br />
+    <br />
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="mb-4">
+          <header class="py-5 text-left ms-1">
+            <br />
+            <br />
+            <br />
+            <h1 class="display-4">LEVEL 1</h1>
+            <p class="font-weight-light mb-0">Exercise 1</p>
+          </header>
+        </div>
+      </div>
+
+      <div id="exercises" class="col-lg-8 mx-auto" style="height: 25vh">
+        <button id="start-level" class="btn btn-primary btn-block my-4">
+          START
+        </button>
+        <button id="stop-level" class="btn btn-danger btn-block my-4">
+          STOP
+        </button>
+        <p id="clock">00:00:00</p>
       </div>
     </div>
-
-    <div id="exercises" class="col-lg-8 mx-auto" style="height: 25vh">
-      <button id="start-level" class="btn btn-primary btn-block my-4">
-        START
-      </button>
-      <button id="stop-level" class="btn btn-danger btn-block my-4">
-        STOP
-      </button>
-      <p id="clock">00:00:00</p>
-
-
-      <canvas id="canvas1">
-        <script type="module" src="../js/modules/handModel.js"></script>
-      </canvas>
-    </div>
-
-    </body>
 
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
     <div id="preloader"></div>
@@ -233,6 +227,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="../js/main.js" type="module"></script>
-    <script src="../js/pages/exercises.js" type="module"></script>
+    <script src="../js/pages/interactive.js" type="module"></script>
   </body>
 </html>
