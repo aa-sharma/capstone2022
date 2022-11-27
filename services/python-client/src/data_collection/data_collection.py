@@ -117,9 +117,13 @@ def repackageCartesian(XYZ):
     """
     # Inital
     XYZDict = {
-        0: {"x": "7", "y": "0", "z": "3"},
-        1: {"x": "3", "y": "2", "z": "9"},
+        # "palmA": {"x": "7", "y": "0", "z": "3"},
+        # "indexA": {"x": "3", "y": "2", "z": "9"},
+        # "indexB": {"x": "8", "y": "8", "z": "8"},
+        0: {"x": "8", "y": "8", "z": "8"},
+        1: {"x": "8", "y": "8", "z": "8"},
         2: {"x": "8", "y": "8", "z": "8"},
+        3: {"x": "8", "y": "8", "z": "8"},
         3: {"x": "1", "y": "6", "z": "1"},
         4: {"x": "1", "y": "6", "z": "1"},
         5: {"x": "1", "y": "6", "z": "1"},
@@ -142,6 +146,11 @@ def repackageCartesian(XYZ):
         22: {"x": "1", "y": "6", "z": "1"},
         23: {"x": "1", "y": "6", "z": "1"}
     }
+
+    # mapping = {
+    #     1: "palmA",
+    #     2: "indexA"
+    # }
 
     ############ Unpack Array ############
 
@@ -170,6 +179,9 @@ def repackageCartesian(XYZ):
     k = 0
     for j in range(6):
         for i in range(4):
+            # XYZDict[mapping[k]]["x"] = X[j][i]
+            # XYZDict[mapping[k]]["y"] = Y[j][i]
+            # XYZDict[mapping[k]]["z"] = Z[j][i]
             XYZDict[k]["x"] = X[j][i]
             XYZDict[k]["y"] = Y[j][i]
             XYZDict[k]["z"] = Z[j][i]
