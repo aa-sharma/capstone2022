@@ -87,7 +87,7 @@ if __name__ == "__main__":
 # bestScore = newScore
 # }
 #
-# }
+# }F10E2821BBBEA527EA02
 #
 # def compare (expectedPosition, parsedData) {
 # return (|realPinkyAngle - expectedPinkyAngle| + ... + 0.25|realYaw - expectedYaw|

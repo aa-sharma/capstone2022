@@ -39,7 +39,7 @@ def read_serial():
             anglesList = (parseData(input))
 
         # Write to file not tested.
-        logger.debug(anglesList[x])
+        logger.debug(anglesList)
         if config.WRITE_ARUDINO_DATA:
             __savefile(anglesList[x])
 
@@ -114,7 +114,7 @@ def repackageCartesian(XYZ):
     """
     # Inital
     XYZDict = {
-        "palmA": {"x": "7", "y": "0", "z": "3"},
+        "palmA": {"x": "0", "y": "0", "z": "0"},
         "indexA": {"x": "3", "y": "2", "z": "9"},
         "indexB": {"x": "8", "y": "8", "z": "8"},
         "indexC": {"x": "8", "y": "8", "z": "8"},
@@ -184,9 +184,10 @@ def repackageCartesian(XYZ):
     for j in range(6):
         for i in range(4):
             if j == 0:
-                XYZDict[mapping[k]]["x"] = X[j]
-                XYZDict[mapping[k]]["y"] = Y[j]
-                XYZDict[mapping[k]]["z"] = Z[j]
+                XYZDict[mapping[k]]["x"] = 0
+                XYZDict[mapping[k]]["y"] = 0
+                XYZDict[mapping[k]]["z"] = 0
+                k = 1
                 break
             else:
                 XYZDict[mapping[k]]["x"] = X[j][i]

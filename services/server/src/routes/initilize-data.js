@@ -44,6 +44,7 @@ router.postP("/", authAdmin, async (req, res) => {
 
       let exercise = new Exercise({
         level: exercises[idx].level,
+        exerciseNumber: exercises[idx].exerciseNumber,
         description: exercises[idx].description,
         position: [startingPosition, finalPosition],
       });

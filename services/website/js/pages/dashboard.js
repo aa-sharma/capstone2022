@@ -2,48 +2,110 @@ import API from "../modules/api.js";
 
 const token = localStorage["token"];
 
-let myVariable = document.getElementsByClassName("my-class");
-console.log(myVariable[0]);
+const graphUserLevelProgress = new API({
+  url: "/api/user-level-progress?pageSize=1000",
+  token,
+});
+const { json: graphUserLevelProgressJson } =
+  await graphUserLevelProgress.call();
 
-const api = new API({ url: "/api/exercise", token });
-const { json } = await api.call();
+const tableUserLevelProgress = new API({
+  url: "/api/user-level-progress?pageSize=6",
+  token,
+});
+const { json: tableUserLevelProgressJson } =
+  await tableUserLevelProgress.call();
 
-console.log(json);
+const populateTable = (items) => {
+  const table = document.getElementById("table");
+  for (const item of items) {
+    const tableElement = document.createElement("tr");
+    const date = new Date(item.date);
+    tableElement.innerHTML = `
+      <th scope="row">${date.toString().split(" GMT")[0]}</th>
+      <td>Level ${item.exercise.level} Exercise ${
+      item.exercise.exerciseNumber
+    }</td>
+      <td>${item.agilityScore}</td>
+      <td>${item.dexterityScore}</td>
+      <td>${item.overallScore}</td>
+    `;
+    table.appendChild(tableElement);
+  }
+};
 
-var trace1 = {
-    x: [1, 2, 3],
-    y: [4, 5, 6],
-    type: 'scatter'
+const populateGraph = (items) => {
+  const dexterityScoreGraph = {
+    x: [],
+    y: [],
+    hovertext: [],
+    hoverinfo: "text+y",
+    type: "scatter",
+    line: {
+      color: "blue",
+    },
   };
-  
-  var trace2 = {
-    x: [20, 30, 40],
-    y: [50, 60, 70],
-    xaxis: 'x2',
-    yaxis: 'y2',
-    type: 'scatter'
+
+  const agilityScoreGraph = {
+    x: [],
+    y: [],
+    hovertext: [],
+    hoverinfo: "text+y",
+    type: "scatter",
+    line: {
+      color: "red",
+    },
   };
-  
-  var trace3 = {
-    x: [300, 400, 500],
-    y: [600, 700, 800],
-    xaxis: 'x3',
-    yaxis: 'y3',
-    type: 'scatter'
+
+  const overallScoreGraph = {
+    x: [],
+    y: [],
+    hovertext: [],
+    hoverinfo: "text+y",
+    type: "scatter",
+    line: {
+      color: "green",
+    },
   };
-  
-  var trace4 = {
-    x: [4000, 5000, 6000],
-    y: [7000, 8000, 9000],
-    xaxis: 'x4',
-    yaxis: 'y4',
-    type: 'scatter'
+  const itemsByDateAscending = items.reverse();
+
+  for (const idx in itemsByDateAscending) {
+    const index = Number(idx) + 1;
+    let date = new Date(itemsByDateAscending[idx].date);
+    date = date.toString().split(" GMT")[0];
+    dexterityScoreGraph.x.push(index);
+    dexterityScoreGraph.y.push(itemsByDateAscending[idx].dexterityScore);
+    dexterityScoreGraph.hovertext.push(date);
+    agilityScoreGraph.x.push(index);
+    agilityScoreGraph.y.push(itemsByDateAscending[idx].agilityScore);
+    agilityScoreGraph.hovertext.push(date);
+    overallScoreGraph.x.push(index);
+    overallScoreGraph.y.push(itemsByDateAscending[idx].overallScore);
+    overallScoreGraph.hovertext.push(date);
+  }
+
+  const dexterityScoreLayout = {
+    xaxis: { title: "Date", linewidth: 2 },
+    yaxis: { title: "Score", linewidth: 2 },
+    title: "Dexterity Score",
   };
-  
-  var data = [trace1, trace2, trace3, trace4];
-  
-  var layout = {
-    grid: {rows: 2, columns: 2, pattern: 'independent'},
+
+  const agilityScoreLayout = {
+    xaxis: { title: "Date", linewidth: 2 },
+    yaxis: { title: "Score", linewidth: 2 },
+    title: "Agility Score",
   };
-  
-  Plotly.newPlot('plot', data, layout);
+
+  const overallScoreLayout = {
+    xaxis: { title: "Date", linewidth: 2 },
+    yaxis: { title: "Score", linewidth: 2 },
+    title: "Overall Score",
+  };
+
+  Plotly.newPlot("dexterityScore", [dexterityScoreGraph], dexterityScoreLayout);
+  Plotly.newPlot("agilityScore", [agilityScoreGraph], agilityScoreLayout);
+  Plotly.newPlot("overallScore", [overallScoreGraph], overallScoreLayout);
+};
+
+populateTable(tableUserLevelProgressJson.items);
+populateGraph(graphUserLevelProgressJson.items);

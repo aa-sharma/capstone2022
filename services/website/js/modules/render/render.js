@@ -2,34 +2,30 @@ import * as THREE from "./three.module.js";
 import { OrbitControls } from "./OrbitControls.js";
 
 class Render {
-  constructor() {
+  constructor({ element }) {
+    this.element = element;
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(this.renderer.domElement);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(this.element.offsetWidth, this.element.offsetHeight);
+    this.element.appendChild(this.renderer.domElement);
 
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(
-      30,
+      5,
       window.innerWidth / window.innerHeight,
       1,
-      500
+      3000
     );
 
-    this.camera.position.set(-20, 35, 75);
-    this.camera.lookAt(0, 0, 0);
-
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.addEventListener("change", this.__render);
+    this.controls.addEventListener("change", this.render);
+    this.camera.position.set(60, 20, 200);
 
-    this.__setResizing(this.renderer, this.scene, this.camera);
-    this.__setPlane();
+    this.__setResizing(this.renderer, this.scene, this.camera, this.element);
     this.__setGrid();
     this.__setLighting();
-
     this.lines = [];
-    const pointGeometry = new THREE.SphereGeometry(0.5, 25, 25);
+    const pointGeometry = new THREE.SphereGeometry(0.2, 25, 25);
     const pointMaterial = new THREE.MeshPhysicalMaterial({ color: 0xd41c00 });
 
     const handPoints = [
@@ -68,59 +64,38 @@ class Render {
     this.handModel[point].position.x = position.x;
     this.handModel[point].position.y = position.y;
     this.handModel[point].position.z = position.z;
-    this.__render();
   }
 
   animate() {
     requestAnimationFrame(this.animate.bind(this));
-    this.__render();
+    this.render();
   }
 
   __setGrid() {
-    const grid = new THREE.GridHelper(100, 100, 0x0fd000, 0x000000);
+    const grid = new THREE.GridHelper(100, 100, "black", "black");
     grid.material.opacity = 0.1;
     grid.material.transparent = true;
     this.scene.add(grid);
-    const axesHelper = new THREE.AxesHelper(100);
-    this.scene.add(axesHelper);
-  }
-
-  __setPlane() {
-    //ground
-    const planeGeometry = new THREE.PlaneGeometry(80, 50);
-    const planeMaterial = new THREE.MeshPhongMaterial({
-      color: 0x999999,
-      depthWrite: false,
-    });
-    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.rotation.x = -Math.PI / 2;
-    plane.receiveShadow = true;
-    this.scene.add(plane);
   }
 
   __setLighting() {
     const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-    hemiLight.position.set(0, 20, 0);
     this.scene.add(hemiLight);
 
     const dirLight = new THREE.DirectionalLight(0xfffffff);
-    dirLight.position.set(0, 2, 1);
-    dirLight.castShadow = true;
-    dirLight.shadow.camera.top = 18;
-    dirLight.shadow.camera.bottom = -10;
-    dirLight.shadow.camera.left = -12;
-    dirLight.shadow.camera.right = 12;
     this.scene.add(dirLight);
-    this.renderer.setClearColor(0xfffffffff);
+    this.renderer.setClearColor(0xffffff);
+    const axesHelper = new THREE.AxesHelper(50);
+    this.scene.add(axesHelper);
   }
 
-  __setResizing(renderer, scene, camera) {
+  __setResizing(renderer, scene, camera, element) {
     // automatic resize
     window.addEventListener("resize", onWindowResize, false);
     function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect = element.offsetWidth / element.offsetHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(element.offsetWidth, element.offsetHeight);
       renderer.render(scene, camera);
     }
   }
@@ -167,9 +142,11 @@ class Render {
     }
   }
 
-  __render() {
+  render() {
     try {
       this.__setLines();
+      this.camera.lookAt(6, 6, 0);
+
       this.renderer.render(this.scene, this.camera);
     } catch (e) {}
   }

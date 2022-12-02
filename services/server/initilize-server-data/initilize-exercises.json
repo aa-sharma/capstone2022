@@ -1,41 +1,97 @@
 [
   {
     "level": 1,
+    "exerciseNumber": 1,
     "positionIndex": 0,
     "description": "Closed Fist"
   },
   {
     "level": 1,
+    "exerciseNumber": 2,
     "positionIndex": 1,
     "description": "open palm"
   },
   {
-    "level": 2,
+    "level": 1,
+    "exerciseNumber": 3,
     "positionIndex": 2,
     "description": "give me the middle finger"
   },
   {
-    "level": 2,
+    "level": 1,
+    "exerciseNumber": 4,
     "positionIndex": 0,
     "description": "point at me"
   },
   {
-    "level": 3,
+    "level": 2,
+    "exerciseNumber": 1,
     "positionIndex": 1,
     "description": "do the cha cha slide"
   },
   {
-    "level": 3,
+    "level": 2,
+    "exerciseNumber": 2,
     "positionIndex": 2,
     "description": "peace me"
   },
   {
-    "level": 4,
+    "level": 2,
+    "exerciseNumber": 3,
     "positionIndex": 0,
     "description": "like your drinking wine"
   },
   {
+    "level": 2,
+    "exerciseNumber": 4,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
+    "level": 3,
+    "exerciseNumber": 1,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
+    "level": 3,
+    "exerciseNumber": 2,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
+    "level": 3,
+    "exerciseNumber": 3,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
+    "level": 3,
+    "exerciseNumber": 4,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
     "level": 4,
+    "exerciseNumber": 1,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
+    "level": 4,
+    "exerciseNumber": 2,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
+    "level": 4,
+    "exerciseNumber": 3,
+    "positionIndex": 1,
+    "description": "rock on"
+  },
+  {
+    "level": 4,
+    "exerciseNumber": 4,
     "positionIndex": 1,
     "description": "rock on"
   }

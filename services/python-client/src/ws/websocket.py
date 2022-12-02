@@ -19,7 +19,7 @@ def stop_exercise(data):
 
 @sio.on("user_start_exercise")
 def start_exercise(expected_angles):
-    logger.info(f'User requested to start exercise:\n{json.dumps(data, indent=4)}')
+    logger.info(f'User requested to start exercise:\n{json.dumps(expected_angles, indent=4)}')
     sio.start_level = True
     sio.run_level = True
 
@@ -29,17 +29,17 @@ def start_exercise(expected_angles):
         raw_xyz = dataProcessor.GenerateXYZ(raw_data)
         processed_xyz = data_collection.repackageCartesian(raw_xyz)
         sio.emit('python_client_data', processed_xyz)
-        time.sleep(1)
+        time.sleep(0.1)
 
-    best_score = 0
+    # best_score = 0
 
-    while sio.run_level:
-        logger.info("running")
-        new_score = dexterity_score(expected_angles, raw_data)
-        if new_score > best_score:
-            best_score = new_score
+    # while sio.run_level:
+    #     logger.info("running")
+    #     new_score = dexterity_score(expected_angles, raw_data)
+    #     if new_score > best_score:
+    #         best_score = new_score
 
-        time.sleep(1)
+    #     time.sleep(1)
 
 
 @sio.event

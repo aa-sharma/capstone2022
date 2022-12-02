@@ -16,6 +16,10 @@ const ExerciseSchema = mongoose.Schema({
     type: Number,
     required: [true, "`level` is required"],
   },
+  exerciseNumber: {
+    type: Number,
+    required: [true, "`exerciseNumber` is required"],
+  },
 });
 
 ExerciseSchema.path("position").validate(function (position) {

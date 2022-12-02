@@ -138,29 +138,73 @@
 
     <br />
     <br />
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <div class="mb-4">
-          <header class="py-5 text-left ms-1">
-            <br />
-            <br />
-            <br />
-            <h1 class="display-4">LEVEL 1</h1>
-            <p class="font-weight-light mb-0">Exercise 1</p>
-          </header>
-        </div>
-      </div>
+    <br />
+    <div id="level" class="text-center pt-5"></div>
+    <div class="text-center">
+      <button id="start-level" class="btn btn-primary btn-block my-2">
+        START
+      </button>
+      <button id="stop-level" class="btn btn-danger btn-block my-2">
+        STOP
+      </button>
+      <p id="clock">00:00:00</p>
+    </div>
 
-      <div id="exercises" class="col-lg-8 mx-auto" style="height: 25vh">
-        <button id="start-level" class="btn btn-primary btn-block my-4">
-          START
-        </button>
-        <button id="stop-level" class="btn btn-danger btn-block my-4">
-          STOP
-        </button>
-        <p id="clock">00:00:00</p>
+    <div class="row mb-5" style="height: 50vh">
+      <div class="col-md-6 h-100">
+        <h1 class="display-6 text-center">Expected Position</h1>
+        <div id="expectedPosition" style="height: 90%"></div>
+      </div>
+      <div class="col-md-6 h-100 flex">
+        <h1 class="display-6 text-center">Actual Position</h1>
+        <div id="actualPosition" style="height: 90%"></div>
       </div>
     </div>
+
+    <footer class="containter-fluid">
+      <div class="div-1">
+        <div class="row">
+          <div class="col-sm-4">
+            <br />
+            <br />
+            <p class="font-weight-light">
+              Electrical Engineering Capstone 2022
+            </p>
+            <small class="text-muted">ELG4912 - ELG4913</small>
+            <br />
+            <small class="text-muted">January 2022 - December 2022</small>
+            <br />
+          </div>
+
+          <div class="col-sm-4 mt-2">
+            <br />
+            <small class="text-muted">Eric Hallé-Sherman</small>
+            <br />
+            <small class="text-muted">Reethi Paul</small>
+            <br />
+            <small class="text-muted">Ziad Salameh</small>
+            <br />
+            <small class="text-muted">Aashna Sharma</small>
+            <br />
+            <small class="text-muted">Lucas Rahn</small>
+          </div>
+
+          <div class="col-sm-4">
+            <br />
+            <br />
+            <img
+              src="img/uottawa.png"
+              class="icon"
+              alt="uOttawa logo"
+              style="width: 110px; height: 85px"
+            />
+            <br />
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
     <div id="preloader"></div>

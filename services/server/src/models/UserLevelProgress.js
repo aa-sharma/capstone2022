@@ -10,7 +10,6 @@ const modifiedExerciseSchema = mongoose.Schema(ExerciseSchema, {
   },
 });
 
-const SchemaTypes = mongoose.Schema.Types;
 const UserLevelProgressSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,13 +22,24 @@ const UserLevelProgressSchema = mongoose.Schema({
   },
   dexterityScore: {
     // relative to exerciseLevel dexterityDifficulty
-    type: SchemaTypes.Decimal128,
+    type: Number,
     required: [true, "`dexterityScore` is required"],
+    min: [0, "`dexterityScore` cannot be less than 0"],
+    max: [10, "`dexterityScore` cannot be greater than 10`"],
   },
   agilityScore: {
     // relative to exerciseLevel agilityDifficulty
-    type: SchemaTypes.Decimal128,
+    type: Number,
     required: [true, "`agilityScore` is required"],
+    min: [0, "`agilityScore` cannot be less than 0"],
+    max: [10, "`agilityScore` cannot be greater than 10`"],
+  },
+  overallScore: {
+    // relative to exerciseLevel agilityDifficulty
+    type: Number,
+    required: [true, "`overallScore` is required"],
+    min: [0, "`overallScore` cannot be less than 0"],
+    max: [10, "`overallScore` cannot be greater than 10`"],
   },
   date: {
     type: Date,
@@ -45,29 +55,6 @@ UserLevelProgressSchema.path("exercise").validate(function (exercise) {
   }
   return true;
 }, "`exercise.position` must be of length 2, where the first index is the starting position and second index is the ending position");
-
-UserLevelProgressSchema.path("agilityScore").validate(function (agilityScore) {
-  if (
-    parseFloat(agilityScore) > parseFloat(String(10)) ||
-    parseFloat(agilityScore) < parseFloat(String(0))
-  ) {
-    return false;
-  }
-  return true;
-}, "`agilityScore` must be between 0 and 10");
-
-UserLevelProgressSchema.path("dexterityScore").validate(function (
-  dexterityScore
-) {
-  if (
-    parseFloat(dexterityScore) > parseFloat(String(10)) ||
-    parseFloat(dexterityScore) < parseFloat(String(0))
-  ) {
-    return false;
-  }
-  return true;
-},
-"`dexterityScore` must be between 0 and 10");
 
 const UserLevelProgress = mongoose.model(
   "UserLevelProgress",

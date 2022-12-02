@@ -15,13 +15,14 @@ const { paginationResponse, isValidObjectId } = require("../utils/helpers");
 // @desc    create new exercise
 // @access  onlyAdmin
 router.postP("/", auth, async (req, res) => {
-  const { position, level, description } = req.body;
+  const { position, level, description, exerciseNumber } = req.body;
 
   try {
     let exercise = new Exercise({
       position,
       level,
       description,
+      exerciseNumber,
     });
 
     try {
@@ -68,7 +69,9 @@ router.getP("/:id", auth, async (req, res) => {
 // @access  Private
 router.getP("/", auth, async (req, res) => {
   try {
-    let exercise = await Exercise.find().select("-__v").sort({ level: "asc" });
+    let exercise = await Exercise.find()
+      .select("-__v")
+      .sort({ level: "asc", exerciseNumber: "asc" });
 
     return res.json(
       paginationResponse(exercise, req.query.page, req.query.pageSize)

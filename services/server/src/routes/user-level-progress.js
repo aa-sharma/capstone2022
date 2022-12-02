@@ -30,6 +30,7 @@ router.postP("/", auth, async (req, res) => {
       exercise,
       dexterityScore,
       agilityScore,
+      overallScore: (3 / 4) * dexterityScore + (1 / 4) * agilityScore,
     });
 
     try {
@@ -42,18 +43,7 @@ router.postP("/", auth, async (req, res) => {
       _id: userLevelProgress._id,
     }).select("-__v -user");
 
-    // first flattenDecimals using mongoose `toJSON()`
-    userLevelProgress = userLevelProgress.toJSON({ flattenDecimals: true });
-    //  use lodash _.cloneDeepWith() to iterate over every object property
-    let userLevelProgressDecimals = _.cloneDeepWith(
-      userLevelProgress,
-      (propVal) => {
-        if (_.has(propVal, "$numberDecimal"))
-          return parseFloat(propVal.$numberDecimal);
-      }
-    );
-
-    return res.json(userLevelProgressDecimals);
+    return res.json(userLevelProgress);
   } catch (err) {
     logger.error(err.message);
     return res.status(500).send("Server Error");
@@ -71,23 +61,9 @@ router.getP("/", auth, async (req, res) => {
       .select("-__v -user")
       .sort({ date: "desc" });
 
-    let userLevelProgressesResult = [];
-    for (let userLevelProgress of userLevelProgresses) {
-      userLevelProgress = userLevelProgress.toJSON({ flattenDecimals: true });
-      //  use lodash _.cloneDeepWith() to iterate over every object property
-      let userLevelProgressDecimals = _.cloneDeepWith(
-        userLevelProgress,
-        (propVal) => {
-          if (_.has(propVal, "$numberDecimal"))
-            return parseFloat(propVal.$numberDecimal);
-        }
-      );
-      userLevelProgressesResult.push(userLevelProgressDecimals);
-    }
-
     return res.json(
       paginationResponse(
-        userLevelProgressesResult,
+        userLevelProgresses,
         req.query.page,
         req.query.pageSize
       )
@@ -117,18 +93,7 @@ router.getP("/:id", auth, async (req, res) => {
         .json(singleErrorMsg("userLevelProgress report does not exist"));
     }
 
-    // first flattenDecimals using mongoose `toJSON()`
-    userLevelProgress = userLevelProgress.toJSON({ flattenDecimals: true });
-    //  use lodash _.cloneDeepWith() to iterate over every object property
-    let userLevelProgressDecimals = _.cloneDeepWith(
-      userLevelProgress,
-      (propVal) => {
-        if (_.has(propVal, "$numberDecimal"))
-          return parseFloat(propVal.$numberDecimal);
-      }
-    );
-
-    return res.json(userLevelProgressDecimals);
+    return res.json(userLevelProgress);
   } catch (err) {
     logger.error(err.message);
     return res.status(500).send("Server Error");
@@ -151,23 +116,9 @@ router.getP("/level/:levelNumber", auth, async (req, res) => {
       "exercise.level": req.params.levelNumber,
     }).select("-__v -user");
 
-    let userLevelProgressesResult = [];
-    for (let userLevelProgress of userLevelProgresses) {
-      userLevelProgress = userLevelProgress.toJSON({ flattenDecimals: true });
-      //  use lodash _.cloneDeepWith() to iterate over every object property
-      let userLevelProgressDecimals = _.cloneDeepWith(
-        userLevelProgress,
-        (propVal) => {
-          if (_.has(propVal, "$numberDecimal"))
-            return parseFloat(propVal.$numberDecimal);
-        }
-      );
-      userLevelProgressesResult.push(userLevelProgressDecimals);
-    }
-
     return res.json(
       paginationResponse(
-        userLevelProgressesResult,
+        userLevelProgresses,
         req.query.page,
         req.query.pageSize
       )
