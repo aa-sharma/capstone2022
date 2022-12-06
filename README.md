@@ -2,7 +2,7 @@
 
 A rehabilitation glove with an interactive interface for recovering stroke patients and others with limited hand mobility.
 
-![alt text](./plot.png)
+![alt text](./services/website/img/middleFinger.png)
 
 ## Edit .env.example file
 
