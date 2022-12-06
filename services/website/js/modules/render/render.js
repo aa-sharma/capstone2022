@@ -2,7 +2,8 @@ import * as THREE from "./three.module.js";
 import { OrbitControls } from "./OrbitControls.js";
 
 class Render {
-  constructor({ element }) {
+  constructor({ element, pointColor }) {
+    this.__pointColor = pointColor || 0xd41c00;
     this.element = element;
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setSize(this.element.offsetWidth, this.element.offsetHeight);
@@ -19,14 +20,16 @@ class Render {
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.addEventListener("change", this.render);
-    this.camera.position.set(60, 20, 200);
+    this.camera.position.set(-90, 30, 300);
 
     this.__setResizing(this.renderer, this.scene, this.camera, this.element);
     this.__setGrid();
     this.__setLighting();
     this.lines = [];
     const pointGeometry = new THREE.SphereGeometry(0.2, 25, 25);
-    const pointMaterial = new THREE.MeshPhysicalMaterial({ color: 0xd41c00 });
+    const pointMaterial = new THREE.MeshPhysicalMaterial({
+      color: this.__pointColor,
+    });
 
     const handPoints = [
       "pinkyA",
@@ -53,10 +56,10 @@ class Render {
     ];
 
     this.handModel = {};
-    handPoints.map((e) => {
-      this.handModel[e] = new THREE.Mesh(pointGeometry, pointMaterial);
-      this.handModel[e].position.set(0, 0, 0);
-      this.scene.add(this.handModel[e]);
+    handPoints.map((point) => {
+      this.handModel[point] = new THREE.Mesh(pointGeometry, pointMaterial);
+      this.handModel[point].position.set(0, 0, 0);
+      this.scene.add(this.handModel[point]);
     });
   }
 
@@ -64,6 +67,14 @@ class Render {
     this.handModel[point].position.x = position.x;
     this.handModel[point].position.y = position.y;
     this.handModel[point].position.z = position.z;
+  }
+
+  setPointColor(point, pointColor) {
+    const pointMaterial = new THREE.MeshPhysicalMaterial({
+      color: pointColor,
+    });
+
+    this.handModel[point].material = pointMaterial;
   }
 
   animate() {

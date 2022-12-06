@@ -1,32 +1,112 @@
-[
-  {
-    "pinkyAngle": 1,
-    "ringAngle": 1,
-    "middleAngle": 1,
-    "indexAngle": 1,
-    "thumbAngle": 1,
-    "roll": 1,
-    "pitch": 1,
-    "yaw": 1
+{
+  "openPalm": {
+    "pinkyAngle": 0,
+    "ringAngle": 0,
+    "middleAngle": 0,
+    "indexAngle": 0,
+    "thumbAngle": 0,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
   },
-  {
-    "pinkyAngle": 2,
-    "ringAngle": 2,
-    "middleAngle": 2,
-    "indexAngle": 2,
-    "thumbAngle": 2,
-    "roll": 2,
-    "pitch": 2,
-    "yaw": 2
+  "closedFist": {
+    "pinkyAngle": 90,
+    "ringAngle": 90,
+    "middleAngle": 90,
+    "indexAngle": 90,
+    "thumbAngle": 90,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
   },
-  {
-    "pinkyAngle": 3,
-    "ringAngle": 3,
-    "middleAngle": 3,
-    "indexAngle": 3,
-    "thumbAngle": 3,
-    "roll": 3,
-    "pitch": 3,
-    "yaw": 3
+  "peace": {
+    "pinkyAngle": 90,
+    "ringAngle": 90,
+    "middleAngle": 0,
+    "indexAngle": 0,
+    "thumbAngle": 90,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "rockOn": {
+    "pinkyAngle": 0,
+    "ringAngle": 90,
+    "middleAngle": 90,
+    "indexAngle": 0,
+    "thumbAngle": 90,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "loveYou": {
+    "pinkyAngle": 0,
+    "ringAngle": 90,
+    "middleAngle": 90,
+    "indexAngle": 0,
+    "thumbAngle": 0,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "middleFinger": {
+    "pinkyAngle": 90,
+    "ringAngle": 90,
+    "middleAngle": 0,
+    "indexAngle": 90,
+    "thumbAngle": 90,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "thumbsUp": {
+    "pinkyAngle": 90,
+    "ringAngle": 90,
+    "middleAngle": 90,
+    "indexAngle": 90,
+    "thumbAngle": 0,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "pointerFinger": {
+    "pinkyAngle": 90,
+    "ringAngle": 90,
+    "middleAngle": 90,
+    "indexAngle": 0,
+    "thumbAngle": 90,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "pinkyFinger": {
+    "pinkyAngle": 0,
+    "ringAngle": 90,
+    "middleAngle": 90,
+    "indexAngle": 90,
+    "thumbAngle": 90,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "three": {
+    "pinkyAngle": 90,
+    "ringAngle": 90,
+    "middleAngle": 0,
+    "indexAngle": 0,
+    "thumbAngle": 0,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
+  },
+  "claw": {
+    "pinkyAngle": 90,
+    "ringAngle": 90,
+    "middleAngle": 45,
+    "indexAngle": 45,
+    "thumbAngle": 90,
+    "roll": 0,
+    "pitch": 0,
+    "yaw": 0
   }
-]
+}

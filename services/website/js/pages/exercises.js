@@ -45,7 +45,7 @@ for (const exercise of json.items) {
   populateExercise.innerHTML = `
   <div class="d-inline-block">
     <img
-      src="../img/exsc-icon.png"
+      src="../img/${exercise.image}"
       class="rounded-circle"
       alt=""
       style="width: 300px; height: 300px"

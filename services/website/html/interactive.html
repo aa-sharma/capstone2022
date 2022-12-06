@@ -147,12 +147,14 @@
       <button id="stop-level" class="btn btn-danger btn-block my-2">
         STOP
       </button>
-      <p id="clock">00:00:00</p>
+      <div><label id="minutes">00</label>:<label id="seconds">00</label>:<label id="milaseconds">000</label></div>
     </div>
 
     <div class="row mb-5" style="height: 50vh">
       <div class="col-md-6 h-100">
-        <h1 class="display-6 text-center">Expected Position</h1>
+        <h1 id="expectedPositionHeader" class="display-6 text-center">
+          Initial Position
+        </h1>
         <div id="expectedPosition" style="height: 90%"></div>
       </div>
       <div class="col-md-6 h-100 flex">

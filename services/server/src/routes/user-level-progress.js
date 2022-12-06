@@ -28,9 +28,11 @@ router.postP("/", auth, async (req, res) => {
     let userLevelProgress = new UserLevelProgress({
       user: req.user._id,
       exercise,
-      dexterityScore,
-      agilityScore,
-      overallScore: (3 / 4) * dexterityScore + (1 / 4) * agilityScore,
+      dexterityScore: Math.round(dexterityScore * 100) / 100,
+      agilityScore: Math.round(agilityScore * 100) / 100,
+      overallScore:
+        Math.round(((3 / 4) * dexterityScore + (1 / 4) * agilityScore) * 100) /
+        100,
     });
 
     try {

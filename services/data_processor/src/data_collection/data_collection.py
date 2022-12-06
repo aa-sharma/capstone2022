@@ -1,11 +1,8 @@
 import serial as serial
-import csv
-from datetime import datetime
 from utils.helper_functions import ROOT_DIR
 import logging
 from utils.config import config
 import re
-import data_processor.dataProcessor
 
 logger = logging.getLogger('logger')
 
@@ -26,27 +23,25 @@ def read_serial():
                 [7]* -> Yaw
     """
 
-    for x in range(8):
-        try:
-            ser = serial.Serial(config.COM_PORT, 9600, timeout=1)
-            input = ser.readline()
-            ser.close()
-            anglesList = (parseData(input))
-        except:
-            # Tested using test_string only. To be tested with HW integration.
-            test_string = "b'168/171/175/155/175/0/0/0\r\n'"
-            input = test_string
-            anglesList = (parseData(input))
+    try:
+        ser = serial.Serial(config.COM_PORT, 9600, timeout=1)
+        input = ser.readline()
+        ser.close()
+        anglesList = parse_string_angles_into_array(input)
+    except Exception as e:
+        logger.error(f"Failed to collect data from arduino with error: {e}")
+        exit(0)
+        # # Tested using test_string only. To be tested with HW integration.
+        # test_string = "b'168/171/175/155/175/0/0/0\r\n'"
+        # input = test_string
+        # anglesList = parse_string_angles_into_array(input)
 
-        # Write to file not tested.
-        logger.debug(anglesList)
-        if config.WRITE_ARUDINO_DATA:
-            __savefile(anglesList[x])
+    logger.debug(anglesList)
 
     return (anglesList)
 
 
-def parseData(inputString):
+def parse_string_angles_into_array(input_string):
     """
     Function to extract just the angles data from received string from serial port.
     Args: inputString of format: "b'168/171/175/155/175/0/0/0\r\n'" 
@@ -55,18 +50,24 @@ def parseData(inputString):
                         Ex. ['168', '171', '175', '155', '175', '0', '0', '0']
     """
     adc = re.search(
-        "'(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)", str(inputString))
-    anglesList = []
+        "'(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)\/(\+|-?\d+)", str(input_string))
+    angles_list = []
     if adc:
         for i in range(1, 9):
-            anglesList.append(int(adc.group(i)))
+            angles_list.append(int(adc.group(i)))
     else:
         logger.error(["Could not parse input data."])
 
-    return (anglesList)
+    return angles_list
 
 
-def repackageCartesian(XYZ):
+def parse_expected_position_into_array(expected_position):
+    return [expected_position['indexAngle'], expected_position['middleAngle'], expected_position['ringAngle'],
+            expected_position['pinkyAngle'], expected_position['thumbAngle'], expected_position['roll'],
+            expected_position['pitch'], expected_position['yaw']]
+
+
+def repackage_cartesian(XYZ):
     """
     Args: Array of 3 subarrays with 6 sub-subarrays each corresponding to fingers/palm. 
     Each of these 6 sub-subarrays has 4 elements for 4 points (A,B,C,D):
@@ -197,19 +198,3 @@ def repackageCartesian(XYZ):
 
     logger.debug(XYZDict)
     return (XYZDict)
-
-
-def __savefile(data):
-    # a functin for simply saving files
-    with open(f'{ROOT_DIR}/../data/arduino_data.csv', "w+", newline='') as my_csv:
-        csvWriter = csv.writer(my_csv, delimiter=',')
-        csvWriter.writerows(data)
-
-
-# on.start_level
-#   1. read_serial ()
-#       1.1 parseData ()
-#   2. dataProcessing --> GenerateXYZ()
-#   3. repackageCartesian()
-#   4. updateCartesianValues()
-# emit updateCartesianValues retval

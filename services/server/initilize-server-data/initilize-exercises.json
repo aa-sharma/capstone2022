@@ -2,97 +2,73 @@
   {
     "level": 1,
     "exerciseNumber": 1,
-    "positionIndex": 0,
-    "description": "Closed Fist"
+    "position": ["closedFist", "openPalm"],
+    "description": "Closed Fist to Open Palm"
   },
   {
     "level": 1,
     "exerciseNumber": 2,
-    "positionIndex": 1,
-    "description": "open palm"
+    "position": ["openPalm", "closedFist"],
+    "description": "Open Palm to Closed Fist"
   },
   {
     "level": 1,
     "exerciseNumber": 3,
-    "positionIndex": 2,
-    "description": "give me the middle finger"
+    "position": ["closedFist", "peace"],
+    "description": "Closed Fist to Peace Sign"
   },
   {
     "level": 1,
     "exerciseNumber": 4,
-    "positionIndex": 0,
-    "description": "point at me"
+    "position": ["closedFist", "thumbsUp"],
+    "description": "Closed Fist to Thumbs Up"
   },
   {
     "level": 2,
     "exerciseNumber": 1,
-    "positionIndex": 1,
-    "description": "do the cha cha slide"
+    "position": ["openPalm", "pointerFinger"],
+    "description": "Open Palm to Point"
   },
   {
     "level": 2,
     "exerciseNumber": 2,
-    "positionIndex": 2,
-    "description": "peace me"
+    "position": ["openPalm", "pinkyFinger"],
+    "description": "Open Palm to Drinking Wine"
   },
   {
     "level": 2,
     "exerciseNumber": 3,
-    "positionIndex": 0,
-    "description": "like your drinking wine"
+    "position": ["closedFist", "rockOn"],
+    "description": "Closed Fist to Rock On!"
   },
   {
     "level": 2,
     "exerciseNumber": 4,
-    "positionIndex": 1,
-    "description": "rock on"
+    "position": ["closedFist", "three"],
+    "description": "Closed Fist to the Number Three"
   },
   {
     "level": 3,
     "exerciseNumber": 1,
-    "positionIndex": 1,
-    "description": "rock on"
+    "position": ["openPalm", "loveYou"],
+    "description": "Open Palm to I Love You"
   },
   {
     "level": 3,
     "exerciseNumber": 2,
-    "positionIndex": 1,
-    "description": "rock on"
+    "position": ["peace", "pinkyFinger"],
+    "description": "Peace Sign to Drinking Wine"
   },
   {
     "level": 3,
     "exerciseNumber": 3,
-    "positionIndex": 1,
-    "description": "rock on"
+    "position": ["rockOn", "claw"],
+    "description": "Rock On to Claw"
   },
   {
     "level": 3,
     "exerciseNumber": 4,
-    "positionIndex": 1,
-    "description": "rock on"
-  },
-  {
-    "level": 4,
-    "exerciseNumber": 1,
-    "positionIndex": 1,
-    "description": "rock on"
-  },
-  {
-    "level": 4,
-    "exerciseNumber": 2,
-    "positionIndex": 1,
-    "description": "rock on"
-  },
-  {
-    "level": 4,
-    "exerciseNumber": 3,
-    "positionIndex": 1,
-    "description": "rock on"
-  },
-  {
-    "level": 4,
-    "exerciseNumber": 4,
-    "positionIndex": 1,
-    "description": "rock on"
+    "position": ["openPalm", "middleFinger"],
+    "description": "Give me the Middle Finger!"
   }
 ]

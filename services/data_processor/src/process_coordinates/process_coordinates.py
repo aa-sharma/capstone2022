@@ -1,4 +1,3 @@
-import serial
 import math
 import numpy
 import time
@@ -13,7 +12,7 @@ import time
 #     angles = int(angles)
 #     return angles
 
-def GenerateXYZ(angles):
+def generate_xyz(angles):
     """
     Args: Angles array containing 8 elements corresponding to angles retrived from sensor.
     angles[0] -> index angle

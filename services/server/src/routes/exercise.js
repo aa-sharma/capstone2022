@@ -15,7 +15,7 @@ const { paginationResponse, isValidObjectId } = require("../utils/helpers");
 // @desc    create new exercise
 // @access  onlyAdmin
 router.postP("/", auth, async (req, res) => {
-  const { position, level, description, exerciseNumber } = req.body;
+  const { position, level, description, exerciseNumber, image } = req.body;
 
   try {
     let exercise = new Exercise({
@@ -23,6 +23,7 @@ router.postP("/", auth, async (req, res) => {
       level,
       description,
       exerciseNumber,
+      image,
     });
 
     try {

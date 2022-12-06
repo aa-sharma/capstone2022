@@ -14,13 +14,14 @@ setup_logger()
 
 if __name__ == "__main__":
 
-    token_data = requests.post(f"{config.BASE_SERVER_URL}/api/auth/device", json={"productCode": config.PRODUCT_CODE})
+    sio.token_data = requests.post(f"{config.BASE_SERVER_URL}/api/auth/device",
+                                   json={"productCode": config.PRODUCT_CODE})
 
-    if (token_data.status_code != 200):
-        logger.error(f"request for token failed with message:{json.dumps(token_data.json(), indent=4)}")
+    if (sio.token_data.status_code != 200):
+        logger.error(f"request for token failed with message:{json.dumps(sio.token_data.json(), indent=4)}")
         exit(0)
 
-    sio.connect(config.BASE_SERVER_URL, auth={'x-auth-token': token_data.json()['token']}, transports=['websocket'])
+    sio.connect(config.BASE_SERVER_URL, auth={'x-auth-token': sio.token_data.json()['token']}, transports=['websocket'])
     sio.emit('python_client_connected', {'msg': 'message from the python client'})
 
 
@@ -87,7 +88,7 @@ if __name__ == "__main__":
 # bestScore = newScore
 # }
 #
-# }F10E2821BBBEA527EA02
+# }
 #
 # def compare (expectedPosition, parsedData) {
 # return (|realPinkyAngle - expectedPinkyAngle| + ... + 0.25|realYaw - expectedYaw|

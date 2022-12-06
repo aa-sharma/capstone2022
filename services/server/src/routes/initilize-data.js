@@ -17,36 +17,18 @@ router.postP("/", authAdmin, async (req, res) => {
       "./initilize-server-data/initilize-positions.json"
     );
 
-    const startingPosition = {
-      pinkyAngle: 0,
-      ringAngle: 0,
-      middleAngle: 0,
-      indexAngle: 0,
-      thumbAngle: 0,
-      roll: 0,
-      pitch: 0,
-      yaw: 0,
-    };
-
     await Exercise.deleteMany();
 
-    for (idx in exercises) {
-      const finalPosition = {
-        pinkyAngle: positions[exercises[idx].positionIndex].pinkyAngle,
-        ringAngle: positions[exercises[idx].positionIndex].ringAngle,
-        middleAngle: positions[exercises[idx].positionIndex].middleAngle,
-        indexAngle: positions[exercises[idx].positionIndex].indexAngle,
-        thumbAngle: positions[exercises[idx].positionIndex].thumbAngle,
-        roll: positions[exercises[idx].positionIndex].roll,
-        pitch: positions[exercises[idx].positionIndex].pitch,
-        yaw: positions[exercises[idx].positionIndex].yaw,
-      };
-
+    for (const exerciseData of exercises) {
       let exercise = new Exercise({
-        level: exercises[idx].level,
-        exerciseNumber: exercises[idx].exerciseNumber,
-        description: exercises[idx].description,
-        position: [startingPosition, finalPosition],
+        level: exerciseData.level,
+        exerciseNumber: exerciseData.exerciseNumber,
+        description: exerciseData.description,
+        position: [
+          positions[exerciseData.position[0]],
+          positions[exerciseData.position[1]],
+        ],
+        image: `${exerciseData.position[1]}.png`,
       });
       await exercise.save();
     }
