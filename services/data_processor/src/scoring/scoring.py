@@ -12,7 +12,7 @@ def dexterity_score(expected_angles, actual_angles):
     """
     score = 0
     angle_difference = average_angle_difference(expected_angles, actual_angles)
-    if angle_difference <= 5:
+    if angle_difference <= 2:
         score = 10
     else:
         score = 10 - angle_difference * 10/85

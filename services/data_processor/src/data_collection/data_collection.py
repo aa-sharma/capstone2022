@@ -56,6 +56,7 @@ def parse_string_angles_into_array(input_string):
         for i in range(1, 9):
             angles_list.append(int(adc.group(i)))
     else:
+        angles_list = [0, 0, 0, 0, 0, 0, 0, 0]
         logger.error(["Could not parse input data."])
 
     return angles_list

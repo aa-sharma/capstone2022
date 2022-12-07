@@ -29,7 +29,7 @@ def start_exercise(exercise):
     sio.start_exercise = True
     average_angle_difference = 90
 
-    while sio.init_start_exercise and average_angle_difference > 5:
+    while sio.init_start_exercise and average_angle_difference > 2:
         actual_angles_list = data_collection.read_serial()  # read values from arduino, outputs angles list
 
         average_angle_difference = scoring.average_angle_difference(angles_list_starting, actual_angles_list)
@@ -48,7 +48,7 @@ def start_exercise(exercise):
     start_time = time.time()
     average_angle_difference = 90
     best_dexterity_score = 0
-    while sio.start_exercise and average_angle_difference > 5:
+    while sio.start_exercise and average_angle_difference > 2:
         actual_angles_list = data_collection.read_serial()  # read values from arduino, outputs angles list
 
         average_angle_difference = scoring.average_angle_difference(angles_list_finish, actual_angles_list)
